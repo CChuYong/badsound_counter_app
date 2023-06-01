@@ -195,20 +195,3 @@ packages:
 sdks:
   dart: ">=3.0.2 <4.0.0"
   flutter: ">=3.10.0"
-flutter:
-  fonts:
-    - family: Pretendard
-      fonts:
-        - asset: assets/fonts/Pretendard/Pretendard-Regular.ttf
-        - asset: assets/fonts/Pretendard/Pretendard-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Pretendard/Pretendard-ExtraLight.ttf
-          weight: 200
-        - asset: assets/fonts/Pretendard/Pretendard-Light.ttf
-          weight: 300
-        - asset: assets/fonts/Pretendard/Pretendard-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Pretendard/Pretendard-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Pretendard/Pretendard-Thin.ttf
-          weight: 100

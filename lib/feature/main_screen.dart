@@ -1,6 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+const warmGray900 = Color(0xff1C1917);
+const warmGray800 = Color(0xff292524);
+const warmGray700 = Color(0xff44403C);
+const warmGray600 = Color(0xff57534E);
+const warmGray500 = Color(0xff78716C);
+const warmGray400 = Color(0xffA8A29E);
+const warmGray300 = Color(0xffD6D3D1);
+const warmGray200 = Color(0xffE7E5E4);
+const warmGray100 = Color(0xffF5F5F4);
+const warmGray50 = Color(0xffFAFAF9);
+const defaultGreen = Color(0xff10B981);
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -12,13 +23,23 @@ class MainPage extends StatelessWidget {
         preferredSize: Size.fromHeight(screenAwareSize(56.0, context)),
         child: TopBar()
       ),
-      body: Center(
-        child: Text(
-          'Hello, world!',
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
+      body: Column(
+        children: [
+          Padding(
+              padding: EdgeInsets.only(left: 20.sp, right: 20.sp),
+            child: MainPageStatBox(),
+          ),
+          Text(
+            'Hello, world!',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          Text(
+            'Hello, world!',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+        ]
       ),
-        drawer: SideBar()
+        endDrawer: SideBar()
     );
   }
 
@@ -29,6 +50,108 @@ class MainPage extends StatelessWidget {
 
 }
 
+class MainPageStatBox extends StatelessWidget {
+  const MainPageStatBox({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 20.sp, bottom: 20.sp, left: 23.sp, right: 23.sp),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(11.sp),
+        color: warmGray100,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                '5월 2주차 합산',
+                style: TextStyle(
+                  color: warmGray900,
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              //SizedBox(height: 6),
+              Text(
+                '13,000 원',
+                style: TextStyle(
+                  color: defaultGreen,
+                  fontSize: 36.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              SizedBox(height: 6),
+              Wrap(
+                spacing: 4.sp,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Icon(
+                    Icons.info,
+                    color: warmGray400,
+                    size: 10.sp,
+                  ),
+                  Text(
+                    '5/8 ~ 5/14 사이의 내역이에요',
+                    style: TextStyle(
+                      color: warmGray400,
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  )
+                ],
+              )
+
+            ],
+          ),
+          SizedBox(height: 18),
+          Divider(
+            color: warmGray200,
+          ),
+          SizedBox(height: 8),
+          Padding(
+              padding: EdgeInsets.only(left: 30.sp, right: 30.sp),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '내역 보기',
+                    style: TextStyle(
+                      color: warmGray400,
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  VerticalDivider(
+                    color: warmGray200,
+                  ),
+                  Text(
+                    '내역 보기',
+                    style: TextStyle(
+                      color: warmGray400,
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  )
+                ],
+              )
+          )
+
+
+        ],
+      )
+
+    );
+  }
+  
+}
+
 class TopBar extends StatelessWidget {
   const TopBar({super.key});
 
@@ -36,24 +159,15 @@ class TopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
   //    backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
-      actions: [
-        Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(right: 16),
-              child: Text(
-                '로그아웃',
-                style: TextStyle(
-                  color: Color(0xff10B981),
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-            )
-          ],
-        )
-      ],
+    centerTitle: false,
+      title: Text(
+        '나쁜말 카운터',
+        style: TextStyle(
+          color: Color(0xff10B981),
+          fontSize: 13.sp,
+          fontWeight: FontWeight.w900,
+        ),
+      )
     );
   }
 }

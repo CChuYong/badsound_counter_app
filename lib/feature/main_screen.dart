@@ -1,3 +1,4 @@
+import 'package:badsound_counter_app/component/touchableopacity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -119,9 +120,9 @@ class MainPageChatBoxElements extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return TouchableOpacity(child: Container(
       padding:
-          EdgeInsets.only(top: 10.sp, bottom: 10.sp, left: 14.sp, right: 14.sp),
+      EdgeInsets.only(top: 10.sp, bottom: 10.sp, left: 14.sp, right: 14.sp),
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(11.sp),
@@ -202,7 +203,10 @@ class MainPageChatBoxElements extends StatelessWidget {
           )
         ],
       ),
-    );
+    ), onTap: () => {
+
+    })
+      ;
   }
 }
 
@@ -425,12 +429,16 @@ class SideBar extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
+          Container(
+            height: 128.sp,
+            child:  const DrawerHeader(
+              decoration: BoxDecoration(
+                color: warmGray700,
+              ),
+              child: Text('나쁜말 카운터'),
             ),
-            child: Text('Drawer Header'),
           ),
+
           ListTile(
             title: const Text('Item 1'),
             onTap: () {

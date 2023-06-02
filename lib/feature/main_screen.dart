@@ -2,16 +2,8 @@ import 'package:badsound_counter_app/component/touchableopacity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-const warmGray900 = Color(0xff1C1917);
-const warmGray800 = Color(0xff292524);
-const warmGray700 = Color(0xff44403C);
-const warmGray600 = Color(0xff57534E);
-const warmGray500 = Color(0xff78716C);
-const warmGray400 = Color(0xffA8A29E);
-const warmGray300 = Color(0xffD6D3D1);
-const warmGray200 = Color(0xffE7E5E4);
-const warmGray100 = Color(0xffF5F5F4);
-const warmGray50 = Color(0xffFAFAF9);
+import '../designsystem/theme/base_color.dart';
+
 const defaultGreen = Color(0xff10B981);
 const defaultRed = Color(0xffFF8282);
 
@@ -34,34 +26,52 @@ class MainPage extends StatelessWidget {
                 Expanded(child: MainPageChatBox()),
               ]),
             )),
-        bottomNavigationBar: ClipRRect(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(24.sp),
-            topRight: Radius.circular(24.sp),
-          ),
-          child: BottomNavigationBar(
-            backgroundColor: warmGray100,
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_month),
-                label: 'asdf',
+        bottomNavigationBar:
+            Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.25),
+                    spreadRadius: 5,
+                    blurRadius: 300,
+                    offset: Offset(0, 0), // changes position of shadow
+                  ),
+                ],
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'asdf',
+              child:  ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24.sp),
+                  topRight: Radius.circular(24.sp),
+                ),
+                child: BottomNavigationBar(
+                  backgroundColor: BaseColor.warmGray100,
+                  elevation: 24.0,
+                  items: [
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.calendar_month),
+                      label: 'asdf',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.home),
+                      label: 'asdf',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.person),
+                      label: 'asdf',
+                    )
+                  ],
+                  showSelectedLabels: false,
+                  showUnselectedLabels: false,
+                  unselectedIconTheme: IconThemeData(color: BaseColor.warmGray400, size: 25.sp),
+                  selectedIconTheme: IconThemeData(color: BaseColor.warmGray800, size: 25.sp),
+                  currentIndex: 1,
+                  onTap: (num) => {
+                //  Navigator.push(context, MaterialPageRoute(builder: (ctx) => const ProfilePage()))
+                  },
+                ),
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'asdf',
-              )
-            ],
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            unselectedIconTheme: IconThemeData(color: warmGray400, size: 25.sp),
-            selectedIconTheme: IconThemeData(color: warmGray800, size: 25.sp),
-            currentIndex: 1,
-          ),
-        ),
+            ),
+
         endDrawer: SideBar());
   }
 
@@ -84,7 +94,7 @@ class MainPageChatBox extends StatelessWidget {
           Text(
             '나쁜말 방 목록',
             style: TextStyle(
-              color: warmGray900,
+              color: BaseColor.warmGray900,
               fontSize: 16.sp,
               fontWeight: FontWeight.w700,
               height: 1.2,
@@ -126,7 +136,7 @@ class MainPageChatBoxElements extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(11.sp),
-        color: warmGray100,
+        color: BaseColor.warmGray100,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -137,7 +147,7 @@ class MainPageChatBoxElements extends StatelessWidget {
                 width: 51.sp,
                 height: 51.sp,
                 decoration: BoxDecoration(
-                  color: warmGray700,
+                  color: BaseColor.warmGray700,
                   shape: BoxShape.circle,
                 ),
               ),
@@ -148,7 +158,7 @@ class MainPageChatBoxElements extends StatelessWidget {
                   Text(
                     '벤님과의 나쁜말',
                     style: TextStyle(
-                      color: warmGray900,
+                      color: BaseColor.warmGray900,
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w700,
                       height: 1.2,
@@ -174,7 +184,7 @@ class MainPageChatBoxElements extends StatelessWidget {
               Text(
                 '오후 10:39',
                 style: TextStyle(
-                  color: warmGray900,
+                  color: BaseColor.warmGray900,
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w700,
                   height: 1.2,
@@ -220,7 +230,7 @@ class MainPageChatBoxAddElements extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(11.sp),
-        color: warmGray100,
+        color: BaseColor.warmGray100,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -228,14 +238,14 @@ class MainPageChatBoxAddElements extends StatelessWidget {
           Row(children: [
             Icon(
               Icons.person_add,
-              color: warmGray600,
+              color: BaseColor.warmGray600,
               size: 14.sp,
             ),
             SizedBox(width: 5.sp),
             Text(
               '방 생성하기',
               style: TextStyle(
-                color: warmGray600,
+                color: BaseColor.warmGray600,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w700,
                 height: 1.2,
@@ -259,7 +269,15 @@ class MainPageStatBox extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(11.sp),
-          color: warmGray100,
+          color: BaseColor.warmGray100,
+          boxShadow: [
+            BoxShadow(
+              color: BaseColor.warmGray400.withOpacity(0.25),
+              spreadRadius: 0.1,
+              blurRadius: 30,
+              offset: Offset(0, 5), // changes position of shadow
+            ),
+          ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -270,7 +288,7 @@ class MainPageStatBox extends StatelessWidget {
               children: [
                 Icon(
                   Icons.arrow_back_ios_new_sharp,
-                  color: warmGray600,
+                  color: BaseColor.warmGray600,
                   size: 14.sp,
                 ),
                 Column(
@@ -280,7 +298,7 @@ class MainPageStatBox extends StatelessWidget {
                     Text(
                       '5월 2주차 합산',
                       style: TextStyle(
-                        color: warmGray900,
+                        color: BaseColor.warmGray900,
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w700,
                         height: 1.2,
@@ -303,13 +321,13 @@ class MainPageStatBox extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.info,
-                          color: warmGray400,
+                          color: BaseColor.warmGray400,
                           size: 10.sp,
                         ),
                         Text(
                           '5/8 ~ 5/14 사이의 내역이에요!',
                           style: TextStyle(
-                            color: warmGray400,
+                            color: BaseColor.warmGray400,
                             fontSize: 10.sp,
                             fontWeight: FontWeight.w700,
                             height: 1.2,
@@ -321,14 +339,14 @@ class MainPageStatBox extends StatelessWidget {
                 ),
                 Icon(
                   Icons.arrow_forward_ios_sharp,
-                  color: warmGray600,
+                  color: BaseColor.warmGray600,
                   size: 14.sp,
                 )
               ],
             ),
             const SizedBox(height: 18),
             const Divider(
-              color: warmGray200,
+              color: BaseColor.warmGray200,
             ),
             SizedBox(height: 8),
             Padding(
@@ -344,13 +362,13 @@ class MainPageStatBox extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.list_alt_outlined,
-                              color: warmGray400,
+                              color: BaseColor.warmGray400,
                               size: 13.sp,
                             ),
                             Text(
                               '내역 보기',
                               style: TextStyle(
-                                color: warmGray400,
+                                color: BaseColor.warmGray400,
                                 fontSize: 13.sp,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -360,7 +378,7 @@ class MainPageStatBox extends StatelessWidget {
                       ),
                       Expanded(
                           child: const VerticalDivider(
-                        color: warmGray200,
+                        color: BaseColor.warmGray200,
                       )),
                       Expanded(
                           child: Wrap(
@@ -369,13 +387,13 @@ class MainPageStatBox extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.insert_chart,
-                            color: warmGray400,
+                            color: BaseColor.warmGray400,
                             size: 13.sp,
                           ),
                           Text(
                             '통계 보기',
                             style: TextStyle(
-                              color: warmGray400,
+                              color: BaseColor.warmGray400,
                               fontSize: 13.sp,
                               fontWeight: FontWeight.w600,
                             ),
@@ -404,13 +422,13 @@ class TopBar extends StatelessWidget {
           children: [
             Icon(
               Icons.ac_unit,
-              color: warmGray600,
+              color: BaseColor.warmGray600,
               size: 18.sp,
             ),
             Text(
               '나쁜말 카운터',
               style: TextStyle(
-                color: warmGray600,
+                color: BaseColor.warmGray600,
                 fontSize: 15.sp,
                 fontWeight: FontWeight.w900,
               ),
@@ -433,7 +451,7 @@ class SideBar extends StatelessWidget {
             height: 128.sp,
             child:  const DrawerHeader(
               decoration: BoxDecoration(
-                color: warmGray700,
+                color: BaseColor.warmGray700,
               ),
               child: Text('나쁜말 카운터'),
             ),

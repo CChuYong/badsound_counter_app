@@ -15,8 +15,8 @@ class MainPageChatBox extends StatelessWidget {
         Text(
           '나쁜말 방 목록',
           style: TextStyle(
-            color: BaseColor.warmGray900,
-            fontSize: 16.sp,
+            color: BaseColor.warmGray700,
+            fontSize: 15.sp,
             fontWeight: FontWeight.w700,
             height: 1.2,
           ),

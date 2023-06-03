@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../component/touchableopacity.dart';
-import '../../designsystem/theme/base_color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../designsystem/theme/base_color.dart';
 
 class MainPageStatBox extends StatelessWidget {
   const MainPageStatBox({super.key});
@@ -125,28 +123,28 @@ class MainPageStatBox extends StatelessWidget {
                       ),
                       Expanded(
                           child: const VerticalDivider(
-                            color: BaseColor.warmGray200,
-                          )),
+                        color: BaseColor.warmGray200,
+                      )),
                       Expanded(
                           child: Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            spacing: 8.sp,
-                            children: [
-                              Icon(
-                                Icons.insert_chart,
-                                color: BaseColor.warmGray400,
-                                size: 13.sp,
-                              ),
-                              Text(
-                                '통계 보기',
-                                style: TextStyle(
-                                  color: BaseColor.warmGray400,
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              )
-                            ],
-                          ))
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        spacing: 8.sp,
+                        children: [
+                          Icon(
+                            Icons.insert_chart,
+                            color: BaseColor.warmGray400,
+                            size: 13.sp,
+                          ),
+                          Text(
+                            '통계 보기',
+                            style: TextStyle(
+                              color: BaseColor.warmGray400,
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ],
+                      ))
                     ],
                   ),
                 ))

@@ -1,13 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../theme/base_color.dart';
+import '../designsystem/theme/base_color.dart';
 
 class MainNavigator extends StatefulWidget {
   final List<Widget> pages;
   final int defaultPageNumber;
-  const MainNavigator({super.key, required this.pages, required this.defaultPageNumber});
+
+  const MainNavigator(
+      {super.key, required this.pages, required this.defaultPageNumber});
 
   @override
   State<StatefulWidget> createState() => _MainPageState();
@@ -18,7 +19,7 @@ class _MainPageState extends State<MainNavigator> {
   late Widget _currentPage = widget.pages[widget.defaultPageNumber];
   bool _incremental = false;
 
-  final Duration animationDuration = const Duration(milliseconds: 150);
+  final Duration animationDuration = const Duration(milliseconds: 50);
 
   void _movePage(int pageNumber) {
     setState(() {
@@ -32,34 +33,27 @@ class _MainPageState extends State<MainNavigator> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: double.infinity,
-        child: AnimatedSwitcher(
-          duration: animationDuration,
-          child: _currentPage,
-          transitionBuilder: (Widget child, Animation<double> animation) {
-            return SlideTransition(
-              position: Tween(
-                begin: Offset(_incremental ? 1.0 : -1.0, 0.0),
-                end: const Offset(0.0, 0.0),
-              ).animate(
-                CurvedAnimation(
-                  parent: animation,
-                  curve: const Interval(0.0, 0.5)
-                )
-              ),
-              child: FadeTransition(
-                opacity: CurvedAnimation(
-                  parent: animation,
-                  curve: const Interval(0.5, 1.0),
-                ),
-                child: child,
-              ),
-            );
-          }
-        )
-      ),
-      bottomNavigationBar:
-      Container(
+          height: double.infinity,
+          child: AnimatedSwitcher(
+              duration: animationDuration,
+              child: _currentPage,
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return SlideTransition(
+                  position: Tween(
+                    begin: Offset(_incremental ? 1.0 : -1.0, 0.0),
+                    end: const Offset(0.0, 0.0),
+                  ).animate(CurvedAnimation(
+                      parent: animation, curve: const Interval(0.0, 0.05))),
+                  child: FadeTransition(
+                    opacity: CurvedAnimation(
+                      parent: animation,
+                      curve: const Interval(0.1, 1.0),
+                    ),
+                    child: child,
+                  ),
+                );
+              })),
+      bottomNavigationBar: Container(
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -70,30 +64,28 @@ class _MainPageState extends State<MainNavigator> {
             ),
           ],
         ),
-        child:  ClipRRect(
+        child: ClipRRect(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(24.sp),
               topRight: Radius.circular(24.sp),
             ),
             child: BottomBar(
-              onNavButtonTap: (index) => {
-                _movePage(index)
-              },
+              onNavButtonTap: (index) => {_movePage(index)},
               defaultPageNumber: widget.defaultPageNumber,
-            )
-        ),
+            )),
       ),
     );
   }
-
 }
-
 
 class BottomBar extends StatefulWidget {
   final void Function(int)? onNavButtonTap;
   final int defaultPageNumber;
-  const BottomBar({super.key, required this.onNavButtonTap, required this.defaultPageNumber});
 
+  const BottomBar(
+      {super.key,
+      required this.onNavButtonTap,
+      required this.defaultPageNumber});
 
   @override
   State<StatefulWidget> createState() => _BottomBarState();
@@ -130,17 +122,15 @@ class _BottomBarState extends State<BottomBar> {
       ],
       showSelectedLabels: false,
       showUnselectedLabels: false,
-      unselectedIconTheme: IconThemeData(
-          color: BaseColor.warmGray400, size: 25.sp),
-      selectedIconTheme: IconThemeData(
-          color: BaseColor.warmGray800, size: 25.sp),
+      unselectedIconTheme:
+          IconThemeData(color: BaseColor.warmGray400, size: 25.sp),
+      selectedIconTheme:
+          IconThemeData(color: BaseColor.warmGray800, size: 25.sp),
       currentIndex: _currentPage,
-      onTap: (num) =>
-      {
+      onTap: (num) => {
         _setPage(num)
         //  Navigator.push(context, MaterialPageRoute(builder: (ctx) => const ProfilePage()))
       },
     );
   }
-
 }

@@ -122,6 +122,8 @@ class _BottomBarState extends State<BottomBar> {
       ],
       showSelectedLabels: false,
       showUnselectedLabels: false,
+      selectedFontSize: 0,
+      unselectedFontSize: 0,
       unselectedIconTheme:
           IconThemeData(color: BaseColor.warmGray400, size: 25.sp),
       selectedIconTheme:

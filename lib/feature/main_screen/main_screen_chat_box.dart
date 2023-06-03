@@ -27,9 +27,10 @@ class MainPageChatBox extends StatelessWidget {
               child: Column(
             children: [
               for (int i = 0; i < 10; i++) ...[
-                SizedBox(height: 13),
                 MainPageChatBoxElements(),
-              ]
+                SizedBox(height: 13),
+              ],
+              MainPageChatBoxAddElements()
             ],
           )),
         )
@@ -60,8 +61,8 @@ class MainPageChatBoxElements extends StatelessWidget {
                   Stack(
                     children: [
                       Container(
-                        width: 51.sp,
-                        height: 51.sp,
+                        width: 46.sp,
+                        height: 46.sp,
                         decoration: const BoxDecoration(
                           color: BaseColor.warmGray700,
                           shape: BoxShape.circle,

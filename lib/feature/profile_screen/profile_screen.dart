@@ -59,7 +59,9 @@ class ProfilePage extends StatelessWidget {
                   children: [
                     const GraySolidButton('프로필 사진 변경'),
                     SizedBox(width: 10.sp),
-                    const GraySolidButton('닉네임 변경'),
+                    GraySolidButton('닉네임 변경', onTap: () => {
+                      Navigator.pushNamed(context, 'splash')
+                    }),
                   ],
                 ),
                 const Divider(color: BaseColor.warmGray700)

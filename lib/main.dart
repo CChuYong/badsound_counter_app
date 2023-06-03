@@ -1,4 +1,5 @@
 import 'package:badsound_counter_app/feature/calendar_screen/calendar_screen.dart';
+import 'package:badsound_counter_app/feature/login_screen.dart/login_screen.dart';
 import 'package:badsound_counter_app/feature/main_screen/main_screen.dart';
 import 'package:badsound_counter_app/feature/profile_screen/profile_screen.dart';
 import 'package:badsound_counter_app/feature/splash_screen/splash_screen.dart';
@@ -35,7 +36,8 @@ class MyApp extends StatelessWidget {
                         ProfilePage(),
                       ],
                     ),
-                'splash': (builder) => const SplashScreen()
+                'splash': (builder) => const SplashScreen(),
+                'login': (builder) => const LoginScreen()
               },
             ));
   }

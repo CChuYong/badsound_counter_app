@@ -11,4 +11,8 @@ final class BaseColor {
   static const warmGray200 = Color(0xffE7E5E4);
   static const warmGray100 = Color(0xffF5F5F4);
   static const warmGray50 = Color(0xffFAFAF9);
+
+static const defaultGreen = Color(0xff10B981);
+static const defaultRed = Color(0xffFF8282);
+
 }

@@ -57,12 +57,12 @@ class ProfilePage extends StatelessWidget {
                 SizedBox(height: 6.sp),
                 Row(
                   children: [
-                    GraySolidButton('프로필 사진 변경'),
+                    const GraySolidButton('프로필 사진 변경'),
                     SizedBox(width: 10.sp),
-                    GraySolidButton('닉네임 변경'),
+                    const GraySolidButton('닉네임 변경'),
                   ],
                 ),
-                Divider(color: BaseColor.warmGray700)
+                const Divider(color: BaseColor.warmGray700)
               ],
             )
           ],

@@ -20,7 +20,7 @@ class MainPageStatBox extends StatelessWidget {
               color: BaseColor.warmGray400.withOpacity(0.25),
               spreadRadius: 0.1,
               blurRadius: 30,
-              offset: Offset(0, 5), // changes position of shadow
+              offset: const Offset(0, 5), // changes position of shadow
             ),
           ],
         ),
@@ -59,7 +59,7 @@ class MainPageStatBox extends StatelessWidget {
                         height: 1.2,
                       ),
                     ),
-                    SizedBox(height: 6),
+                    const SizedBox(height: 6),
                     Wrap(
                       spacing: 4.sp,
                       crossAxisAlignment: WrapCrossAlignment.center,
@@ -93,7 +93,7 @@ class MainPageStatBox extends StatelessWidget {
             const Divider(
               color: BaseColor.warmGray200,
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Padding(
                 padding: EdgeInsets.only(left: 30.sp, right: 30.sp),
                 child: IntrinsicHeight(
@@ -121,10 +121,11 @@ class MainPageStatBox extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Expanded(
-                          child: const VerticalDivider(
-                        color: BaseColor.warmGray200,
-                      )),
+                      const Expanded(
+                          child: VerticalDivider(
+                            color: BaseColor.warmGray200,
+                          )
+                      ),
                       Expanded(
                           child: Wrap(
                         crossAxisAlignment: WrapCrossAlignment.center,

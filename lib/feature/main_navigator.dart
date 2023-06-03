@@ -32,7 +32,7 @@ class _MainPageState extends State<MainNavigator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
           height: double.infinity,
           child: AnimatedSwitcher(
               duration: animationDuration,
@@ -106,18 +106,18 @@ class _BottomBarState extends State<BottomBar> {
     return BottomNavigationBar(
       backgroundColor: BaseColor.warmGray100,
       elevation: 24.0,
-      items: [
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_month),
-          label: 'asdf',
+          label: 'calendar_page',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'asdf',
+          label: 'home_page',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: 'asdf',
+          label: 'profile_page',
         )
       ],
       showSelectedLabels: false,
@@ -127,8 +127,8 @@ class _BottomBarState extends State<BottomBar> {
       selectedIconTheme:
           IconThemeData(color: BaseColor.warmGray800, size: 25.sp),
       currentIndex: _currentPage,
-      onTap: (num) => {
-        _setPage(num)
+      onTap: (number) => {
+        _setPage(number)
         //  Navigator.push(context, MaterialPageRoute(builder: (ctx) => const ProfilePage()))
       },
     );

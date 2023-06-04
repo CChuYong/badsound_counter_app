@@ -6,7 +6,7 @@ class TouchableOpacity extends StatefulWidget {
   final Duration opacityDuration = const Duration(milliseconds: 150);
   final Duration scaleDuration = const Duration(milliseconds: 100);
   final double opacity = 0.5;
-  final double scale = 0.95;
+  final double scale = 0.98;
 
   const TouchableOpacity({super.key, required this.child, this.onTap});
 

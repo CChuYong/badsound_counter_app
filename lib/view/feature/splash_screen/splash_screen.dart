@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:badsound_counter_app/feature/login_screen.dart/login_screen.dart';
+import 'package:badsound_counter_app/view/feature/login_screen.dart/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

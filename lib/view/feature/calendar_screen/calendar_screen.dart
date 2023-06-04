@@ -1,4 +1,4 @@
-import 'package:badsound_counter_app/designsystem/component/safe_area_with_padding.dart';
+import 'package:badsound_counter_app/view/designsystem/component/safe_area_with_padding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

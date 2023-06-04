@@ -1,15 +1,16 @@
-import 'package:badsound_counter_app/feature/calendar_screen/calendar_screen.dart';
-import 'package:badsound_counter_app/feature/login_screen.dart/login_screen.dart';
-import 'package:badsound_counter_app/feature/main_screen/main_screen.dart';
-import 'package:badsound_counter_app/feature/profile_screen/profile_screen.dart';
-import 'package:badsound_counter_app/feature/splash_screen/splash_screen.dart';
+import 'package:badsound_counter_app/view/feature/calendar_screen/calendar_screen.dart';
+import 'package:badsound_counter_app/view/feature/login_screen.dart/login_screen.dart';
+import 'package:badsound_counter_app/view/feature/main_screen/main_screen.dart';
+import 'package:badsound_counter_app/view/feature/profile_screen/profile_screen.dart';
+import 'package:badsound_counter_app/view/feature/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import 'feature/main_navigator.dart';
+import 'view/feature/main_navigator.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const GetMaterialApp(home: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
                 'splash': (builder) => const SplashScreen(),
                 'login': (builder) => const LoginScreen()
               },
-            ));
+        )
+    );
   }
 }

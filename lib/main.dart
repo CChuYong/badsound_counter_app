@@ -6,10 +6,22 @@ import 'package:badsound_counter_app/view/feature/splash_screen/splash_screen.da
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:injectable/injectable.dart';
 
 import 'view/feature/main_navigator.dart';
+import 'dependencies.config.dart' as di;
+
+
+
+@InjectableInit(
+  initializerName: 'init', // default
+  preferRelativeImports: true, // default
+  asExtension: true, // default
+)
+void configureDependencies() => di.init();
 
 void main() {
+  configureDependencies();
   runApp(const GetMaterialApp(home: MyApp()));
 }
 

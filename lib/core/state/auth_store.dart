@@ -1,19 +1,19 @@
-import 'package:badsound_counter_app/dependencies.config.dart';
-
-import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
 import '../model/auth_token.dart';
 
 
+@singleton
 class AuthProvider {
   AuthToken? authToken;
-
-  final dio = inject<Dio>();
 
   bool isAuthenticated() => authToken != null;
 
   void authenticate(AuthToken token){
-   // dio.interceptors.
     authToken = token;
+  }
+
+  void clearAuthentication() {
+    authToken = null;
   }
 }

@@ -1,3 +1,6 @@
+import 'package:badsound_counter_app/core/api/model/refresh_request.dart';
+import 'package:badsound_counter_app/core/api/open_api.dart';
+import 'package:badsound_counter_app/core/model/auth_token.dart';
 import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:dio/src/dio_mixin.dart';
@@ -5,6 +8,7 @@ import 'package:dio/dio.dart';
 
 class ApiInterceptor extends Interceptor {
   final AuthProvider authProvider = inject<AuthProvider>();
+  final OpenAPI openAPI = inject<OpenAPI>();
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     print('[REQ] [${options.method}] ${options.uri}');
@@ -22,11 +26,20 @@ class ApiInterceptor extends Interceptor {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioError err, ErrorInterceptorHandler handler) async {
     final isStatus401 = err.response?.statusCode == 401;
     if(isStatus401) {
       if(authProvider.isAuthenticated()) {
         // try refresh it
+        try{
+          final result = await openAPI.refresh(RefreshRequest(refreshToken: authProvider.authToken?.refreshToken ?? ''));
+          authProvider.authenticate(
+              AuthToken(result.accessToken, result.refreshToken)
+          );
+        } catch(e) {
+          //Refresh failure. invalidate authentication
+          authProvider.clearAuthentication();
+        }
       }
     }
     return super.onError(err, handler);

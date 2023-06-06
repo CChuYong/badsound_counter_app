@@ -1,37 +1,26 @@
+import 'dart:developer';
+
+import 'package:badsound_counter_app/core/framework/base_view.dart';
+import 'package:badsound_counter_app/presenter/feature/login_screen_store.dart';
+import 'package:badsound_counter_app/view/component/touchableopacity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../designsystem/theme/base_color.dart';
 import '../../designsystem/theme/base_icon.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginScreenV2 extends BaseView<LoginScreenV2, LoginScreenAction, LoginScreenState> {
+  @override
+  LoginScreenAction initAction() => LoginScreenAction();
 
   @override
-  State createState() => _LoginWidgetState();
-}
-
-class _LoginWidgetState extends State<LoginScreen> {
-  bool _loaded = false;
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      _loaded = false;
-    });
-    Future.delayed(const Duration(milliseconds: 100), () {
-      setState(() {
-        _loaded = true;
-      });
-    });
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () => {Navigator.pushReplacementNamed(context, 'navigator')},
-        child:
+  Widget render(BuildContext context, LoginScreenAction action,
+      LoginScreenState state) {
+    if(state.loginState == LoginState.LOGIN_SUCCEED) {
+      Navigator.pushReplacementNamed(context, 'navigator');
+      return Container();
+    }
+    return
         Container(
             width: double.infinity,
             height: double.infinity,
@@ -39,8 +28,11 @@ class _LoginWidgetState extends State<LoginScreen> {
             child: SafeArea(
                 child: AnimatedPadding(
                   duration: Duration(milliseconds: 800),
-                  padding: EdgeInsets.only(left: 20.sp, right: 20.sp, top: _loaded ? 50.sp : 100.sp, bottom: 10.sp),
-                  child:  Column(
+                  padding: EdgeInsets.only(left: 20.sp,
+                      right: 20.sp,
+                      top: !state.isLoading ? 50.sp : 100.sp,
+                      bottom: 10.sp),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
@@ -64,13 +56,23 @@ class _LoginWidgetState extends State<LoginScreen> {
                           ],
                         ),
                       ),
-                      AnimatedOpacity(opacity: _loaded ? 1.0 : 0.0, duration: Duration(milliseconds: 800), child: Column(
-                        children: [
-                          Image.asset('assets/images/sign_in_with_apple_4x.png'),
-                          SizedBox(height: 8.sp),
-                          Image.asset('assets/images/sign_in_with_google_4x.png'),
-                        ],
-                      ))
+                      AnimatedOpacity(opacity: !state.isLoading ? 1.0 : 0.0,
+                          duration: Duration(milliseconds: 800),
+                          child: Column(
+                            children: [
+                              TouchableOpacity(
+                                  onTap: () => action.loginWithApple(),
+                                  child: Image.asset(
+                                  'assets/images/sign_in_with_apple_4x.png')
+                              ),
+                              SizedBox(height: 8.sp),
+                              TouchableOpacity(
+                                onTap: () => Navigator.pushReplacementNamed(context, 'navigator'),
+                                child: Image.asset(
+                                    'assets/images/sign_in_with_google_4x.png'),
+                              ),
+                            ],
+                          ))
 
                     ],
                   ),
@@ -78,6 +80,7 @@ class _LoginWidgetState extends State<LoginScreen> {
 
             )
 
-        ));
+    );
   }
+
 }

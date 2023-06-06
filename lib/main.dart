@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
                       ],
                     ),
                 'splash': (builder) => const SplashScreen(),
-                'login': (builder) => const LoginScreen()
+                'login': (builder) => LoginScreenV2()
               },
         )
     );

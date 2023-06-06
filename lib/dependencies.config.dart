@@ -1,10 +1,19 @@
+import 'package:badsound_counter_app/core/api/api_interceptor.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
+import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 
-final di = GetIt.instance;
+final inject = GetIt.instance;
 
 Future<void> init() async {
-  final client = OpenAPI(Dio());
-  di.registerSingleton(client);
+  final dio = Dio();
+  final client = OpenAPI(dio);
+
+  inject.registerSingleton(dio);
+  inject.registerSingleton(client);
+  inject.registerSingleton(AuthProvider());
+
+  final interceptor = ApiInterceptor();
+  dio.interceptors.add(interceptor);
 }

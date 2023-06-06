@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
       //Navigator.pushReplacementNamed(context, 'login');
       Navigator.pushReplacement(context,
         PageRouteBuilder(
-          pageBuilder: (context, animation1, animation2) => LoginScreen(),
+          pageBuilder: (context, animation1, animation2) => LoginScreenV2(),
           transitionDuration: Duration.zero,
           reverseTransitionDuration: Duration.zero,
         ),);

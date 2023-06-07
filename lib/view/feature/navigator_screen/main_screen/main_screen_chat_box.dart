@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../component/touchableopacity.dart';
-import '../../designsystem/theme/base_color.dart';
+import '../../../component/touchableopacity.dart';
+import '../../../designsystem/theme/base_color.dart';
 
 class MainPageChatBox extends StatelessWidget {
   const MainPageChatBox({super.key});

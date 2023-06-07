@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../designsystem/theme/base_color.dart';
+import '../../designsystem/theme/base_color.dart';
 
 class MainNavigator extends StatefulWidget {
   final List<Widget> pages;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../designsystem/theme/base_color.dart';
-import '../../designsystem/theme/base_icon.dart';
+import '../../../designsystem/theme/base_color.dart';
+import '../../../designsystem/theme/base_icon.dart';
 
 class MainPageTopBar extends StatelessWidget {
   const MainPageTopBar({super.key});

@@ -1,14 +1,14 @@
-import 'package:badsound_counter_app/view/feature/calendar_screen/calendar_screen.dart';
+import 'package:badsound_counter_app/view/feature/navigator_screen/calendar_screen/calendar_screen.dart';
 import 'package:badsound_counter_app/view/feature/login_screen.dart/login_screen.dart';
-import 'package:badsound_counter_app/view/feature/main_screen/main_screen.dart';
-import 'package:badsound_counter_app/view/feature/profile_screen/profile_screen.dart';
+import 'package:badsound_counter_app/view/feature/navigator_screen/main_screen/main_screen.dart';
+import 'package:badsound_counter_app/view/feature/navigator_screen/profile_screen/profile_screen.dart';
 import 'package:badsound_counter_app/view/feature/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:injectable/injectable.dart';
 
-import 'view/feature/main_navigator.dart';
+import 'view/feature/navigator_screen/main_navigator.dart';
 import 'dependencies.config.dart' as di;
 
 

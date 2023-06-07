@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-
-import '../../../presenter/feature/main_screen/main_screen_stat_box_store.dart';
-import '../../designsystem/theme/base_color.dart';
+import '../../../designsystem/theme/base_color.dart';
 
 class MainPageStatBox extends StatelessWidget {
   const MainPageStatBox({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final MainPageStatBoxStore store = Get.put(MainPageStatBoxStore());
     return GestureDetector(
-      onTap: () => store.updateLoading(),
       child: Container(
           padding: EdgeInsets.only(
               top: 20.sp, bottom: 20.sp, left: 23.sp, right: 23.sp),

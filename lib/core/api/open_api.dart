@@ -8,7 +8,7 @@ import 'model/me_response.dart';
 import 'model/refresh_request.dart';
 part 'open_api.g.dart';
 
-@RestApi(baseUrl: 'http://192.168.1.49:8080/app')
+@RestApi(baseUrl: 'https://dsc.bearus.co/app')
 abstract class OpenAPI {
   factory OpenAPI(Dio dio, {String baseUrl}) = _OpenAPI;
 

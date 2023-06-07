@@ -2,8 +2,8 @@ import 'package:badsound_counter_app/view/designsystem/component/safe_area_with_
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../designsystem/component/gray_solid_button.dart';
-import '../../designsystem/theme/base_color.dart';
+import '../../../designsystem/component/gray_solid_button.dart';
+import '../../../designsystem/theme/base_color.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});

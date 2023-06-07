@@ -57,26 +57,15 @@ A extends BaseAction<V, A, S>, S> extends GetxController {
     render();
   }
 
-  void showSnackBar({
+  void errorSnackBar({
     required String message,
-    String title = '',
     SnackBarType type = SnackBarType.GREY, // neutral
     EdgeInsets margin = const EdgeInsets.all(12),
     int msDuration = 2000,
     SnackPosition position = SnackPosition.TOP,
   }) {
-    // Color bgColor;
-    // if (type == SnackBarType.RED) bgColor = Colors.red[400];
-    // if (type == SnackBarType.GREEN) bgColor = Colors.green[400];
-    // if (type == SnackBarType.YELLOW) bgColor = Colors.yellow[400];
-    //
-    // Color txtColor;
-    // if (type == SnackBarType.RED) txtColor = Colors.white;
-    // if (type == SnackBarType.GREEN) txtColor = Colors.white;
-    // if (type == SnackBarType.YELLOW) txtColor = Colors.black87;
-
     Get.snackbar(
-      title,
+      '',
       message,
       // backgroundColor: bgColor,
       // colorText: txtColor,

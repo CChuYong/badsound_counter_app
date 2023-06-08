@@ -6,6 +6,7 @@ import 'package:badsound_counter_app/core/api/model/auth_request.dart';
 import 'package:badsound_counter_app/core/model/auth_token.dart';
 import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
+import 'package:get/get.dart';
 
 import '../../view/feature/login_screen.dart/login_screen.dart';
 
@@ -70,7 +71,9 @@ class LoginScreenAction extends BaseAction<LoginScreenV2, LoginScreenAction, Log
         state.loginState = LoginState.LOGIN_SUCCEED;
         state.isLoading = false;
       });
+      Get.offNamed('navigator');
     }catch(e){
+      log(e.toString());
       errorSnackBar(message: '알 수 없는 오류가 발생했어요');
       setState(() {
         state.loginState = LoginState.WAIT_FOR_LOGIN;

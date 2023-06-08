@@ -45,7 +45,7 @@ A extends BaseAction<V, A, S>, S> extends GetxController {
   }
 
   void dispose() {
-    super.dispose();
+    //super.dispose();
   }
 
   void didChangeDependencies(BuildContext context) {

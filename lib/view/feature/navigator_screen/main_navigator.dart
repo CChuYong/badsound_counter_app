@@ -116,7 +116,7 @@ class _BottomBarState extends State<BottomBar> {
           IconThemeData(color: BaseColor.warmGray800, size: 25.sp),
       currentIndex: _currentPage,
       onTap: (number) => {
-        _setPage(number)
+        if(number != _currentPage) _setPage(number)
       },
     );
   }

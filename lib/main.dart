@@ -1,3 +1,4 @@
+import 'package:badsound_counter_app/core/framework/state_store.dart';
 import 'package:badsound_counter_app/view/feature/navigator_screen/calendar_screen/calendar_screen.dart';
 import 'package:badsound_counter_app/view/feature/login_screen.dart/login_screen.dart';
 import 'package:badsound_counter_app/view/feature/navigator_screen/main_screen/main_screen.dart';
@@ -18,8 +19,10 @@ import 'dependencies.config.dart' as di;
 )
 void configureDependencies() => di.init();
 
-void main() {
+void main() async{
   configureDependencies();
+  WidgetsFlutterBinding.ensureInitialized();
+  await StateStore.init();
   runApp(ScreenUtilInit(
       builder: (context, widget) => GetMaterialApp(
             // home: const MyApp(),

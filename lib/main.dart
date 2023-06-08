@@ -35,7 +35,6 @@ void main() {
               GetPage(
                   name: '/navigator',
                   page: () => const MainNavigator(
-                        defaultPageNumber: 1,
                         pages: [
                           CalendarPage(),
                           MainPage(),

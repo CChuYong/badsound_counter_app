@@ -1,46 +1,32 @@
+import 'package:badsound_counter_app/core/framework/base_view.dart';
+import 'package:badsound_counter_app/presenter/feature/main_navigator_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../designsystem/theme/base_color.dart';
 
-class MainNavigator extends StatefulWidget {
-  final List<Widget> pages;
-  final int defaultPageNumber;
-
-  const MainNavigator(
-      {super.key, required this.pages, required this.defaultPageNumber});
-
-  @override
-  State<StatefulWidget> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainNavigator> {
-  late int _currentPageIndex = widget.defaultPageNumber;
-  late Widget _currentPage = widget.pages[widget.defaultPageNumber];
-  bool _incremental = false;
-
+class MainNavigator extends BaseView<MainNavigator, MainNavigatorAction, MainNavigatorState> {
   final Duration animationDuration = const Duration(milliseconds: 50);
+  final List<Widget> pages;
 
-  void _movePage(int pageNumber) {
-    setState(() {
-      _incremental = pageNumber > _currentPageIndex;
-      _currentPageIndex = pageNumber;
-      _currentPage = widget.pages[pageNumber];
-    });
-  }
+    const MainNavigator(
+      {super.key, required this.pages});
 
   @override
-  Widget build(BuildContext context) {
+  MainNavigatorAction initAction() => MainNavigatorAction();
+
+  @override
+  Widget render(BuildContext context, MainNavigatorAction action, MainNavigatorState state) {
     return Scaffold(
       body: SizedBox(
           height: double.infinity,
           child: AnimatedSwitcher(
               duration: animationDuration,
-              child: _currentPage,
+              child: pages[state.pageNumber],
               transitionBuilder: (Widget child, Animation<double> animation) {
                 return SlideTransition(
                   position: Tween(
-                    begin: Offset(_incremental ? 1.0 : -1.0, 0.0),
+                    begin: Offset(state.incremental ? 1.0 : -1.0, 0.0),
                     end: const Offset(0.0, 0.0),
                   ).animate(CurvedAnimation(
                       parent: animation, curve: const Interval(0.0, 0.05))),
@@ -70,8 +56,8 @@ class _MainPageState extends State<MainNavigator> {
               topRight: Radius.circular(24.sp),
             ),
             child: BottomBar(
-              onNavButtonTap: (index) => {_movePage(index)},
-              defaultPageNumber: widget.defaultPageNumber,
+              onNavButtonTap: (index) => {action.bottomBarTap(index)},
+              defaultPageNumber: state.pageNumber,
             )),
       ),
     );
@@ -131,7 +117,6 @@ class _BottomBarState extends State<BottomBar> {
       currentIndex: _currentPage,
       onTap: (number) => {
         _setPage(number)
-        //  Navigator.push(context, MaterialPageRoute(builder: (ctx) => const ProfilePage()))
       },
     );
   }

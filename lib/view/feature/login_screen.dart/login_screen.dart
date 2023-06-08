@@ -63,7 +63,7 @@ class LoginScreenV2 extends BaseView<LoginScreenV2, LoginScreenAction, LoginScre
                               ),
                               SizedBox(height: 8.sp),
                               TouchableOpacity(
-                                onTap: () => Navigator.pushReplacementNamed(context, 'navigator'),
+                                onTap: () => action.loginWithGoogle(),
                                 child: Image.asset(
                                     'assets/images/sign_in_with_google_4x.png'),
                               ),

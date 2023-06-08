@@ -10,9 +10,17 @@ class MeResponse {
   @JsonKey(name: 'email')
   String email;
 
+  @JsonKey(name: 'nickname')
+  String nickname;
+
+  @JsonKey(name: 'createdAtTs')
+  int createdAtTs;
+
   MeResponse({
     required this.id,
     required this.email,
+    required this.nickname,
+    required this.createdAtTs,
   });
 
   factory MeResponse.fromJson(Map<String, dynamic> json) => _$MeResponseFromJson(json);

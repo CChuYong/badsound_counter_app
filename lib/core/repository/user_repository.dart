@@ -9,9 +9,9 @@ class UserRepository {
     final data = await api.getMe();
     return User(
       userId: data.id,
-      nickname: 'after-load',
+      nickname: data.nickname,
       email: data.email,
-      createdAtTs: 0
+      createdAtTs: data.createdAtTs,
     );
   }
 }

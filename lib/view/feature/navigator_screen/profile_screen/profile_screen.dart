@@ -4,6 +4,7 @@ import 'package:badsound_counter_app/view/designsystem/component/safe_area_with_
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/util/date_parser.dart';
 import '../../../designsystem/component/gray_solid_button.dart';
 import '../../../designsystem/theme/base_color.dart';
 
@@ -52,7 +53,7 @@ class ProfilePage extends BaseView<ProfilePage, ProfileScreenAction, ProfileScre
                       ),
                     ),
                     Text(
-                      'since 2023.05.30.',
+                      'since ${DateParser.timeStampAsDate(state.user.createdAtTs)}',
                       style: TextStyle(
                         color: BaseColor.warmGray700,
                         fontSize: 11.sp,

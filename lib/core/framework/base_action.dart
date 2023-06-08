@@ -16,7 +16,7 @@ A extends BaseAction<V, A, S>, S> extends GetxController {
   bool isBusy = true; // must be started as true
 
   final Debouncer reloadDbn = Debouncer(const Duration(milliseconds: 300));
-  final Debouncer renderDbn = Debouncer(const Duration(milliseconds: 300));
+  final Debouncer renderDbn = Debouncer(const Duration(milliseconds: 50));
 
   Future<S> initState();
 

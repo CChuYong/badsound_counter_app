@@ -16,10 +16,6 @@ class LoginScreenV2 extends BaseView<LoginScreenV2, LoginScreenAction, LoginScre
   @override
   Widget render(BuildContext context, LoginScreenAction action,
       LoginScreenState state) {
-    // if(state.loginState == LoginState.LOGIN_SUCCEED) {
-    //   Navigator.pushReplacementNamed(context, 'navigator');
-    //   return Container();
-    // }
     return
         Container(
             width: double.infinity,

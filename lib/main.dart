@@ -20,9 +20,9 @@ import 'dependencies.config.dart' as di;
 void configureDependencies() => di.init();
 
 void main() async{
-  configureDependencies();
   WidgetsFlutterBinding.ensureInitialized();
   await StateStore.init();
+  configureDependencies();
   runApp(ScreenUtilInit(
       builder: (context, widget) => GetMaterialApp(
             // home: const MyApp(),

@@ -23,4 +23,12 @@ class StateStore {
     if(data == null) return null;
     return jsonDecode(data);
   }
+
+  static void clearState(Type key) {
+    sharedPreferences!.remove(key.toString());
+  }
+
+  static void clear() {
+    sharedPreferences!.clear();
+  }
 }

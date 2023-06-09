@@ -1,8 +1,12 @@
 import 'dart:async';
 
+import 'package:badsound_counter_app/core/state/auth_store.dart';
+import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:badsound_counter_app/view/feature/login_screen.dart/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../designsystem/theme/base_color.dart';
 import '../../designsystem/theme/base_icon.dart';
@@ -15,18 +19,24 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final AuthProvider authProvider = inject<AuthProvider>();
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 3), () {
+      if(authProvider.isAuthenticated()) {
+        Get.offNamed('/navigator');
+      }else {
+        Navigator.pushReplacement(context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => LoginScreenV2(),
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero,
+          ),);
+      }
       //Navigator.pushNamed(context, 'login');
       //Navigator.pushReplacementNamed(context, 'login');
-      Navigator.pushReplacement(context,
-        PageRouteBuilder(
-          pageBuilder: (context, animation1, animation2) => LoginScreenV2(),
-          transitionDuration: Duration.zero,
-          reverseTransitionDuration: Duration.zero,
-        ),);
+
     });
   }
   @override

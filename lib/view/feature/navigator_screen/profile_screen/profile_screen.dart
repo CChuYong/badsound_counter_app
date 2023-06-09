@@ -1,5 +1,6 @@
 import 'package:badsound_counter_app/core/framework/base_view.dart';
 import 'package:badsound_counter_app/presenter/feature/profile_screen/profile_screen_store.dart';
+import 'package:badsound_counter_app/view/component/touchableopacity.dart';
 import 'package:badsound_counter_app/view/designsystem/component/safe_area_with_padding.dart';
 import 'package:badsound_counter_app/view/designsystem/theme/base_icon.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class ProfilePage extends BaseView<ProfilePage, ProfileScreenAction, ProfileScre
 
   @override
   Widget render(BuildContext context, ProfileScreenAction action, ProfileScreenState state) {
+    onTapHandler(type) => action.onPressMenu(type);
     return SafeAreaWithPadding(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,11 +98,11 @@ class ProfilePage extends BaseView<ProfilePage, ProfileScreenAction, ProfileScre
             ),
             SizedBox(height: 8.sp),
 
-            ProfileMenuElement('공지사항', Icons.announcement),
-            ProfileMenuElement('알림', Icons.notifications),
-            ProfileMenuElement('환경설정', Icons.settings),
-            ProfileMenuElement('개인정보처리방침', Icons.file_copy_sharp),
-            ProfileMenuElement('로그아웃', Icons.logout),
+            ProfileMenuElement('공지사항', Icons.announcement, ProfileScreenMenuType.notice, onTapHandler),
+            ProfileMenuElement('알림', Icons.notifications, ProfileScreenMenuType.notice, onTapHandler),
+            ProfileMenuElement('환경설정', Icons.settings, ProfileScreenMenuType.notice, onTapHandler),
+            ProfileMenuElement('개인정보처리방침', Icons.file_copy_sharp, ProfileScreenMenuType.notice, onTapHandler),
+            ProfileMenuElement('로그아웃', Icons.logout, ProfileScreenMenuType.logout, onTapHandler),
 
           ],
         ));
@@ -110,37 +112,45 @@ class ProfilePage extends BaseView<ProfilePage, ProfileScreenAction, ProfileScre
 class ProfileMenuElement extends StatelessWidget {
   String text;
   IconData icon;
-  ProfileMenuElement(this.text, this.icon, {super.key});
+  ProfileScreenMenuType type;
+  Function onTap;
+  ProfileMenuElement(this.text, this.icon, this.type, this.onTap, {super.key});
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(
-              left: 0.sp, top: 13.sp, bottom: 13.sp, right: 0.sp),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return TouchableOpacity(
+      onTap: () => onTap(type),
+    child: Column(
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(icon, size: 19.sp),
-                  SizedBox(width: 12.sp),
-                  Text(
-                    text,
-                    style: TextStyle(
-                      color: BaseColor.warmGray700,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w800,
+              Padding(
+                padding: EdgeInsets.only(
+                    left: 0.sp, top: 13.sp, bottom: 13.sp, right: 0.sp),
+                child: Container(
+                    child:Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(icon, size: 19.sp),
+                        SizedBox(width: 12.sp),
+                        Text(
+                          text,
+                          style: TextStyle(
+                            color: BaseColor.warmGray700,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        )
+                      ],
                     ),
-                  )
-                ],
+                    Icon(BaseIcon.arrowRight, size: 10.sp)
+                  ],
+                )),
               ),
-              Icon(BaseIcon.arrowRight, size: 10.sp)
             ],
           ),
-        ),
-      ],
+
+
     );
   }
 }

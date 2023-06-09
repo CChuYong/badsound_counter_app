@@ -1,4 +1,7 @@
+import 'package:badsound_counter_app/view/designsystem/component/gray_solid_button.dart';
+import 'package:badsound_counter_app/view/designsystem/theme/base_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../view/designsystem/theme/base_icon.dart';
@@ -74,6 +77,57 @@ A extends BaseAction<V, A, S>, S> extends GetxController {
       duration: Duration(milliseconds: msDuration),
       margin: margin,
       snackPosition: position,
+    );
+  }
+
+  void confirmModal({
+    required String content,
+    required String confirmText,
+    String cancelText = '취소',
+    required Function onConfirm,
+}){
+    Get.defaultDialog(
+      title: '',
+      middleText: content,
+      backgroundColor: Colors.white,
+      titleStyle: const TextStyle(fontSize: 0),
+      middleTextStyle: const TextStyle(color: BaseColor.warmGray800),
+      textConfirm: confirmText,
+      textCancel: cancelText,
+      confirmTextColor: Colors.black,
+      cancelTextColor: Colors.black,
+      onConfirm: (){},
+      onCancel: (){},
+      contentPadding: EdgeInsets.only(bottom: 15.sp),
+      confirm: TextButton(
+          style: TextButton.styleFrom(
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            backgroundColor: BaseColor.warmGray300,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(3.sp)),
+          ),
+          child: Text(
+            confirmText,
+            style:
+            TextStyle(color: BaseColor.warmGray500),
+          ),
+          onPressed: () {
+            onConfirm();
+          }),
+      cancel: TextButton(
+          style: TextButton.styleFrom(
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            backgroundColor: BaseColor.warmGray200,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(3.sp)),
+          ),
+          child: Text(
+            cancelText,
+            style: TextStyle(color: BaseColor.warmGray400),
+          ),
+          onPressed: () {
+            Get.back();
+          }),
     );
   }
 

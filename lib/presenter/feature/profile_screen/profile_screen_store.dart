@@ -33,6 +33,15 @@ class ProfileScreenAction extends BaseAction<ProfilePage, ProfileScreenAction, P
     switch(type) {
       case ProfileScreenMenuType.notice:
         log('notice');
+        confirmModal(
+            content: '정말 로그아웃 할까요?',
+            confirmText: '로그아웃',
+          onConfirm: ()  {
+            log('logout');
+            authProvider.clearAuthentication();
+            Get.offNamed('/login');
+          }
+        );
         break;
       case ProfileScreenMenuType.logout:
         log('logout');

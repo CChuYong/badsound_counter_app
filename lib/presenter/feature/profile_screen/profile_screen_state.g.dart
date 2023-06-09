@@ -6,11 +6,14 @@ part of 'profile_screen_state.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ProfileScreenState _$ProfileScreenStateFromJson(Map<String, dynamic> json) =>
-    ProfileScreenState(
-      json['nickname'] as String,
-      json['since'] as String,
-    );
+ProfileScreenState _$ProfileScreenStateFromJson(Map<String, dynamic> json) {
+  log(json.toString());
+  return  ProfileScreenState(
+    json['nickname'] as String,
+    json['since'] as String,
+  );
+}
+
 
 Map<String, dynamic> _$ProfileScreenStateToJson(ProfileScreenState instance) =>
     <String, dynamic>{

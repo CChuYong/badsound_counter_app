@@ -40,6 +40,7 @@ dependencies:
   get_it:
   json_annotation:
   shared_preferences:
+  webview_flutter:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

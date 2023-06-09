@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'profile_screen_state.g.dart';

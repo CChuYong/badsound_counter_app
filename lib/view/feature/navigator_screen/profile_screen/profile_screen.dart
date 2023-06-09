@@ -99,9 +99,9 @@ class ProfilePage extends BaseView<ProfilePage, ProfileScreenAction, ProfileScre
             SizedBox(height: 8.sp),
 
             ProfileMenuElement('공지사항', Icons.announcement, ProfileScreenMenuType.notice, onTapHandler),
-            ProfileMenuElement('알림', Icons.notifications, ProfileScreenMenuType.notice, onTapHandler),
-            ProfileMenuElement('환경설정', Icons.settings, ProfileScreenMenuType.notice, onTapHandler),
-            ProfileMenuElement('개인정보처리방침', Icons.file_copy_sharp, ProfileScreenMenuType.notice, onTapHandler),
+            ProfileMenuElement('알림', Icons.notifications, ProfileScreenMenuType.notification, onTapHandler),
+            ProfileMenuElement('환경설정', Icons.settings, ProfileScreenMenuType.settings, onTapHandler),
+            ProfileMenuElement('개인정보처리방침', Icons.file_copy_sharp, ProfileScreenMenuType.privacy, onTapHandler),
             ProfileMenuElement('로그아웃', Icons.logout, ProfileScreenMenuType.logout, onTapHandler),
 
           ],

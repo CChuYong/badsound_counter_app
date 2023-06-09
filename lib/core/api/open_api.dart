@@ -1,5 +1,6 @@
 import 'package:badsound_counter_app/core/api/model/auth_request.dart';
 import 'package:badsound_counter_app/core/api/model/auth_result.dart';
+import 'package:badsound_counter_app/core/api/model/dashboard_response.dart';
 import 'package:retrofit/http.dart';
 
 import 'package:dio/dio.dart';
@@ -20,4 +21,7 @@ abstract class OpenAPI {
 
   @GET('/users/me')
   Future<MeResponse> getMe();
+
+  @GET('/users/dashboard')
+  Future<DashboardResponse> getDashboard();
 }

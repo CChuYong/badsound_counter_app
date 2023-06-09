@@ -16,7 +16,6 @@ class ProfileScreenAction extends BaseAction<ProfilePage, ProfileScreenAction, P
 
   @override
   void dispose() {
-    log('save state');
     StateStore.saveState(ProfileScreenState, state.toJson());
   }
 

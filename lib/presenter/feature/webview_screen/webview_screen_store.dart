@@ -6,7 +6,9 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewScreenAction extends BaseAction<FullWebViewScreen, WebViewScreenAction, WebViewScreenState> {
   final String initialUrl;
-  WebViewScreenAction(this.initialUrl): super(WebViewScreenState());
+  WebViewScreenAction(this.initialUrl): super(WebViewScreenState()) {
+    webViewController.loadRequest(Uri.parse(initialUrl));
+  }
   @override
   Future<WebViewScreenState> initState() async => WebViewScreenState();
 
@@ -27,8 +29,7 @@ class WebViewScreenAction extends BaseAction<FullWebViewScreen, WebViewScreenAct
           return NavigationDecision.navigate;
         },
       ),
-    )
-    ..loadRequest(Uri.parse('https://bsc-webview.bearus.co'));
+    );
 
   void back() async {
     if(await webViewController.canGoBack()) {

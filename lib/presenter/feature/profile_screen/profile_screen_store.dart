@@ -38,6 +38,9 @@ class ProfileScreenAction extends BaseAction<ProfilePage, ProfileScreenAction, P
         log('notice');
         webViewService.navigateToNotice();
         break;
+      case ProfileScreenMenuType.privacy:
+        webViewService.navigateToPrivacy();
+        break;
       case ProfileScreenMenuType.logout:
         log('logout');
         confirmModal(

@@ -11,6 +11,10 @@ class WebViewService {
     navigateToPath('notice');
   }
 
+  void navigateToPrivacy() {
+    navigateToPath('privacy');
+  }
+
   void navigateToPath(String path) {
     Get.to(() => FullWebViewScreen('$_baseUrl/$path'));
   }

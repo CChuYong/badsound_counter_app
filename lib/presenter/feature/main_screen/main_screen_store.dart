@@ -1,6 +1,6 @@
 import 'package:badsound_counter_app/view/feature/navigator_screen/main_screen/main_screen.dart';
 
-import '../../core/framework/base_action.dart';
+import '../../../core/framework/base_action.dart';
 
 class MainScreenState {
 

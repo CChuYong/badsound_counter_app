@@ -1,5 +1,5 @@
 import 'package:badsound_counter_app/core/framework/base_view.dart';
-import 'package:badsound_counter_app/presenter/feature/main_screen_store.dart';
+import 'package:badsound_counter_app/presenter/feature/main_screen/main_screen_store.dart';
 import 'package:badsound_counter_app/view/designsystem/component/safe_area_with_padding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

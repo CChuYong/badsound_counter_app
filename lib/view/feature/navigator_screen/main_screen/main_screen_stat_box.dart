@@ -1,12 +1,16 @@
+import 'package:badsound_counter_app/core/framework/base_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../presenter/feature/main_screen/main_screen_stat_box_state.dart';
+import '../../../../presenter/feature/main_screen/main_screen_stat_box_store.dart';
 import '../../../designsystem/theme/base_color.dart';
 
-class MainPageStatBox extends StatelessWidget {
-  const MainPageStatBox({super.key});
+class MainPageStatBox extends BaseView<MainPageStatBox, MainPageStatBoxAction, MainPageStatBoxState> {
+  @override
+  MainPageStatBoxAction initAction() => MainPageStatBoxAction();
 
   @override
-  Widget build(BuildContext context) {
+  Widget render(BuildContext context, MainPageStatBoxAction action, MainPageStatBoxState state) {
     return GestureDetector(
       child: Container(
           padding: EdgeInsets.only(
@@ -41,7 +45,7 @@ class MainPageStatBox extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        '5월 2주차 합산',
+                        state.title,
                         style: TextStyle(
                           color: BaseColor.warmGray900,
                           fontSize: 12.sp,
@@ -50,15 +54,15 @@ class MainPageStatBox extends StatelessWidget {
                         ),
                       ),
                       //SizedBox(height: 6),
-                        Text(
-                          '12,000 원',
-                          style: TextStyle(
-                            color: BaseColor.defaultGreen,
-                            fontSize: 36.sp,
-                            fontWeight: FontWeight.w600,
-                            height: 1.2,
-                          ),
+                      Text(
+                        state.money,
+                        style: TextStyle(
+                          color: BaseColor.defaultGreen,
+                          fontSize: 36.sp,
+                          fontWeight: FontWeight.w600,
+                          height: 1.2,
                         ),
+                        ) ,
                       const SizedBox(height: 6),
                       Wrap(
                         spacing: 4.sp,
@@ -70,7 +74,7 @@ class MainPageStatBox extends StatelessWidget {
                             size: 10.sp,
                           ),
                           Text(
-                            '5/8 ~ 5/14 사이의 내역이에요!',
+                            state.subTitle,
                             style: TextStyle(
                               color: BaseColor.warmGray400,
                               fontSize: 10.sp,
@@ -152,6 +156,6 @@ class MainPageStatBox extends StatelessWidget {
             ],
           )),
     )
-      ;
+    ;
   }
 }

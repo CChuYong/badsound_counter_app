@@ -11,9 +11,12 @@ class MainPageStatBoxState {
   String title;
 
   @JsonKey(name: 'subTitle')
-  String subTitle ;
+  String subTitle;
+
   MainPageStatBoxState(this.money, this.title, this.subTitle);
 
-  factory MainPageStatBoxState.fromJson(Map<String, dynamic> json) => _$MainPageStatBoxStateFromJson(json);
+  factory MainPageStatBoxState.fromJson(Map<String, dynamic> json) =>
+      _$MainPageStatBoxStateFromJson(json);
+
   Map<String, dynamic> toJson() => _$MainPageStatBoxStateToJson(this);
 }

@@ -30,24 +30,23 @@ class _GraySolidButtonState extends State<GraySolidButton> {
         onTapCancel: () => setState(() => isDown = false),
         onTap: widget.onTap,
         child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(3.sp),
-          color: isDown ? BaseColor.warmGray300 : BaseColor.warmGray100,
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(
-              top: 8.sp, bottom: 8.sp, left: 30.sp, right: 30.sp),
-          child: Center(
-            child: Text(
-              widget.text,
-              style: TextStyle(
-                color: BaseColor.warmGray400,
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w700,
-              ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(3.sp),
+              color: isDown ? BaseColor.warmGray300 : BaseColor.warmGray100,
             ),
-          ),
-        ))
-    );
+            child: Padding(
+              padding: EdgeInsets.only(
+                  top: 8.sp, bottom: 8.sp, left: 30.sp, right: 30.sp),
+              child: Center(
+                child: Text(
+                  widget.text,
+                  style: TextStyle(
+                    color: BaseColor.warmGray400,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            )));
   }
 }

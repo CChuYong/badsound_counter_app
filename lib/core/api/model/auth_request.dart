@@ -15,7 +15,8 @@ class AuthRequest {
     required this.token,
   });
 
-  factory AuthRequest.fromJson(Map<String, dynamic> json) => _$AuthRequestFromJson(json);
+  factory AuthRequest.fromJson(Map<String, dynamic> json) =>
+      _$AuthRequestFromJson(json);
 
   Map<String, dynamic> toJson() => _$AuthRequestToJson(this);
 }

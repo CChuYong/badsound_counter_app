@@ -6,24 +6,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../designsystem/theme/base_color.dart';
 
-class CalendarPage extends BaseView<CalendarPage, CalendarScreenAction, CalendarScreenState> {
+class CalendarPage
+    extends BaseView<CalendarPage, CalendarScreenAction, CalendarScreenState> {
   const CalendarPage({super.key});
 
   @override
   CalendarScreenAction initAction() => CalendarScreenAction();
 
   @override
-  Widget render(BuildContext context, CalendarScreenAction action, CalendarScreenState state) {
+  Widget render(BuildContext context, CalendarScreenAction action,
+      CalendarScreenState state) {
     return SafeAreaWithPadding(
         child: Center(
-          child: Text(
-            '준비중이에요!',
-            style: TextStyle(
-              color: BaseColor.warmGray700,
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-        ));
+      child: Text(
+        '준비중이에요!',
+        style: TextStyle(
+          color: BaseColor.warmGray700,
+          fontSize: 15.sp,
+          fontWeight: FontWeight.w800,
+        ),
+      ),
+    ));
   }
 }

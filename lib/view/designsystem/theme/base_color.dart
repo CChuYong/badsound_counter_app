@@ -14,4 +14,6 @@ final class BaseColor {
 
   static const defaultGreen = Color(0xff10B981);
   static const defaultRed = Color(0xffFF8282);
+
+  static const defaultBackgroundColor = warmGray200;
 }

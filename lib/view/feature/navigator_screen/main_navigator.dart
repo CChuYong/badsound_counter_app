@@ -5,18 +5,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../designsystem/theme/base_color.dart';
 
-class MainNavigator extends BaseView<MainNavigator, MainNavigatorAction, MainNavigatorState> {
+class MainNavigator
+    extends BaseView<MainNavigator, MainNavigatorAction, MainNavigatorState> {
   final Duration animationDuration = const Duration(milliseconds: 50);
   final List<Widget> pages;
 
-    const MainNavigator(
-      {super.key, required this.pages});
+  const MainNavigator({super.key, required this.pages});
 
   @override
   MainNavigatorAction initAction() => MainNavigatorAction();
 
   @override
-  Widget render(BuildContext context, MainNavigatorAction action, MainNavigatorState state) {
+  Widget render(BuildContext context, MainNavigatorAction action,
+      MainNavigatorState state) {
     return Scaffold(
       body: SizedBox(
           height: double.infinity,
@@ -115,9 +116,7 @@ class _BottomBarState extends State<BottomBar> {
       selectedIconTheme:
           IconThemeData(color: BaseColor.warmGray800, size: 25.sp),
       currentIndex: _currentPage,
-      onTap: (number) => {
-        if(number != _currentPage) _setPage(number)
-      },
+      onTap: (number) => {if (number != _currentPage) _setPage(number)},
     );
   }
 }

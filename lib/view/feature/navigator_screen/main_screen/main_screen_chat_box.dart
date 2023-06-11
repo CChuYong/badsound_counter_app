@@ -1,14 +1,33 @@
+import 'package:badsound_counter_app/core/framework/base_view.dart';
+import 'package:badsound_counter_app/core/util/date_parser.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../presenter/feature/main_screen/main_screen_chat_box_store.dart';
 import '../../../component/touchableopacity.dart';
 import '../../../designsystem/theme/base_color.dart';
 
-class MainPageChatBox extends StatelessWidget {
+class MainPageChatBox extends BaseView<MainPageChatBox, MainPageChatBoxAction,
+    MainPageChatBoxState> {
   const MainPageChatBox({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  MainPageChatBoxAction initAction() => MainPageChatBoxAction();
+
+  @override
+  Widget render(BuildContext context, MainPageChatBoxAction action,
+      MainPageChatBoxState state) {
+    final rooms = state.rooms
+        .map((e) => [
+              MainPageChatBoxElements(
+                  e.roomName,
+                  DateParser.lastMessageFormat(e.lastMessageAtTs),
+                  e.unreadMessageCount),
+              SizedBox(height: 13.sp)
+            ])
+        .flattened
+        .toList();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -26,11 +45,8 @@ class MainPageChatBox extends StatelessWidget {
           child: SingleChildScrollView(
               child: Column(
             children: [
-              for (int i = 0; i < 10; i++) ...[
-                MainPageChatBoxElements(),
-                SizedBox(height: 13),
-              ],
-              MainPageChatBoxAddElements()
+              ...rooms,
+              MainPageChatBoxAddElements(action.createNewChatBox)
             ],
           )),
         )
@@ -40,7 +56,13 @@ class MainPageChatBox extends StatelessWidget {
 }
 
 class MainPageChatBoxElements extends StatefulWidget {
-  const MainPageChatBoxElements({super.key});
+  const MainPageChatBoxElements(
+      this.roomName, this.lastTime, this.unreadMessageCount,
+      {super.key});
+
+  final String roomName;
+  final String lastTime;
+  final int unreadMessageCount;
 
   @override
   State createState() => _MainPageChatBoxElementState();
@@ -104,7 +126,7 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '벤님과의 나쁜말',
+                          widget.roomName,
                           style: TextStyle(
                             color: BaseColor.warmGray900,
                             fontSize: 12.sp,
@@ -130,7 +152,7 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      '오후 10:36',
+                      widget.lastTime,
                       style: TextStyle(
                         color: BaseColor.warmGray500,
                         fontSize: 12.sp,
@@ -148,7 +170,7 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                         shape: BoxShape.circle,
                       ),
                       child: Text(
-                        '1',
+                        widget.unreadMessageCount.toString(),
                         style: TextStyle(
                           color: BaseColor.warmGray50,
                           fontSize: 10.sp,
@@ -165,43 +187,46 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
         ),
         onTap: () => {});
   }
-
 }
 
 class MainPageChatBoxAddElements extends StatelessWidget {
-  const MainPageChatBoxAddElements({super.key});
+  final Function() onTap;
+
+  const MainPageChatBoxAddElements(this.onTap, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top: 14.sp, bottom: 14.sp),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(11.sp),
-        color: BaseColor.warmGray100,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(children: [
-            Icon(
-              Icons.person_add,
-              color: BaseColor.warmGray600,
-              size: 14.sp,
-            ),
-            SizedBox(width: 5.sp),
-            Text(
-              '방 생성하기',
-              style: TextStyle(
-                color: BaseColor.warmGray600,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w700,
-                height: 1.2,
-              ),
-            ),
-          ])
-        ],
-      ),
-    );
+    return TouchableOpacity(
+        onTap: onTap,
+        child: Container(
+          padding: EdgeInsets.only(top: 14.sp, bottom: 14.sp),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(11.sp),
+            color: BaseColor.warmGray100,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(children: [
+                Icon(
+                  Icons.person_add,
+                  color: BaseColor.warmGray600,
+                  size: 14.sp,
+                ),
+                SizedBox(width: 5.sp),
+                Text(
+                  '방 생성하기',
+                  style: TextStyle(
+                    color: BaseColor.warmGray600,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w700,
+                    height: 1.2,
+                  ),
+                ),
+              ])
+            ],
+          ),
+        ));
   }
 }

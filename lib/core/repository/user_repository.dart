@@ -23,7 +23,6 @@ class UserRepository {
     return MainPageStatBoxState(
         '${CurrencyParser.format(data.weeklyPrice)}원',
         '${data.currentMonth}월 ${data.currentWeek}주차 합산',
-        '${data.currentMonth}/${data.weekStartDay} ~ ${data.currentMonth}/${data.weekEndDay} 사이의 내역이에요!'
-    );
+        '${data.currentMonth}/${data.weekStartDay} ~ ${data.currentMonth}/${data.weekEndDay} 사이의 내역이에요!');
   }
 }

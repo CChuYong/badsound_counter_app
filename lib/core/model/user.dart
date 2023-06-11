@@ -12,8 +12,14 @@ class User {
   final String nickname;
   @JsonKey(name: 'createdAtTs')
   final int createdAtTs;
-  User({required this.userId, required this.email, required this.nickname, required this.createdAtTs});
+
+  User(
+      {required this.userId,
+      required this.email,
+      required this.nickname,
+      required this.createdAtTs});
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
   Map<String, dynamic> toJson() => _$UserToJson(this);
 }

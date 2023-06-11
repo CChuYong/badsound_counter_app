@@ -1,6 +1,7 @@
 import 'package:badsound_counter_app/core/framework/state_store.dart';
-import 'package:badsound_counter_app/view/feature/navigator_screen/calendar_screen/calendar_screen.dart';
+import 'package:badsound_counter_app/view/designsystem/theme/base_color.dart';
 import 'package:badsound_counter_app/view/feature/login_screen.dart/login_screen.dart';
+import 'package:badsound_counter_app/view/feature/navigator_screen/calendar_screen/calendar_screen.dart';
 import 'package:badsound_counter_app/view/feature/navigator_screen/main_screen/main_screen.dart';
 import 'package:badsound_counter_app/view/feature/navigator_screen/profile_screen/profile_screen.dart';
 import 'package:badsound_counter_app/view/feature/splash_screen/splash_screen.dart';
@@ -9,8 +10,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:injectable/injectable.dart';
 
-import 'view/feature/navigator_screen/main_navigator.dart';
 import 'dependencies.config.dart' as di;
+import 'view/feature/navigator_screen/main_navigator.dart';
 
 @InjectableInit(
   initializerName: 'init', // default
@@ -19,7 +20,7 @@ import 'dependencies.config.dart' as di;
 )
 void configureDependencies() => di.init();
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StateStore.init();
   configureDependencies();
@@ -28,7 +29,8 @@ void main() async{
             // home: const MyApp(),
             theme: ThemeData(
               fontFamily: 'Pretendard',
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              colorScheme:
+                  ColorScheme.fromSeed(seedColor: BaseColor.defaultGreen),
               useMaterial3: true,
             ),
             initialRoute: '/',

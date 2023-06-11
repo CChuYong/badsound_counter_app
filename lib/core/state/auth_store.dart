@@ -6,14 +6,14 @@ import 'package:injectable/injectable.dart';
 
 import '../model/auth_token.dart';
 
-
 @singleton
 class AuthProvider {
-  AuthToken? authToken = StateStore.loadState(AuthProvider)?.let(AuthToken.fromJson);
+  AuthToken? authToken =
+      StateStore.loadState(AuthProvider)?.let(AuthToken.fromJson);
 
   bool isAuthenticated() => authToken != null;
 
-  void authenticate(AuthToken token){
+  void authenticate(AuthToken token) {
     log('Authenticate succeed!');
     authToken = token;
     StateStore.saveState(AuthProvider, token.toJson());

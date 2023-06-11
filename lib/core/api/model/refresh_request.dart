@@ -11,7 +11,8 @@ class RefreshRequest {
     required this.refreshToken,
   });
 
-  factory RefreshRequest.fromJson(Map<String, dynamic> json) => _$RefreshRequestFromJson(json);
+  factory RefreshRequest.fromJson(Map<String, dynamic> json) =>
+      _$RefreshRequestFromJson(json);
 
   Map<String, dynamic> toJson() => _$RefreshRequestToJson(this);
 }

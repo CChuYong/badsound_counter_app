@@ -22,7 +22,7 @@ class Debouncer {
     _completer = Completer();
     _runJustOnceAtTheEnd = Timer(
       duration,
-          () {
+      () {
         _completer?.complete(onTimePassed());
         _completer = null;
       },

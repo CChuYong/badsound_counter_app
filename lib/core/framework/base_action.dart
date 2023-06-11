@@ -1,4 +1,3 @@
-import 'package:badsound_counter_app/view/designsystem/component/gray_solid_button.dart';
 import 'package:badsound_counter_app/view/designsystem/theme/base_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +10,7 @@ import 'base_view.dart';
 enum SnackBarType { RED, GREEN, YELLOW, GREY }
 
 abstract class BaseAction<V extends BaseView<V, A, S>,
-A extends BaseAction<V, A, S>, S> extends GetxController {
+    A extends BaseAction<V, A, S>, S> extends GetxController {
   S state;
 
   BaseAction(this.state);
@@ -80,12 +79,32 @@ A extends BaseAction<V, A, S>, S> extends GetxController {
     );
   }
 
+  void infoSnackBar({
+    required String message,
+    SnackBarType type = SnackBarType.GREY, // neutral
+    EdgeInsets margin = const EdgeInsets.all(12),
+    int msDuration = 2000,
+    SnackPosition position = SnackPosition.TOP,
+  }) {
+    Get.snackbar(
+      '',
+      message,
+      // backgroundColor: bgColor,
+      // colorText: txtColor,
+      icon: Icon(BaseIcon.snackBarInfo),
+      titleText: Container(),
+      duration: Duration(milliseconds: msDuration),
+      margin: margin,
+      snackPosition: position,
+    );
+  }
+
   void confirmModal({
     required String content,
     required String confirmText,
     String cancelText = '취소',
     required Function onConfirm,
-}){
+  }) {
     Get.defaultDialog(
       title: '',
       middleText: content,
@@ -96,8 +115,8 @@ A extends BaseAction<V, A, S>, S> extends GetxController {
       textCancel: cancelText,
       confirmTextColor: Colors.black,
       cancelTextColor: Colors.black,
-      onConfirm: (){},
-      onCancel: (){},
+      onConfirm: () {},
+      onCancel: () {},
       contentPadding: EdgeInsets.only(bottom: 15.sp),
       confirm: TextButton(
           style: TextButton.styleFrom(
@@ -108,8 +127,7 @@ A extends BaseAction<V, A, S>, S> extends GetxController {
           ),
           child: Text(
             confirmText,
-            style:
-            TextStyle(color: BaseColor.warmGray500),
+            style: TextStyle(color: BaseColor.warmGray500),
           ),
           onPressed: () {
             onConfirm();

@@ -1,3 +1,1 @@
-class WebViewScreenState {
-
-}
+class WebViewScreenState {}

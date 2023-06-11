@@ -23,7 +23,8 @@ class MeResponse {
     required this.createdAtTs,
   });
 
-  factory MeResponse.fromJson(Map<String, dynamic> json) => _$MeResponseFromJson(json);
+  factory MeResponse.fromJson(Map<String, dynamic> json) =>
+      _$MeResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$MeResponseToJson(this);
 }

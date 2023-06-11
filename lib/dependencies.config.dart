@@ -3,8 +3,8 @@ import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/repository/user_repository.dart';
 import 'package:badsound_counter_app/core/service/webview_service.dart';
 import 'package:badsound_counter_app/core/state/auth_store.dart';
-import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
 
 final inject = GetIt.instance;
 

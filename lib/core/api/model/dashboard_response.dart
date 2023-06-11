@@ -19,8 +19,11 @@ class DashboardResponse {
   @JsonKey(name: 'weekEndDay')
   final int weekEndDay;
 
-  DashboardResponse(this.weeklyPrice, this.currentMonth, this.currentWeek, this.weekStartDay, this.weekEndDay);
+  DashboardResponse(this.weeklyPrice, this.currentMonth, this.currentWeek,
+      this.weekStartDay, this.weekEndDay);
 
-  factory DashboardResponse.fromJson(Map<String, dynamic> json) => _$DashboardResponseFromJson(json);
+  factory DashboardResponse.fromJson(Map<String, dynamic> json) =>
+      _$DashboardResponseFromJson(json);
+
   Map<String, dynamic> toJson() => _$DashboardResponseToJson(this);
 }

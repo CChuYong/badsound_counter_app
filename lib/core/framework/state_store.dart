@@ -4,7 +4,8 @@ import 'dart:developer';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StateStore {
-  static Future<SharedPreferences> get _instance async => sharedPreferences ??= await SharedPreferences.getInstance();
+  static Future<SharedPreferences> get _instance async =>
+      sharedPreferences ??= await SharedPreferences.getInstance();
   static SharedPreferences? sharedPreferences;
 
   static Future<SharedPreferences> init() async {
@@ -20,7 +21,7 @@ class StateStore {
   static Map<String, dynamic>? loadState(Type key) {
     log('loading state with ${key.toString()}');
     final data = sharedPreferences!.getString(key.toString());
-    if(data == null) return null;
+    if (data == null) return null;
     return jsonDecode(data);
   }
 

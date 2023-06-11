@@ -1,16 +1,19 @@
 import 'package:badsound_counter_app/core/framework/base_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../presenter/feature/main_screen/main_screen_stat_box_state.dart';
 import '../../../../presenter/feature/main_screen/main_screen_stat_box_store.dart';
 import '../../../designsystem/theme/base_color.dart';
 
-class MainPageStatBox extends BaseView<MainPageStatBox, MainPageStatBoxAction, MainPageStatBoxState> {
+class MainPageStatBox extends BaseView<MainPageStatBox, MainPageStatBoxAction,
+    MainPageStatBoxState> {
   @override
   MainPageStatBoxAction initAction() => MainPageStatBoxAction();
 
   @override
-  Widget render(BuildContext context, MainPageStatBoxAction action, MainPageStatBoxState state) {
+  Widget render(BuildContext context, MainPageStatBoxAction action,
+      MainPageStatBoxState state) {
     return GestureDetector(
       child: Container(
           padding: EdgeInsets.only(
@@ -62,7 +65,7 @@ class MainPageStatBox extends BaseView<MainPageStatBox, MainPageStatBoxAction, M
                           fontWeight: FontWeight.w600,
                           height: 1.2,
                         ),
-                        ) ,
+                      ),
                       const SizedBox(height: 6),
                       Wrap(
                         spacing: 4.sp,
@@ -127,35 +130,33 @@ class MainPageStatBox extends BaseView<MainPageStatBox, MainPageStatBoxAction, M
                         ),
                         const Expanded(
                             child: VerticalDivider(
-                              color: BaseColor.warmGray200,
-                            )
-                        ),
+                          color: BaseColor.warmGray200,
+                        )),
                         Expanded(
                             child: Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              spacing: 8.sp,
-                              children: [
-                                Icon(
-                                  Icons.insert_chart,
-                                  color: BaseColor.warmGray400,
-                                  size: 13.sp,
-                                ),
-                                Text(
-                                  '통계 보기',
-                                  style: TextStyle(
-                                    color: BaseColor.warmGray400,
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                )
-                              ],
-                            ))
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          spacing: 8.sp,
+                          children: [
+                            Icon(
+                              Icons.insert_chart,
+                              color: BaseColor.warmGray400,
+                              size: 13.sp,
+                            ),
+                            Text(
+                              '통계 보기',
+                              style: TextStyle(
+                                color: BaseColor.warmGray400,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          ],
+                        ))
                       ],
                     ),
                   ))
             ],
           )),
-    )
-    ;
+    );
   }
 }

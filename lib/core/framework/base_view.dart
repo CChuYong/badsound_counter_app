@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'base_action.dart';
 
 abstract class BaseView<V extends BaseView<V, A, S>,
-A extends BaseAction<V, A, S>, S> extends StatelessWidget {
+    A extends BaseAction<V, A, S>, S> extends StatelessWidget {
   const BaseView({super.key});
 
   A initAction();

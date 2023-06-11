@@ -23,7 +23,9 @@ class MainPageChatBox extends BaseView<MainPageChatBox, MainPageChatBoxAction,
               MainPageChatBoxElements(
                   e.roomName,
                   DateParser.lastMessageFormat(e.lastMessageAtTs),
-                  e.unreadMessageCount),
+                  e.unreadMessageCount,
+                  () => action.openChatRoom(e)
+              ),
               SizedBox(height: 13.sp)
             ])
         .flattened
@@ -57,12 +59,13 @@ class MainPageChatBox extends BaseView<MainPageChatBox, MainPageChatBoxAction,
 
 class MainPageChatBoxElements extends StatefulWidget {
   const MainPageChatBoxElements(
-      this.roomName, this.lastTime, this.unreadMessageCount,
+      this.roomName, this.lastTime, this.unreadMessageCount, this.onTap,
       {super.key});
 
   final String roomName;
   final String lastTime;
   final int unreadMessageCount;
+  final Function() onTap;
 
   @override
   State createState() => _MainPageChatBoxElementState();
@@ -81,6 +84,7 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
   Widget build(BuildContext context) {
     return TouchableOpacity(
         child: GestureDetector(
+          onTap: widget.onTap,
           onTapDown: (_) => setState(() => isDown = true),
           onTapUp: (_) => setState(() => isDown = false),
           onTapCancel: () => setState(() => isDown = false),

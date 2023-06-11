@@ -3,6 +3,7 @@ import 'package:badsound_counter_app/core/api/model/room_detail_response.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
+import 'package:badsound_counter_app/view/feature/chat_screen/chat_screen.dart';
 import 'package:badsound_counter_app/view/feature/navigator_screen/main_screen/main_screen_chat_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,6 +28,10 @@ class MainPageChatBoxAction extends BaseAction<MainPageChatBox,
   Future<MainPageChatBoxState> initState() async {
     final data = await openAPI.getMyRooms();
     return MainPageChatBoxState(data);
+  }
+
+  void openChatRoom(RoomDetailResponse roomDetail) {
+    Get.to(() => ChatScreen(roomDetail));
   }
 
   void createNewChatBox() {

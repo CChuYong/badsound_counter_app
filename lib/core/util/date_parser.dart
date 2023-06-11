@@ -3,10 +3,10 @@ import 'package:intl/intl.dart';
 class DateParser {
   static DateFormat dateTimeFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
   static DateFormat dateFormat = DateFormat('yyyy.MM.dd.');
-  static DateFormat lastMessageTimeFormat = DateFormat("a HH:mm");
+  static DateFormat lastMessageTimeFormat = DateFormat("a hh:mm");
 
   static DateTime fromTimeStamp(int timestamp) {
-    return DateTime.fromMillisecondsSinceEpoch(timestamp, isUtc: true);
+    return DateTime.fromMillisecondsSinceEpoch(timestamp, isUtc: false);
   }
 
   static String timeStampAsDateTime(int timestamp) {

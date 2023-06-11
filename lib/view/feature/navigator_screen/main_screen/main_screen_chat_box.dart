@@ -165,6 +165,7 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                       ),
                     ),
                     SizedBox(height: 5.sp),
+                    if(widget.unreadMessageCount >= 1)
                     Container(
                       alignment: AlignmentDirectional.center,
                       width: 14.sp,
@@ -183,6 +184,11 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                         ),
                       ),
                     )
+                    else
+                      SizedBox(
+                        width: 14.sp,
+                        height: 14.sp,
+                      )
                   ],
                 )
               ],

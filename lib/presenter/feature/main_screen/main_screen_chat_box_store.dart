@@ -86,8 +86,10 @@ class MainPageChatBoxAction extends BaseAction<MainPageChatBox,
             '생성하기',
             style: TextStyle(color: BaseColor.warmGray500),
           ),
-          onPressed: () {
-            openAPI.createNewRoom(RoomCreateRequest(textController.text));
+          onPressed: () async {
+            await openAPI.createNewRoom(RoomCreateRequest(textController.text));
+            await onReady();
+            Get.back();
           }),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:badsound_counter_app/core/api/model/auth_request.dart';
 import 'package:badsound_counter_app/core/api/model/auth_result.dart';
+import 'package:badsound_counter_app/core/api/model/chat_response.dart';
 import 'package:badsound_counter_app/core/api/model/dashboard_response.dart';
 import 'package:badsound_counter_app/core/api/model/room_create_request.dart';
 import 'package:badsound_counter_app/core/api/model/room_detail_response.dart';
@@ -37,4 +38,7 @@ abstract class OpenAPI {
 
   @POST('/users/nickname')
   Future<MeResponse> updateNickname(@Body() UserNicknameRequest request);
+
+  @GET('/rooms/{roomId}/messages')
+  Future<List<ChatResponse>> getChattings(@Path() String roomId);
 }

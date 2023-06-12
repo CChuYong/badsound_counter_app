@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:badsound_counter_app/core/framework/base_view.dart';
 import 'package:badsound_counter_app/core/util/date_parser.dart';
 import 'package:collection/collection.dart';
@@ -24,8 +26,7 @@ class MainPageChatBox extends BaseView<MainPageChatBox, MainPageChatBoxAction,
                   e.roomName,
                   DateParser.lastMessageFormat(e.lastMessageAtTs),
                   e.unreadMessageCount,
-                  () => action.openChatRoom(e)
-              ),
+                  () => action.openChatRoom(e)),
               SizedBox(height: 13.sp)
             ])
         .flattened
@@ -44,13 +45,15 @@ class MainPageChatBox extends BaseView<MainPageChatBox, MainPageChatBoxAction,
         ),
         SizedBox(height: 13.sp),
         Expanded(
-          child: SingleChildScrollView(
-              child: Column(
-            children: [
-              ...rooms,
-              MainPageChatBoxAddElements(action.createNewChatBox)
-            ],
-          )),
+          child: RefreshIndicator(
+            onRefresh: () async => {  },
+            child: CustomScrollView(
+                slivers: [
+                  SliverList(delegate: SliverChildListDelegate(rooms)),
+                  SliverToBoxAdapter(child: MainPageChatBoxAddElements(action.createNewChatBox)),
+                ]
+        ),
+          ),
         )
       ],
     );
@@ -165,25 +168,25 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                       ),
                     ),
                     SizedBox(height: 5.sp),
-                    if(widget.unreadMessageCount >= 1)
-                    Container(
-                      alignment: AlignmentDirectional.center,
-                      width: 14.sp,
-                      height: 14.sp,
-                      decoration: const BoxDecoration(
-                        color: BaseColor.defaultRed,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Text(
-                        widget.unreadMessageCount.toString(),
-                        style: TextStyle(
-                          color: BaseColor.warmGray50,
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.w900,
-                          height: 1.2,
+                    if (widget.unreadMessageCount >= 1)
+                      Container(
+                        alignment: AlignmentDirectional.center,
+                        width: 14.sp,
+                        height: 14.sp,
+                        decoration: const BoxDecoration(
+                          color: BaseColor.defaultRed,
+                          shape: BoxShape.circle,
                         ),
-                      ),
-                    )
+                        child: Text(
+                          widget.unreadMessageCount.toString(),
+                          style: TextStyle(
+                            color: BaseColor.warmGray50,
+                            fontSize: 10.sp,
+                            fontWeight: FontWeight.w900,
+                            height: 1.2,
+                          ),
+                        ),
+                      )
                     else
                       SizedBox(
                         width: 14.sp,

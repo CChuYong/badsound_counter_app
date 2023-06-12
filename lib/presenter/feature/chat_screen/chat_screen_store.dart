@@ -1,6 +1,9 @@
+import 'package:badsound_counter_app/core/api/model/chat_response.dart';
 import 'package:badsound_counter_app/core/api/model/room_detail_response.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
+import 'package:badsound_counter_app/core/model/chat.dart';
+import 'package:badsound_counter_app/core/repository/user_repository.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:badsound_counter_app/view/feature/chat_screen/chat_screen.dart';
 
@@ -11,11 +14,18 @@ class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScre
 
   final RoomDetailResponse roomResponse;
   final OpenAPI openAPI = inject<OpenAPI>();
+  final UserRepository userRepository = inject<UserRepository>();
 
   @override
   Future<ChatScreenState> initState() async {
     final data = await openAPI.getChattings(roomResponse.roomId);
-    return ChatScreenState(data);
+    final mappedData = data.map((e) async => await getChat(e));
+    return ChatScreenState(await Future.wait(mappedData));
+  }
+
+  Future<Chat> getChat(ChatResponse e) async {
+    final sender = await userRepository.getUserOrPull(e.speakerId);
+    return Chat(e.messageId, e.roomId, e.content, e.speakerId, sender.nickname, e.violentPrice, e.createdAtTs);
   }
 
 }

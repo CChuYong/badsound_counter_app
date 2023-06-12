@@ -92,6 +92,29 @@ class _OpenAPI implements OpenAPI {
   }
 
   @override
+  Future<MeResponse> getUserById(userId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<MeResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/users/${userId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = MeResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<DashboardResponse> getDashboard() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

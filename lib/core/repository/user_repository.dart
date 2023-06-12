@@ -1,5 +1,6 @@
 import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/model/user.dart';
+import 'package:badsound_counter_app/core/state/user_store.dart';
 import 'package:badsound_counter_app/core/util/currency_parser.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 
@@ -7,6 +8,7 @@ import '../../presenter/feature/main_screen/main_screen_stat_box_state.dart';
 
 class UserRepository {
   final OpenAPI api = inject<OpenAPI>();
+  final UserStore userStore = inject<UserStore>();
 
   Future<User> getMe() async {
     final data = await api.getMe();
@@ -24,5 +26,15 @@ class UserRepository {
         '${CurrencyParser.format(data.weeklyPrice)}원',
         '${data.currentMonth}월 ${data.currentWeek}주차 합산',
         '${data.currentMonth}/${data.weekStartDay} ~ ${data.currentMonth}/${data.weekEndDay} 사이의 내역이에요!');
+  }
+
+  Future<User> getUserOrPull(String userId) async {
+    final cachedUser = userStore.getUser(userId);
+    if(cachedUser != null) return cachedUser;
+
+    final pulledUser = await api.getUserById(userId);
+    final user = User(userId: pulledUser.id, email: pulledUser.email, nickname: pulledUser.nickname, createdAtTs: pulledUser.createdAtTs);
+    userStore.save(user);
+    return user;
   }
 }

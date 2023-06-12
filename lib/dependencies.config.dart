@@ -3,6 +3,7 @@ import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/repository/user_repository.dart';
 import 'package:badsound_counter_app/core/service/webview_service.dart';
 import 'package:badsound_counter_app/core/state/auth_store.dart';
+import 'package:badsound_counter_app/core/state/user_store.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -16,6 +17,7 @@ Future<void> init() async {
   inject.registerSingleton(client);
   inject.registerSingleton(AuthProvider());
   inject.registerSingleton(WebViewService());
+  inject.registerSingleton(UserStore());
 
   final interceptor = ApiInterceptor();
   dio.interceptors.add(interceptor);

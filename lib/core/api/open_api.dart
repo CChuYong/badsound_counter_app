@@ -27,6 +27,9 @@ abstract class OpenAPI {
   @GET('/users/me')
   Future<MeResponse> getMe();
 
+  @GET('/users/{userId}')
+  Future<MeResponse> getUserById(@Path() String userId);
+
   @GET('/users/dashboard')
   Future<DashboardResponse> getDashboard();
 

@@ -10,8 +10,15 @@ class BaseTopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 10.sp, right: 10.sp, top: 5.sp, bottom: 5.sp),
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(width: 1.sp, color: BaseColor.warmGray400),
+        )
+      ),
+    child:
+      Padding(
+      padding: EdgeInsets.only(left: 10.sp, right: 10.sp, top: 5.sp, bottom: 14.sp),
       child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -33,7 +40,7 @@ class BaseTopBar extends StatelessWidget {
         ),
         Container()
       ],
-    ));
+    )));
   }
 
 }

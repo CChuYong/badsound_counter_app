@@ -7,7 +7,7 @@ class ChatRequest {
   @JsonKey(name: 'violentId')
   final String violentId;
 
-  @JsonKey(name: 'spekaerId')
+  @JsonKey(name: 'speakerId')
   final String speakerId;
 
   @JsonKey(name: 'catcherId')

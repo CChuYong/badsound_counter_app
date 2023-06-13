@@ -8,7 +8,7 @@ part of 'chat_request.dart';
 
 ChatRequest _$ChatRequestFromJson(Map<String, dynamic> json) => ChatRequest(
       json['violentId'] as String,
-      json['spekaerId'] as String,
+      json['speakerId'] as String,
       json['catcherId'] as String,
       json['content'] as String,
     );
@@ -16,7 +16,7 @@ ChatRequest _$ChatRequestFromJson(Map<String, dynamic> json) => ChatRequest(
 Map<String, dynamic> _$ChatRequestToJson(ChatRequest instance) =>
     <String, dynamic>{
       'violentId': instance.violentId,
-      'spekaerId': instance.speakerId,
+      'speakerId': instance.speakerId,
       'catcherId': instance.catcherId,
       'content': instance.content,
     };

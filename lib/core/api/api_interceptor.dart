@@ -4,6 +4,7 @@ import 'package:badsound_counter_app/core/model/auth_token.dart';
 import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:dio/dio.dart';
+import 'package:get/get.dart' as g;
 
 class ApiInterceptor extends Interceptor {
   final AuthProvider authProvider = inject<AuthProvider>();
@@ -39,6 +40,7 @@ class ApiInterceptor extends Interceptor {
         } catch (e) {
           //Refresh failure. invalidate authentication
           authProvider.clearAuthentication();
+          g.Get.offNamed('/login');
         }
       }
     }

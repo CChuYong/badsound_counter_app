@@ -37,6 +37,7 @@ class ProfileScreenAction
 
   @override
   Future<ProfileScreenState> initState() async {
+    log('loading profile');
     final retrievedData = await userRepository.getMe();
     return ProfileScreenState(retrievedData.nickname,
         DateParser.timeStampAsDate(retrievedData.createdAtTs));

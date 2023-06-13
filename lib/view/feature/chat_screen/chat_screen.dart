@@ -35,13 +35,18 @@ class ChatScreen
           children: <Widget>[
             BaseTopBar(room.roomName),
             Expanded(
-              child: RefreshIndicator(
+              child: Padding(
+                padding: EdgeInsets.only(left: 15.sp, right: 15.sp),
+                child: RefreshIndicator(
                 onRefresh: () async => {},
-                child: CustomScrollView(slivers: [
+                child: CustomScrollView(
+                  reverse: true,
+                    slivers: [
                   SliverList(
                       delegate: SliverChildListDelegate(
                           state.chattings.map((e) => ChatBox(e)).toList())),
                 ]),
+              )
               ),
             ),
             buildInputArea(context, action),

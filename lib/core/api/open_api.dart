@@ -9,6 +9,7 @@ import 'package:badsound_counter_app/core/api/model/user_nickname_request.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
+import 'model/chat_request.dart';
 import 'model/me_response.dart';
 import 'model/refresh_request.dart';
 
@@ -44,4 +45,7 @@ abstract class OpenAPI {
 
   @GET('/rooms/{roomId}/messages')
   Future<List<ChatResponse>> getChattings(@Path() String roomId);
+
+  @POST('/rooms/{roomId}/messages')
+  Future<ChatResponse> sendMessage(@Path() String roomId, @Body() ChatRequest request);
 }

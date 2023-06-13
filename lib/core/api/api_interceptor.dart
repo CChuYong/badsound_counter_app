@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:badsound_counter_app/core/api/model/refresh_request.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/model/auth_token.dart';
@@ -43,6 +45,8 @@ class ApiInterceptor extends Interceptor {
           g.Get.offNamed('/login');
         }
       }
+    } else{
+      log(err.response?.data?.toString() ?? 'unknown');
     }
     return super.onError(err, handler);
   }

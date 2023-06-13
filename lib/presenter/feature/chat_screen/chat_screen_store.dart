@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:badsound_counter_app/core/api/model/chat_request.dart';
 import 'package:badsound_counter_app/core/api/model/chat_response.dart';
 import 'package:badsound_counter_app/core/api/model/room_detail_response.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
@@ -33,8 +34,11 @@ class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScre
     return Chat(e.messageId, e.roomId, e.content, e.speakerId, sender.nickname, e.violentPrice, e.createdAtTs);
   }
 
-  void onTapSend() {
+  void onTapSend() async {
     if(textController.text == '') return;
+    final me = await userRepository.getCachedMe();
     log('message send');
+    final chat = ChatRequest('test', me.userId, me.userId, textController.text);
+    openAPI.sendMessage(roomResponse.roomId, chat);
   }
 }

@@ -12,12 +12,22 @@ class UserRepository {
 
   Future<User> getMe() async {
     final data = await api.getMe();
-    return User(
+    final retrievedMe = User(
       userId: data.id,
       nickname: data.nickname,
       email: data.email,
       createdAtTs: data.createdAtTs,
     );
+    return retrievedMe;
+  }
+
+  Future<User> getCachedMe() async {
+    final cachedMe = userStore.getMe();
+    if(cachedMe != null) return cachedMe;
+
+    final retrievedMe = await getMe();
+    userStore.setMe(retrievedMe);
+    return retrievedMe;
   }
 
   Future<MainPageStatBoxState> getDashboard() async {

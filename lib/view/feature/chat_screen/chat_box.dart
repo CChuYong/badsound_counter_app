@@ -64,13 +64,22 @@ class ChatBox extends StatelessWidget {
        )]
     )]
     ),
+          if(chat.violentPrice > 0)
           Text(
-              '${CurrencyParser.format(chat.violentPrice)} 원',
+              '+ ${CurrencyParser.format(chat.violentPrice)} 원',
               style: TextStyle(
                 color: BaseColor.defaultGreen,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w700,
               ))
+          else if(chat.violentPrice < 0)
+            Text(
+                '${CurrencyParser.format(chat.violentPrice)} 원',
+                style: TextStyle(
+                  color: BaseColor.defaultRed,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w700,
+                ))
         ]));
   }
 

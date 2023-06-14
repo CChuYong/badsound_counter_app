@@ -38,7 +38,8 @@ class ChatScreen
               child: Padding(
                 padding: EdgeInsets.only(left: 15.sp, right: 15.sp),
                 child: RefreshIndicator(
-                onRefresh: () async => {},
+                  triggerMode: RefreshIndicatorTriggerMode.onEdge,
+                onRefresh: () => action.pullPreviousChat(),
                 child: CustomScrollView(
                   reverse: true,
                     slivers: [

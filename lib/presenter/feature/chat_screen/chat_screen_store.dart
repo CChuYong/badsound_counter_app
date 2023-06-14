@@ -44,6 +44,16 @@ class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScre
     });
   }
 
+  Future<void> pullPreviousChat() async {
+    final firstChat = state.chatTreeSet.last;
+    final data = await openAPI.getChattingsBefore(roomResponse.roomId, firstChat.messageId);
+    final mappedData = data.map((e) async => await getChat(e));
+    final chats = await Future.wait(mappedData);
+    setState(() {
+      state.chatTreeSet.addAll(chats);
+    });
+  }
+
   void onTapSend() async {
     if(textController.text == '') return;
     final me = await userRepository.getCachedMe();

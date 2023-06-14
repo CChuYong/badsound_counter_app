@@ -17,6 +17,7 @@ class UserRepository {
       nickname: data.nickname,
       email: data.email,
       createdAtTs: data.createdAtTs,
+      profileImgUrl: data.profileImgUrl,
     );
     return retrievedMe;
   }
@@ -43,7 +44,7 @@ class UserRepository {
     if(cachedUser != null) return cachedUser;
 
     final pulledUser = await api.getUserById(userId);
-    final user = User(userId: pulledUser.id, email: pulledUser.email, nickname: pulledUser.nickname, createdAtTs: pulledUser.createdAtTs);
+    final user = User(userId: pulledUser.id, email: pulledUser.email, nickname: pulledUser.nickname, createdAtTs: pulledUser.createdAtTs, profileImgUrl: pulledUser.profileImgUrl);
     userStore.save(user);
     return user;
   }

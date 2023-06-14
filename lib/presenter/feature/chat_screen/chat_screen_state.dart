@@ -1,8 +1,9 @@
 import 'package:badsound_counter_app/core/model/chat.dart';
-
-import '../../../core/api/model/chat_response.dart';
+import 'package:quiver/collection.dart';
 
 class ChatScreenState {
-  List<Chat> chattings;
-  ChatScreenState(this.chattings);
+  TreeSet<Chat> chatTreeSet = TreeSet<Chat>(comparator: (a, b) => b.createdAtTs.compareTo(a.createdAtTs));
+  ChatScreenState(List<Chat> chats) {
+    chatTreeSet.addAll(chats);
+  }
 }

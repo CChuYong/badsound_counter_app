@@ -12,12 +12,15 @@ class User {
   final String nickname;
   @JsonKey(name: 'createdAtTs')
   final int createdAtTs;
+  @JsonKey(name: 'profileImgUrl')
+  final String profileImgUrl;
 
   User(
       {required this.userId,
       required this.email,
       required this.nickname,
-      required this.createdAtTs});
+      required this.createdAtTs,
+      required this.profileImgUrl});
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 

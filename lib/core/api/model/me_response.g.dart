@@ -11,6 +11,7 @@ MeResponse _$MeResponseFromJson(Map<String, dynamic> json) => MeResponse(
       email: json['email'] as String,
       nickname: json['nickname'] as String,
       createdAtTs: json['createdAtTs'] as int,
+      profileImgUrl: json['profileImgUrl'] as String,
     );
 
 Map<String, dynamic> _$MeResponseToJson(MeResponse instance) =>
@@ -19,4 +20,5 @@ Map<String, dynamic> _$MeResponseToJson(MeResponse instance) =>
       'email': instance.email,
       'nickname': instance.nickname,
       'createdAtTs': instance.createdAtTs,
+      'profileImgUrl': instance.profileImgUrl,
     };

@@ -1,5 +1,6 @@
 import 'package:badsound_counter_app/core/api/model/chat_response.dart';
 import 'package:badsound_counter_app/core/model/chat.dart';
+import 'package:badsound_counter_app/core/util/currency_parser.dart';
 import 'package:badsound_counter_app/core/util/date_parser.dart';
 import 'package:badsound_counter_app/view/designsystem/theme/base_color.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,9 +21,13 @@ class ChatBox extends StatelessWidget {
         Container(
           width: 44.sp,
           height: 44.sp,
-          decoration: const BoxDecoration(
-            color: BaseColor.defaultGreen,
+          decoration: BoxDecoration(
+            color: BaseColor.warmGray300,
             shape: BoxShape.circle,
+            image: DecorationImage(
+                image: NetworkImage(chat.senderProfileImg),
+              fit: BoxFit.fill,
+            ),
           ),
         ),
         SizedBox(width: 10.sp),
@@ -60,7 +65,7 @@ class ChatBox extends StatelessWidget {
     )]
     ),
           Text(
-              '+13,000 원',
+              '${CurrencyParser.format(chat.violentPrice)} 원',
               style: TextStyle(
                 color: BaseColor.defaultGreen,
                 fontSize: 14.sp,

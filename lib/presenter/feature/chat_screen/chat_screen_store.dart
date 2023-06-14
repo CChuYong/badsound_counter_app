@@ -31,7 +31,7 @@ class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScre
 
   Future<Chat> getChat(ChatResponse e) async {
     final sender = await userRepository.getUserOrPull(e.speakerId);
-    return Chat(e.messageId, e.roomId, e.content, e.speakerId, sender.nickname, e.violentPrice, e.createdAtTs);
+    return Chat(e.messageId, e.roomId, e.content, e.speakerId, sender.nickname, sender.profileImgUrl, e.violentPrice, e.createdAtTs);
   }
 
   void onTapSend() async {
@@ -40,5 +40,6 @@ class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScre
     log('message send');
     final chat = ChatRequest('test', me.userId, me.userId, textController.text);
     openAPI.sendMessage(roomResponse.roomId, chat);
+    textController.text = '';
   }
 }

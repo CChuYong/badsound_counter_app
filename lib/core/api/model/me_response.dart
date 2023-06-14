@@ -16,11 +16,15 @@ class MeResponse {
   @JsonKey(name: 'createdAtTs')
   int createdAtTs;
 
+  @JsonKey(name: 'profileImgUrl')
+  String profileImgUrl;
+
   MeResponse({
     required this.id,
     required this.email,
     required this.nickname,
     required this.createdAtTs,
+    required this.profileImgUrl,
   });
 
   factory MeResponse.fromJson(Map<String, dynamic> json) =>

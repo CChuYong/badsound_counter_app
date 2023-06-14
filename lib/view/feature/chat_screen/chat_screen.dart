@@ -44,7 +44,7 @@ class ChatScreen
                     slivers: [
                   SliverList(
                       delegate: SliverChildListDelegate(
-                          state.chattings.map((e) => ChatBox(e)).toList())),
+                          state.chatTreeSet.map((e) => ChatBox(e)).toList())),
                 ]),
               )
               ),

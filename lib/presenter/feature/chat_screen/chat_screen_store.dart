@@ -34,12 +34,24 @@ class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScre
     return Chat(e.messageId, e.roomId, e.content, e.speakerId, sender.nickname, sender.profileImgUrl, e.violentPrice, e.createdAtTs);
   }
 
+  Future<void> updateChat() async {
+    final lastChat = state.chatTreeSet.first;
+    final data = await openAPI.getChattingsAfter(roomResponse.roomId, lastChat.messageId);
+    final mappedData = data.map((e) async => await getChat(e));
+    final chats = await Future.wait(mappedData);
+    setState(() {
+      state.chatTreeSet.addAll(chats);
+    });
+  }
+
   void onTapSend() async {
     if(textController.text == '') return;
     final me = await userRepository.getCachedMe();
     log('message send');
-    final chat = ChatRequest('test', me.userId, me.userId, textController.text);
-    openAPI.sendMessage(roomResponse.roomId, chat);
+    final message = textController.text;
+    final chat = ChatRequest('test', me.userId, me.userId, message);
     textController.text = '';
+    await openAPI.sendMessage(roomResponse.roomId, chat);
+    await updateChat();
   }
 }

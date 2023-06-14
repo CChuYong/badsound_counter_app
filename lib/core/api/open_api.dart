@@ -46,6 +46,18 @@ abstract class OpenAPI {
   @GET('/rooms/{roomId}/messages')
   Future<List<ChatResponse>> getChattings(@Path() String roomId);
 
+  @GET('/rooms/{roomId}/messages?fetchType=BACKWARD')
+  Future<List<ChatResponse>> getChattingsBefore(
+      @Path() String roomId,
+      @Query("baseId") String baseId,
+      );
+
+  @GET('/rooms/{roomId}/messages?fetchType=FORWARD')
+  Future<List<ChatResponse>> getChattingsAfter(
+      @Path() String roomId,
+      @Query("baseId") String baseId,
+      );
+
   @POST('/rooms/{roomId}/messages')
   Future<ChatResponse> sendMessage(@Path() String roomId, @Body() ChatRequest request);
 }

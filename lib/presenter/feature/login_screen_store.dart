@@ -5,7 +5,6 @@ import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
 import 'package:badsound_counter_app/core/model/auth_token.dart';
 import 'package:badsound_counter_app/core/service/auth_service.dart';
-import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -22,6 +21,12 @@ Future<AuthorizationCredentialAppleID> signInWithApple() async {
   );
 
   return appleCredential;
+}
+
+Future<GoogleSignInAuthentication?> signInWithGoogle() async {
+  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+  return await googleUser?.authentication;
 }
 
 class LoginScreenState {
@@ -86,11 +91,30 @@ class LoginScreenAction
   }
 
   void loginWithGoogle() async {
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-
-    log(googleAuth?.accessToken ?? '');
+    setState(() {
+      state.isLoading = true;
+    });
+    try {
+      final authResult = await signInWithGoogle();
+      if(authResult == null) throw Error();
+      final authenticateResult = await openApi.authenticate(AuthRequest(
+          provider: 'GOOGLE', token: authResult.accessToken ?? ""));
+      await authService.authenticate(AuthToken(
+        authenticateResult.accessToken,
+        authenticateResult.refreshToken,
+      ));
+      setState(() {
+        state.loginState = LoginState.LOGIN_SUCCEED;
+        state.isLoading = false;
+      });
+      Get.offNamed('navigator');
+    } catch (e) {
+      log(e.toString());
+      BaseAction.errorSnackBar(message: '알 수 없는 오류가 발생했어요');
+      setState(() {
+        state.loginState = LoginState.WAIT_FOR_LOGIN;
+        state.isLoading = false;
+      });
+    }
   }
 }

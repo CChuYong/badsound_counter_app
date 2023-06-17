@@ -8,6 +8,7 @@ import 'package:badsound_counter_app/core/service/auth_service.dart';
 import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../../view/feature/login_screen.dart/login_screen.dart';
@@ -84,5 +85,12 @@ class LoginScreenAction
     }
   }
 
-  void loginWithGoogle() async {}
+  void loginWithGoogle() async {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    log(googleAuth?.accessToken ?? '');
+  }
 }

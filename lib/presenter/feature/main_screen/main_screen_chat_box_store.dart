@@ -94,9 +94,17 @@ class MainPageChatBoxAction extends BaseAction<MainPageChatBox,
             style: TextStyle(color: BaseColor.warmGray500),
           ),
           onPressed: () async {
-            await openAPI.createNewRoom(RoomCreateRequest(textController.text));
-            await onReady();
+            final roomResponse = await openAPI.createNewRoom(RoomCreateRequest(textController.text));
+            final mockRoom = RoomDetailResponse(
+              roomResponse.roomId,
+              roomResponse.roomName,
+              roomResponse.ownerId,
+              roomResponse.createdAtTs,
+              roomResponse.createdAtTs,
+              0
+            );
             Get.back();
+            openChatRoom(mockRoom);
           }),
     );
   }

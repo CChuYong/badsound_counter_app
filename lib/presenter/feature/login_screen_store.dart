@@ -97,6 +97,7 @@ class LoginScreenAction
     try {
       final authResult = await signInWithGoogle();
       if(authResult == null) throw Error();
+      log(authResult.accessToken ?? '');
       final authenticateResult = await openApi.authenticate(AuthRequest(
           provider: 'GOOGLE', token: authResult.accessToken ?? ""));
       await authService.authenticate(AuthToken(

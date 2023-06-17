@@ -24,9 +24,14 @@ class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScre
 
   @override
   Future<ChatScreenState> initState() async {
+    final chats = await pullAllChat();
+    return ChatScreenState(chats);
+  }
+
+  Future<List<Chat>> pullAllChat() async {
     final data = await openAPI.getChattings(roomResponse.roomId);
     final mappedData = data.map((e) async => await getChat(e));
-    return ChatScreenState(await Future.wait(mappedData));
+    return await Future.wait(mappedData);
   }
 
   Future<Chat> getChat(ChatResponse e) async {
@@ -35,6 +40,13 @@ class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScre
   }
 
   Future<void> updateChat() async {
+    if(state.chatTreeSet.isEmpty){
+      final allChats = await pullAllChat();
+      setState(() {
+        state.chatTreeSet.addAll(allChats);
+      });
+      return;
+    }
     final lastChat = state.chatTreeSet.first;
     final data = await openAPI.getChattingsAfter(roomResponse.roomId, lastChat.messageId);
     final mappedData = data.map((e) async => await getChat(e));
@@ -45,13 +57,15 @@ class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScre
   }
 
   Future<void> pullPreviousChat() async {
-    final firstChat = state.chatTreeSet.last;
-    final data = await openAPI.getChattingsBefore(roomResponse.roomId, firstChat.messageId);
-    final mappedData = data.map((e) async => await getChat(e));
-    final chats = await Future.wait(mappedData);
-    setState(() {
-      state.chatTreeSet.addAll(chats);
-    });
+    if(state.chatTreeSet.isNotEmpty){
+      final firstChat = state.chatTreeSet.last;
+      final data = await openAPI.getChattingsBefore(roomResponse.roomId, firstChat.messageId);
+      final mappedData = data.map((e) async => await getChat(e));
+      final chats = await Future.wait(mappedData);
+      setState(() {
+        state.chatTreeSet.addAll(chats);
+      });
+    }
   }
 
   void onTapSend() async {

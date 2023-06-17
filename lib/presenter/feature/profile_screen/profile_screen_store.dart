@@ -28,7 +28,7 @@ class ProfileScreenAction
   ProfileScreenAction()
       : super(StateStore.loadState(ProfileScreenState)
                 ?.let(ProfileScreenState.fromJson) ??
-            ProfileScreenState('', ''));
+            ProfileScreenState('', '', ''));
 
   @override
   void dispose() {
@@ -39,8 +39,10 @@ class ProfileScreenAction
   Future<ProfileScreenState> initState() async {
     log('loading profile');
     final retrievedData = await userRepository.getMe();
-    return ProfileScreenState(retrievedData.nickname,
-        DateParser.timeStampAsDate(retrievedData.createdAtTs));
+    return ProfileScreenState(
+        retrievedData.nickname,
+        DateParser.timeStampAsDate(retrievedData.createdAtTs),
+        retrievedData.profileImgUrl);
   }
 
   void updateNickname() {

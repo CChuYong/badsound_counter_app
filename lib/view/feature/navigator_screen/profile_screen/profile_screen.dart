@@ -44,9 +44,13 @@ class ProfilePage
                 Container(
                   width: 82.sp,
                   height: 82.sp,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: BaseColor.warmGray700,
                     shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: NetworkImage(state.profileImageUrl),
+                      fit: BoxFit.fitWidth,
+                    )
                   ),
                 ),
                 SizedBox(height: 6.sp),

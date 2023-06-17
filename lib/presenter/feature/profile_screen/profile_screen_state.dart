@@ -8,8 +8,10 @@ class ProfileScreenState {
   String nickname;
   @JsonKey(name: 'since')
   String since;
+  @JsonKey(name: 'profileImageUrl')
+  String profileImageUrl;
 
-  ProfileScreenState(this.nickname, this.since);
+  ProfileScreenState(this.nickname, this.since, this.profileImageUrl);
 
   factory ProfileScreenState.fromJson(Map<String, dynamic> json) =>
       _$ProfileScreenStateFromJson(json);

@@ -34,6 +34,13 @@ class MainPageChatBoxAction extends BaseAction<MainPageChatBox,
     Get.to(() => ChatScreen(roomDetail));
   }
 
+  Future<void> pullRooms() async {
+    final data = await openAPI.getMyRooms();
+    setState(() {
+      state.rooms = data;
+    });
+  }
+
   void createNewChatBox() {
     final textController = TextEditingController();
     Get.defaultDialog(

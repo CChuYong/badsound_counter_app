@@ -46,7 +46,8 @@ class MainPageChatBox extends BaseView<MainPageChatBox, MainPageChatBoxAction,
         SizedBox(height: 13.sp),
         Expanded(
           child: RefreshIndicator(
-            onRefresh: () async => {  },
+            triggerMode: RefreshIndicatorTriggerMode.onEdge,
+            onRefresh: () => action.pullRooms(),
             child: CustomScrollView(
                 slivers: [
                   SliverList(delegate: SliverChildListDelegate(rooms)),

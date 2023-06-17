@@ -1,8 +1,10 @@
 import 'dart:math';
 
+import 'package:badsound_counter_app/core/api/model/device_request.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:badsound_counter_app/core/state/push_store.dart';
+import 'package:badsound_counter_app/core/util/device_info_util.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:get/get.dart';
 
@@ -18,15 +20,20 @@ class AuthService {
     print("Try authenticating");
     //Phase 1: Store tokens
     authProvider.authenticate(token);
+    //Phase 3: After loaded (fcm.. etc)
+    await pushStore.initializeNotification();
+    //Phase 4: Send device info to server
+    if(pushStore.isPushAuthorized()){
+      openAPI.registerDevice(DeviceRequest(pushStore.token!, getDeviceInfo()));
+    } else {
+      print("Push not authorized!");
+    }
 
     //Phase 2: Navigate Page
     final currentRoute = Get.currentRoute;
     if(currentRoute == '/' || currentRoute == '/login') {
       await Get.offNamed('navigator');
     }
-
-    //Phase 3: After loaded (fcm.. etc)
-    await pushStore.initializeNotification();
   }
 
   Future<bool> refresh() async {

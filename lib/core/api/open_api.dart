@@ -2,6 +2,7 @@ import 'package:badsound_counter_app/core/api/model/auth_request.dart';
 import 'package:badsound_counter_app/core/api/model/auth_result.dart';
 import 'package:badsound_counter_app/core/api/model/chat_response.dart';
 import 'package:badsound_counter_app/core/api/model/dashboard_response.dart';
+import 'package:badsound_counter_app/core/api/model/device_request.dart';
 import 'package:badsound_counter_app/core/api/model/room_create_request.dart';
 import 'package:badsound_counter_app/core/api/model/room_detail_response.dart';
 import 'package:badsound_counter_app/core/api/model/room_response.dart';
@@ -21,6 +22,9 @@ abstract class OpenAPI {
 
   @POST('/users/oauth')
   Future<AuthResult> authenticate(@Body() AuthRequest request);
+
+  @POST('/users/device')
+  Future<dynamic> registerDevice(@Body() DeviceRequest request);
 
   @POST('/users/refresh')
   Future<AuthResult> refresh(@Body() RefreshRequest request);

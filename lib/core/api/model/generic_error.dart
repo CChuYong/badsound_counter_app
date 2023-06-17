@@ -16,3 +16,4 @@ class GenericError {
 
   Map<String, dynamic> toJson() => _$GenericErrorToJson(this);
 }
+

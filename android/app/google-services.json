@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "560716993962",
+    "project_id": "badsoundcounter",
+    "storage_bucket": "badsoundcounter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560716993962:android:6b318bf5612d6923b847d3",
+        "android_client_info": {
+          "package_name": "com.example.badsound_counter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "560716993962-qhgs8r050g2d6mbqbt9e48n9qre0sfm0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe7LipJbr3xVIynS6HUO2es3Adr3DbjS4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "560716993962-qhgs8r050g2d6mbqbt9e48n9qre0sfm0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

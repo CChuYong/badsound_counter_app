@@ -59,7 +59,7 @@ abstract class BaseAction<V extends BaseView<V, A, S>,
     render();
   }
 
-  void errorSnackBar({
+  static void errorSnackBar({
     required String message,
     SnackBarType type = SnackBarType.GREY, // neutral
     EdgeInsets margin = const EdgeInsets.all(12),

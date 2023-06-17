@@ -74,7 +74,7 @@ class LoginScreenAction
       Get.offNamed('navigator');
     } catch (e) {
       log(e.toString());
-      errorSnackBar(message: '알 수 없는 오류가 발생했어요');
+      BaseAction.errorSnackBar(message: '알 수 없는 오류가 발생했어요');
       setState(() {
         state.loginState = LoginState.WAIT_FOR_LOGIN;
         state.isLoading = false;

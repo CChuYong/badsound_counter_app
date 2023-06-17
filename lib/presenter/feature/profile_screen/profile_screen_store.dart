@@ -4,8 +4,8 @@ import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
 import 'package:badsound_counter_app/core/framework/state_store.dart';
 import 'package:badsound_counter_app/core/repository/user_repository.dart';
+import 'package:badsound_counter_app/core/service/auth_service.dart';
 import 'package:badsound_counter_app/core/service/webview_service.dart';
-import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:badsound_counter_app/core/util/date_parser.dart';
 import 'package:badsound_counter_app/core/util/extension.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
@@ -21,7 +21,7 @@ import '../../../view/designsystem/theme/base_color.dart';
 class ProfileScreenAction
     extends BaseAction<ProfilePage, ProfileScreenAction, ProfileScreenState> {
   final UserRepository userRepository = inject<UserRepository>();
-  final AuthProvider authProvider = inject<AuthProvider>();
+  final AuthService authService = inject<AuthService>();
   final WebViewService webViewService = inject<WebViewService>();
   final OpenAPI openAPI = inject<OpenAPI>();
 
@@ -124,9 +124,7 @@ class ProfileScreenAction
             content: '정말 로그아웃 할까요?',
             confirmText: '로그아웃',
             onConfirm: () {
-              log('logout');
-              authProvider.clearAuthentication();
-              Get.offNamed('/login');
+              authService.logout();
             });
         break;
       default:

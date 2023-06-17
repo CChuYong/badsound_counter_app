@@ -4,6 +4,7 @@ import 'package:badsound_counter_app/core/api/model/auth_request.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
 import 'package:badsound_counter_app/core/model/auth_token.dart';
+import 'package:badsound_counter_app/core/service/auth_service.dart';
 import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:get/get.dart';
@@ -41,7 +42,8 @@ class LoginScreenAction
     extends BaseAction<LoginScreenV2, LoginScreenAction, LoginScreenState> {
   LoginScreenAction() : super(LoginScreenState());
 
-  final AuthProvider authProvider = inject<AuthProvider>();
+  //final AuthProvider authProvider = inject<AuthProvider>();
+  final AuthService authService = inject<AuthService>();
   final OpenAPI openApi = inject<OpenAPI>();
 
   @override
@@ -63,7 +65,7 @@ class LoginScreenAction
       final authResult = await signInWithApple();
       final authenticateResult = await openApi.authenticate(AuthRequest(
           provider: 'APPLE', token: authResult.identityToken ?? ""));
-      authProvider.authenticate(AuthToken(
+      await authService.authenticate(AuthToken(
         authenticateResult.accessToken,
         authenticateResult.refreshToken,
       ));

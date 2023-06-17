@@ -5,6 +5,7 @@ import 'package:badsound_counter_app/core/api/model/refresh_request.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
 import 'package:badsound_counter_app/core/model/auth_token.dart';
+import 'package:badsound_counter_app/core/service/auth_service.dart';
 import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:dio/dio.dart';
@@ -14,6 +15,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 
 class ApiInterceptor extends Interceptor {
   final AuthProvider authProvider = inject<AuthProvider>();
+  final AuthService authService = inject<AuthService>();
   final OpenAPI openAPI = inject<OpenAPI>();
 
   @override
@@ -38,16 +40,7 @@ class ApiInterceptor extends Interceptor {
     if (isStatus401) {
       if (authProvider.isAuthenticated()) {
         // try refresh it
-        try {
-          final result = await openAPI.refresh(RefreshRequest(
-              refreshToken: authProvider.authToken?.refreshToken ?? ''));
-          authProvider
-              .authenticate(AuthToken(result.accessToken, result.refreshToken));
-        } catch (e) {
-          //Refresh failure. invalidate authentication
-          authProvider.clearAuthentication();
-          g.Get.offNamed('/login');
-        }
+        final refreshResult = await authService.refresh();
       }
     } else{
       if(err.response != null) {

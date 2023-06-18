@@ -44,7 +44,7 @@ class WebViewScreenAction extends BaseAction<FullWebViewScreen,
         onPageFinished: (String url) {},
         onWebResourceError: (WebResourceError error) {},
         onNavigationRequest: (NavigationRequest request) {
-          if (!request.url.startsWith('https://bsc-webview.bearus.co')) {
+          if (!request.url.startsWith('https://bsc-webview.chuyong.kr')) {
             return NavigationDecision.prevent;
           }
           return NavigationDecision.navigate;

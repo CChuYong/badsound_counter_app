@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../view/feature/webview_screen/full_webview_screen.dart';
 
 class WebViewService {
-  static const String _baseUrl = 'https://bsc-webview.bearus.co';
+  static const String _baseUrl = 'https://bsc-webview.chuyong.kr';
 
   String get baseUrl => _baseUrl;
 

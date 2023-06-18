@@ -42,6 +42,13 @@ class MainPageChatBoxAction extends BaseAction<MainPageChatBox,
     });
   }
 
+  @override
+  void dispose() {
+    state.rooms.forEach((element) {
+      rooms.persist(element);
+    });
+  }
+
   void openChatRoom(RoomDetailResponse roomDetail) async {
     final messages = await messageRepository.getMessagesByRoom(roomDetail.roomId);
     Get.to(() => ChatScreen(roomDetail, messages));

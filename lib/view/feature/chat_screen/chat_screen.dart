@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/model/chat.dart';
 import '../../../presenter/feature/chat_screen/chat_screen_state.dart';
 import '../../../presenter/feature/chat_screen/chat_screen_store.dart';
 import '../../designsystem/theme/base_color.dart';
@@ -14,11 +15,12 @@ import '../../designsystem/theme/base_color.dart';
 class ChatScreen
     extends BaseView<ChatScreen, ChatScreenAction, ChatScreenState> {
   final RoomDetailResponse room;
+  final List<Chat> initialMessages;
 
-  ChatScreen(this.room, {super.key});
+  ChatScreen(this.room, this.initialMessages, {super.key});
 
   @override
-  ChatScreenAction initAction() => ChatScreenAction(room);
+  ChatScreenAction initAction() => ChatScreenAction(room, initialMessages);
 
   @override
   Widget render(

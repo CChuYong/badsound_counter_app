@@ -29,9 +29,9 @@ class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScre
   @override
   Future<ChatScreenState> initState() async {
     print("Before pull, initial message size : ${state.chatTreeSet.length}");
-    final chats = await pullAllChat();
+    await updateChat();
     pushStore.chatMessageConsumer = onMessageReceived;
-    return ChatScreenState(chats);
+    return state;
   }
 
   @override

@@ -17,6 +17,7 @@ class ApiInterceptor extends Interceptor {
   final AuthProvider authProvider = inject<AuthProvider>();
   final AuthService authService = inject<AuthService>();
   final OpenAPI openAPI = inject<OpenAPI>();
+  final Dio dio = inject<Dio>();
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
@@ -41,6 +42,19 @@ class ApiInterceptor extends Interceptor {
       if (authProvider.isAuthenticated()) {
         // try refresh it
         final refreshResult = await authService.refresh();
+        if(refreshResult) {
+          // Re-Request when refresh succeed
+          var response = await dio.request(
+            err.requestOptions.path,
+            data: err.requestOptions.data,
+            queryParameters: err.requestOptions.queryParameters,
+            options: Options(
+              method: err.requestOptions.method,
+              headers: err.requestOptions.headers,
+            ),
+          );
+          return handler.resolve(response);
+        }
       }
     } else{
       if(err.response != null) {
@@ -49,6 +63,6 @@ class ApiInterceptor extends Interceptor {
       }
       log(err.response?.data?.toString() ?? 'unknown dio error');
     }
-    return super.onError(err, handler);
+    return handler.next(err);
   }
 }

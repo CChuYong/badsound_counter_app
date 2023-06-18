@@ -7,6 +7,7 @@ import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
 import 'package:badsound_counter_app/core/model/chat.dart';
 import 'package:badsound_counter_app/core/repository/user_repository.dart';
+import 'package:badsound_counter_app/core/state/push_store.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:badsound_counter_app/view/feature/chat_screen/chat_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,13 +20,27 @@ class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScre
   final RoomDetailResponse roomResponse;
   final OpenAPI openAPI = inject<OpenAPI>();
   final UserRepository userRepository = inject<UserRepository>();
+  final PushStore pushStore = inject<PushStore>();
 
   final textController = TextEditingController();
 
   @override
   Future<ChatScreenState> initState() async {
     final chats = await pullAllChat();
+    pushStore.chatMessageConsumer = onMessageReceived;
     return ChatScreenState(chats);
+  }
+
+  @override
+  void dispose() {
+    pushStore.chatMessageConsumer = null;
+  }
+
+  void onMessageReceived(ChatResponse chat) async {
+    final message = await getChat(chat);
+    setState(() {
+      state.chatTreeSet.add(message);
+    });
   }
 
   Future<List<Chat>> pullAllChat() async {
@@ -76,6 +91,6 @@ class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScre
     final chat = ChatRequest('test', me.userId, me.userId, message);
     textController.text = '';
     await openAPI.sendMessage(roomResponse.roomId, chat);
-    await updateChat();
+    //await updateChat();
   }
 }

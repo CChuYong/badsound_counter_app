@@ -1,8 +1,13 @@
+import 'dart:convert';
+
+import 'package:badsound_counter_app/core/api/model/chat_response.dart';
+import 'package:badsound_counter_app/core/util/extension.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class PushStore {
   String? token;
+  Function? chatMessageConsumer;
   //Related to FireBase Push Services
   PushStore() {
     FirebaseMessaging.instance.getToken().then((value) {
@@ -47,10 +52,25 @@ class PushStore {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('Got a message whilst in the foreground!');
       print('Message data: ${message.data}');
+      processMessage(message.data);
 
       if (message.notification != null) {
         print('Message also contained a notification: ${message.notification.toString()}');
       }
     });
+  }
+
+  void processMessage(Map<String, dynamic> data) {
+    if(!data.containsKey("packetType")) return;
+    switch(data["packetType"]) {
+      case "MESSAGE_RECEIVED":
+        final message = ChatResponse.fromJson(jsonDecode(data["payload"]));
+        chatMessageConsumer?.let((e) => e(message));
+        break;
+      default:
+        print('unknown packet type;');
+        break;
+    }
+
   }
 }

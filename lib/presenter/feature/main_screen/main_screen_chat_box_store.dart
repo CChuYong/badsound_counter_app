@@ -3,6 +3,7 @@ import 'package:badsound_counter_app/core/api/model/room_detail_response.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
 import 'package:badsound_counter_app/core/repository/message_repository.dart';
+import 'package:badsound_counter_app/core/repository/room_repository.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:badsound_counter_app/view/feature/chat_screen/chat_screen.dart';
 import 'package:badsound_counter_app/view/feature/navigator_screen/main_screen/main_screen_chat_box.dart';
@@ -24,12 +25,21 @@ class MainPageChatBoxAction extends BaseAction<MainPageChatBox,
       : super(MainPageChatBoxState(List<RoomDetailResponse>.empty()));
 
   final OpenAPI openAPI = inject<OpenAPI>();
+  final RoomRepository rooms = inject<RoomRepository>();
   final MessageRepository messageRepository = inject<MessageRepository>();
 
   @override
   Future<MainPageChatBoxState> initState() async {
+    final cachedRooms = await rooms.getRooms();
+    updateFromServer();
+    return MainPageChatBoxState(cachedRooms);
+  }
+
+  Future<void> updateFromServer() async {
     final data = await openAPI.getMyRooms();
-    return MainPageChatBoxState(data);
+    setState(() {
+      state.rooms = data;
+    });
   }
 
   void openChatRoom(RoomDetailResponse roomDetail) async {

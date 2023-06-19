@@ -6,15 +6,16 @@ import 'package:get/get.dart';
 
 class BaseTopBar extends StatelessWidget {
   final String title;
-  const BaseTopBar(this.title, {super.key});
+  Border? border = Border(
+    bottom: BorderSide(width: 1.sp, color: BaseColor.warmGray400)
+  );
+  BaseTopBar(this.title, {this.border, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(width: 1.sp, color: BaseColor.warmGray400),
-        )
+        border: border,
       ),
     child:
       Padding(

@@ -12,6 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../view/designsystem/theme/base_color.dart';
+import '../../../view/feature/create_new_room_screen/create_new_room_screen.dart';
 
 class MainPageChatBoxState {
   List<RoomDetailResponse> rooms;
@@ -62,6 +63,8 @@ class MainPageChatBoxAction extends BaseAction<MainPageChatBox,
   }
 
   void createNewChatBox() {
+    Get.to(() => CreateNewRoomScreen());
+    if(true) return;
     final textController = TextEditingController();
     Get.defaultDialog(
       title: '',

@@ -48,12 +48,32 @@ class MainPageChatBox extends BaseView<MainPageChatBox, MainPageChatBoxAction,
           child: RefreshIndicator(
             triggerMode: RefreshIndicatorTriggerMode.onEdge,
             onRefresh: () => action.pullRooms(),
-            child: CustomScrollView(
-                slivers: [
-                  SliverList(delegate: SliverChildListDelegate(rooms)),
-                  SliverToBoxAdapter(child: MainPageChatBoxAddElements(action.createNewChatBox)),
-                ]
-        ),
+            child: CustomScrollView(slivers: [
+              if (rooms.isNotEmpty)
+                SliverList(delegate: SliverChildListDelegate(rooms))
+              else
+                SliverToBoxAdapter(
+                    child: Column(children: [
+                      SizedBox(height: 24.sp),
+                      Icon(Icons.people_alt,
+                      color: BaseColor.warmGray500,
+                        size: 24.sp,
+                      ),
+                      SizedBox(height: 6.sp),
+                  Text(
+                    '아직 방이 없어요! 아래 버튼을 눌러 방을 생성해보세요',
+                    style: TextStyle(
+                      color: BaseColor.warmGray500,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w700,
+                      height: 1.2,
+                    ),
+                  ),
+                  SizedBox(height: 36.sp),
+                ])),
+              SliverToBoxAdapter(
+                  child: MainPageChatBoxAddElements(action.createNewChatBox)),
+            ]),
           ),
         )
       ],

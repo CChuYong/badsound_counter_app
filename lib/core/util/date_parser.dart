@@ -4,7 +4,7 @@ class DateParser {
   static DateFormat dateTimeFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
   static DateFormat dateFormat = DateFormat('yyyy.MM.dd.');
   static DateFormat krMMdd = DateFormat('MM월 dd일');
-  static DateFormat lastMessageTimeFormat = DateFormat("a hh:mm");
+  static DateFormat lastMessageTimeFormat = DateFormat("hh:mm");
 
   static DateTime fromTimeStamp(int timestamp) {
     return DateTime.fromMillisecondsSinceEpoch(timestamp, isUtc: false);
@@ -21,8 +21,10 @@ class DateParser {
   static String lastMessageFormat(int timestamp) {
     final date = fromTimeStamp(timestamp);
     final diffOfToday = calculateDifference(date);
-    if (diffOfToday == 0)
-      return lastMessageTimeFormat.format(fromTimeStamp(timestamp));
+    if (diffOfToday == 0){
+      String dayNight = date.hour < 12 ? "오전 " : "오후 ";
+      return dayNight + lastMessageTimeFormat.format(fromTimeStamp(timestamp));
+    }
     return krMMdd.format(date);
   }
 

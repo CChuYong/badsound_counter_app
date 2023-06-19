@@ -47,10 +47,12 @@ class ProfilePage
                   decoration: BoxDecoration(
                     color: BaseColor.warmGray700,
                     shape: BoxShape.circle,
-                    image: state.profileImageUrl != '' ? DecorationImage(
-                      image: NetworkImage(state.profileImageUrl),
-                      fit: BoxFit.fitWidth,
-                    ) : null,
+                    image: state.profileImageUrl != ''
+                        ? DecorationImage(
+                            image: NetworkImage(state.profileImageUrl),
+                            fit: BoxFit.fitWidth,
+                          )
+                        : null,
                   ),
                 ),
                 SizedBox(height: 6.sp),

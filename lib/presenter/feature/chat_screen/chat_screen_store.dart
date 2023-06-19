@@ -15,8 +15,10 @@ import 'package:flutter/cupertino.dart';
 
 import 'chat_screen_state.dart';
 
-class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScreenState> {
-  ChatScreenAction(this.roomResponse, List<Chat> initialMessages) : super(ChatScreenState(initialMessages));
+class ChatScreenAction
+    extends BaseAction<ChatScreen, ChatScreenAction, ChatScreenState> {
+  ChatScreenAction(this.roomResponse, List<Chat> initialMessages)
+      : super(ChatScreenState(initialMessages));
 
   final RoomDetailResponse roomResponse;
   final OpenAPI openAPI = inject<OpenAPI>();
@@ -58,11 +60,12 @@ class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScre
 
   Future<Chat> getChat(ChatResponse e) async {
     final sender = await userRepository.getUserOrPull(e.speakerId);
-    return Chat(e.messageId, e.roomId, e.content, e.speakerId, sender.nickname, sender.profileImgUrl, e.violentPrice, e.createdAtTs);
+    return Chat(e.messageId, e.roomId, e.content, e.speakerId, sender.nickname,
+        sender.profileImgUrl, e.violentPrice, e.createdAtTs);
   }
 
   Future<void> updateChat() async {
-    if(state.chatTreeSet.isEmpty){
+    if (state.chatTreeSet.isEmpty) {
       final allChats = await pullAllChat();
       setState(() {
         state.chatTreeSet.addAll(allChats);
@@ -70,7 +73,8 @@ class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScre
       return;
     }
     final lastChat = state.chatTreeSet.first;
-    final data = await openAPI.getChattingsAfter(roomResponse.roomId, lastChat.messageId);
+    final data = await openAPI.getChattingsAfter(
+        roomResponse.roomId, lastChat.messageId);
     final mappedData = data.map((e) async => await getChat(e));
     final chats = await Future.wait(mappedData);
     setState(() {
@@ -79,9 +83,10 @@ class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScre
   }
 
   Future<void> pullPreviousChat() async {
-    if(state.chatTreeSet.isNotEmpty){
+    if (state.chatTreeSet.isNotEmpty) {
       final firstChat = state.chatTreeSet.last;
-      final data = await openAPI.getChattingsBefore(roomResponse.roomId, firstChat.messageId);
+      final data = await openAPI.getChattingsBefore(
+          roomResponse.roomId, firstChat.messageId);
       final mappedData = data.map((e) async => await getChat(e));
       final chats = await Future.wait(mappedData);
       setState(() {
@@ -91,7 +96,7 @@ class ChatScreenAction extends BaseAction<ChatScreen, ChatScreenAction, ChatScre
   }
 
   void onTapSend() async {
-    if(textController.text == '') return;
+    if (textController.text == '') return;
     final me = await userRepository.getCachedMe();
     log('message send');
     final message = textController.text;

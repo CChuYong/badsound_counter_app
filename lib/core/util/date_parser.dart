@@ -21,12 +21,15 @@ class DateParser {
   static String lastMessageFormat(int timestamp) {
     final date = fromTimeStamp(timestamp);
     final diffOfToday = calculateDifference(date);
-    if(diffOfToday == 0) return lastMessageTimeFormat.format(fromTimeStamp(timestamp));
+    if (diffOfToday == 0)
+      return lastMessageTimeFormat.format(fromTimeStamp(timestamp));
     return krMMdd.format(date);
   }
 
   static int calculateDifference(DateTime date) {
     DateTime now = DateTime.now();
-    return DateTime(date.year, date.month, date.day).difference(DateTime(now.year, now.month, now.day)).inDays;
+    return DateTime(date.year, date.month, date.day)
+        .difference(DateTime(now.year, now.month, now.day))
+        .inDays;
   }
 }

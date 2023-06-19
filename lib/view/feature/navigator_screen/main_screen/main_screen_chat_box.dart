@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:badsound_counter_app/core/framework/base_view.dart';
 import 'package:badsound_counter_app/core/util/date_parser.dart';
 import 'package:collection/collection.dart';
@@ -55,12 +53,13 @@ class MainPageChatBox extends BaseView<MainPageChatBox, MainPageChatBoxAction,
               else
                 SliverToBoxAdapter(
                     child: Column(children: [
-                      SizedBox(height: 24.sp),
-                      Icon(Icons.people_alt,
-                      color: BaseColor.warmGray500,
-                        size: 24.sp,
-                      ),
-                      SizedBox(height: 6.sp),
+                  SizedBox(height: 24.sp),
+                  Icon(
+                    Icons.people_alt,
+                    color: BaseColor.warmGray500,
+                    size: 24.sp,
+                  ),
+                  SizedBox(height: 6.sp),
                   Text(
                     '아직 방이 없어요! 아래 버튼을 눌러 방을 생성해보세요',
                     style: TextStyle(
@@ -83,8 +82,8 @@ class MainPageChatBox extends BaseView<MainPageChatBox, MainPageChatBoxAction,
 }
 
 class MainPageChatBoxElements extends StatefulWidget {
-  const MainPageChatBoxElements(
-      this.roomName, this.lastTime, this.unreadMessageCount, this.onTap, this.roomImageUrl,
+  const MainPageChatBoxElements(this.roomName, this.lastTime,
+      this.unreadMessageCount, this.onTap, this.roomImageUrl,
       {super.key});
 
   final String roomName;

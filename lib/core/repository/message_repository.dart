@@ -1,12 +1,15 @@
 import 'package:badsound_counter_app/core/model/chat.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+
 class MessageRepository {
   late Database database;
   final String tableName = "messages";
+
   MessageRepository() {
     open();
   }
+
   Future<void> open() async {
     final dbPath = await getDatabasesPath();
     String path = join(dbPath, 'messages.db');
@@ -35,7 +38,8 @@ class MessageRepository {
   }
 
   Future<void> persist(Chat chat) async {
-    await database.insert(tableName,
+    await database.insert(
+      tableName,
       {
         'message_id': chat.messageId,
         'room_id': chat.roomId,
@@ -51,16 +55,18 @@ class MessageRepository {
   }
 
   Future<List<Chat>> getMessagesByRoom(String roomId) async {
-    final result = await database.rawQuery('SELECT * FROM $tableName WHERE room_id = ?', [roomId]);
-    return result.map((e) => Chat(
-        e["message_id"] as String,
-        e["room_id"] as String,
-        e["content"] as String,
-        e["sender_id"] as String,
-        e["sender_nickname"] as String,
-        e["sender_profile_img"] as String,
-        e["violent_price"] as int,
-        e["created_at"] as int
-    )).toList();
+    final result = await database
+        .rawQuery('SELECT * FROM $tableName WHERE room_id = ?', [roomId]);
+    return result
+        .map((e) => Chat(
+            e["message_id"] as String,
+            e["room_id"] as String,
+            e["content"] as String,
+            e["sender_id"] as String,
+            e["sender_nickname"] as String,
+            e["sender_profile_img"] as String,
+            e["violent_price"] as int,
+            e["created_at"] as int))
+        .toList();
   }
 }

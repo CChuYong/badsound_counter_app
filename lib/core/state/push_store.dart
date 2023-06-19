@@ -8,6 +8,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 class PushStore {
   String? token;
   Function? chatMessageConsumer;
+
   //Related to FireBase Push Services
   PushStore() {
     FirebaseMessaging.instance.getToken().then((value) {
@@ -18,8 +19,8 @@ class PushStore {
 
   bool isPushAuthorized() => token != null;
 
-
-  Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  Future<void> _firebaseMessagingBackgroundHandler(
+      RemoteMessage message) async {
     print('Handling a background message ${message.messageId}');
   }
 
@@ -29,21 +30,22 @@ class PushStore {
     final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>()
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(const AndroidNotificationChannel(
-        'high_importance_channel', 'high_importance_notification',
-        importance: Importance.max));
+            'high_importance_channel', 'high_importance_notification',
+            importance: Importance.max));
 
-    await flutterLocalNotificationsPlugin.initialize(const InitializationSettings(
-        android: AndroidInitializationSettings("@mipmap/ic_launcher"),
-        iOS: DarwinInitializationSettings(
-          requestSoundPermission: true,
-          requestBadgePermission: true,
-          requestAlertPermission: true,
-        )
-    ));
+    await flutterLocalNotificationsPlugin
+        .initialize(const InitializationSettings(
+            android: AndroidInitializationSettings("@mipmap/ic_launcher"),
+            iOS: DarwinInitializationSettings(
+              requestSoundPermission: true,
+              requestBadgePermission: true,
+              requestAlertPermission: true,
+            )));
 
-    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
       sound: true,
@@ -55,14 +57,15 @@ class PushStore {
       processMessage(message.data);
 
       if (message.notification != null) {
-        print('Message also contained a notification: ${message.notification.toString()}');
+        print(
+            'Message also contained a notification: ${message.notification.toString()}');
       }
     });
   }
 
   void processMessage(Map<String, dynamic> data) {
-    if(!data.containsKey("packetType")) return;
-    switch(data["packetType"]) {
+    if (!data.containsKey("packetType")) return;
+    switch (data["packetType"]) {
       case "MESSAGE_RECEIVED":
         final message = ChatResponse.fromJson(jsonDecode(data["payload"]));
         chatMessageConsumer?.let((e) => e(message));
@@ -71,6 +74,5 @@ class PushStore {
         print('unknown packet type;');
         break;
     }
-
   }
 }

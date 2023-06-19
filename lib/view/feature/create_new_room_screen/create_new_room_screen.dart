@@ -3,10 +3,9 @@ import 'package:badsound_counter_app/presenter/feature/create_new_room_screen/cr
 import 'package:badsound_counter_app/view/designsystem/component/base_top_bar.dart';
 import 'package:badsound_counter_app/view/designsystem/component/gray_rounded_button.dart';
 import 'package:badsound_counter_app/view/designsystem/component/title_text_box.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../presenter/feature/create_new_room_screen/create_new_room_screen_state.dart';
 import '../../designsystem/theme/base_color.dart';
 
@@ -48,7 +47,9 @@ class CreateNewRoomScreen extends BaseView<CreateNewRoomScreen,
                     ),
                   ),
                   SizedBox(height: 12.sp),
-                  TitleTextBox('방 제목', hint: '여기에 방 제목을 입력하세요', controller: action.roomTitleController),
+                  TitleTextBox('방 제목',
+                      hint: '여기에 방 제목을 입력하세요',
+                      controller: action.roomTitleController),
                   SizedBox(height: 12.sp),
                   GrayRoundedButton('생성하기', onTap: action.createRoom)
                 ],

@@ -2,9 +2,7 @@ import 'package:badsound_counter_app/core/api/model/room_detail_response.dart';
 import 'package:badsound_counter_app/core/framework/base_view.dart';
 import 'package:badsound_counter_app/view/designsystem/component/base_top_bar.dart';
 import 'package:badsound_counter_app/view/feature/chat_screen/chat_box.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/model/chat.dart';
@@ -38,19 +36,17 @@ class ChatScreen
             BaseTopBar(room.roomName),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.only(left: 15.sp, right: 15.sp),
-                child: RefreshIndicator(
-                  triggerMode: RefreshIndicatorTriggerMode.onEdge,
-                onRefresh: () => action.pullPreviousChat(),
-                child: CustomScrollView(
-                  reverse: true,
-                    slivers: [
-                  SliverList(
-                      delegate: SliverChildListDelegate(
-                          state.chatTreeSet.map((e) => ChatBox(e)).toList())),
-                ]),
-              )
-              ),
+                  padding: EdgeInsets.only(left: 15.sp, right: 15.sp),
+                  child: RefreshIndicator(
+                    triggerMode: RefreshIndicatorTriggerMode.onEdge,
+                    onRefresh: () => action.pullPreviousChat(),
+                    child: CustomScrollView(reverse: true, slivers: [
+                      SliverList(
+                          delegate: SliverChildListDelegate(state.chatTreeSet
+                              .map((e) => ChatBox(e))
+                              .toList())),
+                    ]),
+                  )),
             ),
             buildInputArea(context, action),
           ],

@@ -31,5 +31,4 @@ Future<void> init() async {
   dio.interceptors.add(interceptor);
 
   inject.registerSingleton(UserRepository());
-
 }

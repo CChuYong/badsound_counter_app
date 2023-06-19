@@ -6,15 +6,14 @@ import 'package:badsound_counter_app/view/feature/navigator_screen/main_screen/m
 import 'package:badsound_counter_app/view/feature/navigator_screen/profile_screen/profile_screen.dart';
 import 'package:badsound_counter_app/view/feature/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:injectable/injectable.dart';
 
 import 'dependencies.config.dart' as di;
-import 'view/feature/navigator_screen/main_navigator.dart';
 import 'firebase_options.dart';
+import 'view/feature/navigator_screen/main_navigator.dart';
 
 @InjectableInit(
   initializerName: 'init', // default
@@ -55,5 +54,3 @@ void main() async {
             ],
           )));
 }
-
-

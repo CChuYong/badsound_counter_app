@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '560716993962',
     projectId: 'badsoundcounter',
     storageBucket: 'badsoundcounter.appspot.com',
-    iosClientId: '560716993962-36a0hvhu98vojalrr5vg2rboqpr2oa21.apps.googleusercontent.com',
+    iosClientId:
+        '560716993962-36a0hvhu98vojalrr5vg2rboqpr2oa21.apps.googleusercontent.com',
     iosBundleId: 'co.bearus.badSoundCounterApp',
   );
 }

@@ -8,6 +8,7 @@ class DeviceRequest {
   final String fcmToken;
   @JsonKey(name: 'deviceInfo')
   final String deviceInfo;
+
   DeviceRequest(this.fcmToken, this.deviceInfo);
 
   factory DeviceRequest.fromJson(Map<String, dynamic> json) =>

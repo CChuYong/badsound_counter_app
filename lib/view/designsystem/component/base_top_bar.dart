@@ -6,43 +6,41 @@ import 'package:get/get.dart';
 
 class BaseTopBar extends StatelessWidget {
   final String title;
-  Border? border = Border(
-    bottom: BorderSide(width: 1.sp, color: BaseColor.warmGray400)
-  );
+  Border? border =
+      Border(bottom: BorderSide(width: 1.sp, color: BaseColor.warmGray400));
+
   BaseTopBar(this.title, {this.border, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        border: border,
-      ),
-    child:
-      Padding(
-      padding: EdgeInsets.only(left: 10.sp, right: 10.sp, top: 5.sp, bottom: 14.sp),
-      child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        GestureDetector(
-          onTap: () => Get.back(),
-          child: Icon(
-            BaseIcon.arrowLeft,
-            color: BaseColor.warmGray600,
-            size: 16.sp,
-          ),
+        decoration: BoxDecoration(
+          border: border,
         ),
-        Text(
-          title,
-          style: TextStyle(
-            color: BaseColor.warmGray500,
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w900,
-          ),
-        ),
-        Container()
-      ],
-    )));
+        child: Padding(
+            padding: EdgeInsets.only(
+                left: 10.sp, right: 10.sp, top: 5.sp, bottom: 14.sp),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () => Get.back(),
+                  child: Icon(
+                    BaseIcon.arrowLeft,
+                    color: BaseColor.warmGray600,
+                    size: 16.sp,
+                  ),
+                ),
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: BaseColor.warmGray500,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                Container()
+              ],
+            )));
   }
-
 }
-

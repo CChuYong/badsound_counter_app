@@ -1,14 +1,16 @@
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../api/model/room_detail_response.dart';
 
 class RoomRepository {
   late Database database;
   final String tableName = "rooms";
+
   RoomRepository() {
     open();
   }
+
   Future<void> open() async {
     final dbPath = await getDatabasesPath();
     String path = join(dbPath, 'rooms.db');
@@ -31,8 +33,9 @@ class RoomRepository {
   }
 
   Future<RoomDetailResponse?> getRoomById(String roomId) async {
-    final result = await database.rawQuery('SELECT * FROM $tableName WHERE room_id = ?', [roomId]);
-    if(result.isNotEmpty) {
+    final result = await database
+        .rawQuery('SELECT * FROM $tableName WHERE room_id = ?', [roomId]);
+    if (result.isNotEmpty) {
       return RoomDetailResponse.fromJson(result[0]);
     } else {
       return null;
@@ -45,7 +48,8 @@ class RoomRepository {
   }
 
   Future<void> persist(RoomDetailResponse roomDetailResponse) async {
-    await database.insert(tableName,
+    await database.insert(
+      tableName,
       roomDetailResponse.toJson(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );

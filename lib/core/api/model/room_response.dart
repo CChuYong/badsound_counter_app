@@ -15,7 +15,8 @@ class RoomResponse {
   @JsonKey(name: 'roomImageUrl')
   final String roomImageUrl;
 
-  RoomResponse(this.roomId, this.roomName, this.ownerId, this.createdAtTs, this.roomImageUrl);
+  RoomResponse(this.roomId, this.roomName, this.ownerId, this.createdAtTs,
+      this.roomImageUrl);
 
   factory RoomResponse.fromJson(Map<String, dynamic> json) =>
       _$RoomResponseFromJson(json);

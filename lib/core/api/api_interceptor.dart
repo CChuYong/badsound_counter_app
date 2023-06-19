@@ -1,17 +1,13 @@
 import 'dart:developer';
 
 import 'package:badsound_counter_app/core/api/model/generic_error.dart';
-import 'package:badsound_counter_app/core/api/model/refresh_request.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
-import 'package:badsound_counter_app/core/model/auth_token.dart';
 import 'package:badsound_counter_app/core/service/auth_service.dart';
 import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart' as g;
-import 'package:get/get_navigation/get_navigation.dart';
 
 class ApiInterceptor extends Interceptor {
   final AuthProvider authProvider = inject<AuthProvider>();
@@ -42,7 +38,7 @@ class ApiInterceptor extends Interceptor {
       if (authProvider.isAuthenticated()) {
         // try refresh it
         final refreshResult = await authService.refresh();
-        if(refreshResult) {
+        if (refreshResult) {
           // Re-Request when refresh succeed
           var response = await dio.request(
             err.requestOptions.path,
@@ -56,10 +52,12 @@ class ApiInterceptor extends Interceptor {
           return handler.resolve(response);
         }
       }
-    } else{
-      if(err.response != null) {
+    } else {
+      if (err.response != null) {
         final errorBody = GenericError.fromJson(err.response!.data);
-        BaseAction.errorSnackBar(message: errorBody.message, margin: EdgeInsets.only(top: 20, left: 12, right: 12));
+        BaseAction.errorSnackBar(
+            message: errorBody.message,
+            margin: EdgeInsets.only(top: 20, left: 12, right: 12));
       }
       log(err.response?.data?.toString() ?? 'unknown dio error');
     }

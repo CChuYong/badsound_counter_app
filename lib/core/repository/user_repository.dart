@@ -24,7 +24,7 @@ class UserRepository {
 
   Future<User> getCachedMe() async {
     final cachedMe = userStore.getMe();
-    if(cachedMe != null) return cachedMe;
+    if (cachedMe != null) return cachedMe;
 
     final retrievedMe = await getMe();
     userStore.setMe(retrievedMe);
@@ -41,10 +41,15 @@ class UserRepository {
 
   Future<User> getUserOrPull(String userId) async {
     final cachedUser = userStore.getUser(userId);
-    if(cachedUser != null) return cachedUser;
+    if (cachedUser != null) return cachedUser;
 
     final pulledUser = await api.getUserById(userId);
-    final user = User(userId: pulledUser.id, email: pulledUser.email, nickname: pulledUser.nickname, createdAtTs: pulledUser.createdAtTs, profileImgUrl: pulledUser.profileImgUrl);
+    final user = User(
+        userId: pulledUser.id,
+        email: pulledUser.email,
+        nickname: pulledUser.nickname,
+        createdAtTs: pulledUser.createdAtTs,
+        profileImgUrl: pulledUser.profileImgUrl);
     userStore.save(user);
     return user;
   }

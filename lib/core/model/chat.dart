@@ -9,5 +9,14 @@ class Chat {
   final int violentPrice;
 
   final int createdAtTs;
-  Chat(this.messageId, this.roomId, this.content, this.senderId, this.senderNickname, this.senderProfileImg, this.violentPrice, this.createdAtTs);
+
+  Chat(
+      this.messageId,
+      this.roomId,
+      this.content,
+      this.senderId,
+      this.senderNickname,
+      this.senderProfileImg,
+      this.violentPrice,
+      this.createdAtTs);
 }

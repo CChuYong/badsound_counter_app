@@ -17,6 +17,7 @@ class ChatRequest {
   final String content;
 
   ChatRequest(this.violentId, this.speakerId, this.catcherId, this.content);
+
   factory ChatRequest.fromJson(Map<String, dynamic> json) =>
       _$ChatRequestFromJson(json);
 

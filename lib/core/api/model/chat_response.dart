@@ -23,7 +23,8 @@ class ChatResponse {
   @JsonKey(name: 'createdAtTs')
   final int createdAtTs;
 
-  ChatResponse(this.messageId, this.roomId, this.content, this.violentId, this.violentPrice, this.speakerId, this.catcherId, this.createdAtTs);
+  ChatResponse(this.messageId, this.roomId, this.content, this.violentId,
+      this.violentPrice, this.speakerId, this.catcherId, this.createdAtTs);
 
   factory ChatResponse.fromJson(Map<String, dynamic> json) =>
       _$ChatResponseFromJson(json);

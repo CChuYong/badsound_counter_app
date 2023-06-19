@@ -11,7 +11,10 @@ import 'package:badsound_counter_app/core/repository/user_repository.dart';
 import 'package:badsound_counter_app/core/state/push_store.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:badsound_counter_app/view/feature/chat_screen/chat_screen.dart';
+import 'package:badsound_counter_app/view/feature/chat_screen/chat_speaker_selector_screen.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import 'chat_screen_state.dart';
 
@@ -104,5 +107,10 @@ class ChatScreenAction
     textController.text = '';
     await openAPI.sendMessage(roomResponse.roomId, chat);
     //await updateChat();
+  }
+
+  void onTapChangeSpeaker() async {
+    final users = await openAPI.getUsersInRoom(roomResponse.roomId);
+    Get.to(() => ChatSpeakerSelectorScreen(users));
   }
 }

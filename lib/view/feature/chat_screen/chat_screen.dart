@@ -93,6 +93,8 @@ class ChatScreen
                 Positioned(
                   left: 5.sp,
                   top: 5.sp,
+                  child: GestureDetector(
+                    onTap: action.onTapChangeSpeaker,
                   child: Container(
                     width: 30.sp,
                     height: 30.sp,
@@ -100,7 +102,7 @@ class ChatScreen
                       color: BaseColor.warmGray400,
                       shape: BoxShape.circle,
                     ),
-                  ),
+                  )),
                 )
               ],
             ),

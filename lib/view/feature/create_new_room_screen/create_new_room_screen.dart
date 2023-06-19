@@ -30,6 +30,7 @@ class CreateNewRoomScreen extends BaseView<CreateNewRoomScreen,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             BaseTopBar('방 생성하기', border: null),
+            Expanded(child:
             Padding(
               padding: EdgeInsets.only(left: 10.sp, right: 10.sp, top: 10.sp),
               child: Column(
@@ -46,14 +47,18 @@ class CreateNewRoomScreen extends BaseView<CreateNewRoomScreen,
                       ),
                     ),
                   ),
-                  SizedBox(height: 12.sp),
+                  SizedBox(height: 16.sp),
                   TitleTextBox('방 제목',
                       hint: '여기에 방 제목을 입력하세요',
                       controller: action.roomTitleController),
                   SizedBox(height: 12.sp),
-                  GrayRoundedButton('생성하기', onTap: action.createRoom)
                 ],
               ),
+            )
+            ),
+            Padding(
+                padding: EdgeInsets.only(left: 10.sp, right: 10.sp),
+              child: GrayRoundedButton('생성하기', onTap: action.createRoom),
             ),
           ],
         ),

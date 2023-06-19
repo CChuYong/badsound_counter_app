@@ -62,6 +62,9 @@ abstract class OpenAPI {
     @Query("baseId") String baseId,
   );
 
+  @GET('/rooms/{roomId}/users')
+  Future<List<MeResponse>> getUsersInRoom(@Path() String roomId);
+
   @POST('/rooms/{roomId}/messages')
   Future<ChatResponse> sendMessage(
       @Path() String roomId, @Body() ChatRequest request);

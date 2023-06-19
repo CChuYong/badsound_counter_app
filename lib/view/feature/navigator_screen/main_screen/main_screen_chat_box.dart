@@ -141,18 +141,18 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                             ),
                           ),
                         ),
-                        Positioned(
-                          bottom: 3.sp,
-                          right: 3.sp,
-                          child: Container(
-                            width: 10.sp,
-                            height: 10.sp,
-                            decoration: const BoxDecoration(
-                              color: BaseColor.defaultGreen,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                        )
+                        // Positioned(
+                        //   bottom: 3.sp,
+                        //   right: 3.sp,
+                        //   child: Container(
+                        //     width: 10.sp,
+                        //     height: 10.sp,
+                        //     decoration: const BoxDecoration(
+                        //       color: BaseColor.defaultGreen,
+                        //       shape: BoxShape.circle,
+                        //     ),
+                        //   ),
+                        // )
                       ],
                     ),
                     SizedBox(width: 10.sp),

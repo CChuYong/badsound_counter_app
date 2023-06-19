@@ -16,12 +16,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../../core/api/model/me_response.dart';
 import 'chat_screen_state.dart';
 
 class ChatScreenAction
     extends BaseAction<ChatScreen, ChatScreenAction, ChatScreenState> {
   ChatScreenAction(this.roomResponse, List<Chat> initialMessages)
-      : super(ChatScreenState(initialMessages));
+      : super(ChatScreenState(initialMessages, null));
 
   final RoomDetailResponse roomResponse;
   final OpenAPI openAPI = inject<OpenAPI>();
@@ -111,6 +112,12 @@ class ChatScreenAction
 
   void onTapChangeSpeaker() async {
     final users = await openAPI.getUsersInRoom(roomResponse.roomId);
-    Get.to(() => ChatSpeakerSelectorScreen(users));
+    Get.to(() => ChatSpeakerSelectorScreen(users, this));
+  }
+
+  void updateSpeaker(MeResponse user) {
+    setState(() {
+      state.speaker = user;
+    });
   }
 }

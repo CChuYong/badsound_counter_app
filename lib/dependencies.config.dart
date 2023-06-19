@@ -14,7 +14,7 @@ import 'package:get_it/get_it.dart';
 final inject = GetIt.instance;
 
 Future<void> init() async {
-  final dio = Dio();
+  final dio = Dio(BaseOptions(baseUrl: 'https://bsc.chuyong.kr/app'));
   final client = OpenAPI(dio);
 
   inject.registerSingleton(dio);

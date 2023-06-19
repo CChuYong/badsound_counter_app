@@ -98,9 +98,10 @@ class ChatScreen
                   child: Container(
                     width: 30.sp,
                     height: 30.sp,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: BaseColor.warmGray400,
                       shape: BoxShape.circle,
+                      image: action.state.speaker != null ? DecorationImage(image: NetworkImage(action.state.speaker!.profileImgUrl)) : null
                     ),
                   )),
                 )

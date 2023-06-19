@@ -13,7 +13,7 @@ class _OpenAPI implements OpenAPI {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://bsc.bearus.co/app';
+    baseUrl ??= 'https://bsc.chuyong.kr/app';
   }
 
   final Dio _dio;

@@ -16,7 +16,7 @@ import 'model/refresh_request.dart';
 
 part 'open_api.g.dart';
 
-@RestApi(baseUrl: 'https://bsc.bearus.co/app')
+@RestApi(baseUrl: 'https://bsc.chuyong.kr/app')
 abstract class OpenAPI {
   factory OpenAPI(Dio dio, {String baseUrl}) = _OpenAPI;
 

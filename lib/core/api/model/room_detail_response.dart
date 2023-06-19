@@ -16,9 +16,11 @@ class RoomDetailResponse {
   final int lastMessageAtTs;
   @JsonKey(name: 'unreadMessageCount')
   final int unreadMessageCount;
+  @JsonKey(name: 'roomImageUrl')
+  final String roomImageUrl;
 
   RoomDetailResponse(this.roomId, this.roomName, this.ownerId, this.createdAtTs,
-      this.lastMessageAtTs, this.unreadMessageCount);
+      this.lastMessageAtTs, this.unreadMessageCount, this.roomImageUrl);
 
   factory RoomDetailResponse.fromJson(Map<String, dynamic> json) =>
       _$RoomDetailResponseFromJson(json);

@@ -26,7 +26,8 @@ class MainPageChatBox extends BaseView<MainPageChatBox, MainPageChatBoxAction,
                   e.roomName,
                   DateParser.lastMessageFormat(e.lastMessageAtTs),
                   e.unreadMessageCount,
-                  () => action.openChatRoom(e)),
+                  () => action.openChatRoom(e),
+                  e.roomImageUrl),
               SizedBox(height: 13.sp)
             ])
         .flattened
@@ -83,12 +84,13 @@ class MainPageChatBox extends BaseView<MainPageChatBox, MainPageChatBoxAction,
 
 class MainPageChatBoxElements extends StatefulWidget {
   const MainPageChatBoxElements(
-      this.roomName, this.lastTime, this.unreadMessageCount, this.onTap,
+      this.roomName, this.lastTime, this.unreadMessageCount, this.onTap, this.roomImageUrl,
       {super.key});
 
   final String roomName;
   final String lastTime;
   final int unreadMessageCount;
+  final String roomImageUrl;
   final Function() onTap;
 
   @override
@@ -130,9 +132,13 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                         Container(
                           width: 46.sp,
                           height: 46.sp,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: BaseColor.warmGray700,
                             shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: NetworkImage(widget.roomImageUrl),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                         Positioned(

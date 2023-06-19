@@ -14,6 +14,7 @@ RoomDetailResponse _$RoomDetailResponseFromJson(Map<String, dynamic> json) =>
       json['createdAtTs'] as int,
       json['lastMessageAtTs'] as int,
       json['unreadMessageCount'] as int,
+      json['roomImageUrl'] as String,
     );
 
 Map<String, dynamic> _$RoomDetailResponseToJson(RoomDetailResponse instance) =>
@@ -24,4 +25,5 @@ Map<String, dynamic> _$RoomDetailResponseToJson(RoomDetailResponse instance) =>
       'createdAtTs': instance.createdAtTs,
       'lastMessageAtTs': instance.lastMessageAtTs,
       'unreadMessageCount': instance.unreadMessageCount,
+      'roomImageUrl': instance.roomImageUrl,
     };

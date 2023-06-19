@@ -11,6 +11,7 @@ RoomResponse _$RoomResponseFromJson(Map<String, dynamic> json) => RoomResponse(
       json['roomName'] as String,
       json['ownerId'] as String,
       json['createdAtTs'] as int,
+      json['roomImageUrl'] as String,
     );
 
 Map<String, dynamic> _$RoomResponseToJson(RoomResponse instance) =>
@@ -19,4 +20,5 @@ Map<String, dynamic> _$RoomResponseToJson(RoomResponse instance) =>
       'roomName': instance.roomName,
       'ownerId': instance.ownerId,
       'createdAtTs': instance.createdAtTs,
+      'roomImageUrl': instance.roomImageUrl,
     };

@@ -5,11 +5,9 @@
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Image Selection</string>
+	<string>이미지 업로드</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Image Selection</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Image Selection</string>
+	<string>이미지 업로드</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

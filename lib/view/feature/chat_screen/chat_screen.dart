@@ -68,7 +68,7 @@ class ChatScreen
                 TextField(
                   controller: action.textController,
                   decoration: InputDecoration(
-                      hintText: "개소리 입력하기...",
+                      hintText: "${action.state.speaker?.nickname ?? ''}님의 나쁜말 입력하기...",
                       contentPadding:
                           EdgeInsets.fromLTRB(42.sp, 0.sp, 5.sp, 0.sp),
                       fillColor: BaseColor.warmGray50,
@@ -76,8 +76,10 @@ class ChatScreen
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(24.sp),
                           borderSide: BorderSide(
+                            color: BaseColor.warmGray400,
                             width: 1.sp,
-                          ))),
+                          ))
+                  ),
                   style:
                       TextStyle(color: BaseColor.warmGray700, fontSize: 12.sp),
                 ),
@@ -102,6 +104,7 @@ class ChatScreen
                     decoration: BoxDecoration(
                       color: BaseColor.warmGray400,
                       shape: BoxShape.circle,
+                      border: Border.all(color: BaseColor.warmGray600),
                       image: action.state.speaker != null ? DecorationImage(image: CachedNetworkImageProvider(action.state.speaker!.profileImgUrl)) : null
                     ),
                   )),

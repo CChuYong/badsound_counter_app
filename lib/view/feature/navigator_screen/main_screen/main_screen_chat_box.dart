@@ -5,21 +5,18 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/framework/base_child_view.dart';
 import '../../../../presenter/feature/main_screen/main_screen_chat_box_store.dart';
+import '../../../../presenter/feature/main_screen/main_screen_store.dart';
 import '../../../component/touchableopacity.dart';
 import '../../../designsystem/theme/base_color.dart';
+import 'main_screen.dart';
 
-class MainPageChatBox extends BaseView<MainPageChatBox, MainPageChatBoxAction,
-    MainPageChatBoxState> {
-  const MainPageChatBox({super.key});
-
+class MainPageChatBox extends BaseChildView<MainPage, MainScreenAction, MainScreenState>{
   @override
-  MainPageChatBoxAction initAction() => MainPageChatBoxAction();
-
-  @override
-  Widget render(BuildContext context, MainPageChatBoxAction action,
-      MainPageChatBoxState state) {
-    final rooms = state.rooms
+  Widget render(BuildContext context, MainScreenAction action,
+      MainScreenState state) {
+    final rooms = state.roomTreeSet
         .map((e) => [
               MainPageChatBoxElements(
                   e.roomName,

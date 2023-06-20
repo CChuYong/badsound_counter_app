@@ -26,4 +26,15 @@ class RoomDetailResponse {
       _$RoomDetailResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$RoomDetailResponseToJson(this);
+
+  @override
+  int get hashCode => roomId.hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    if(other is RoomDetailResponse) {
+      return other.roomId == roomId;
+    }
+    return false;
+  }
 }

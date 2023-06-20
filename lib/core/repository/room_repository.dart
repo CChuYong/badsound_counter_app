@@ -12,6 +12,13 @@ class RoomRepository {
     open();
   }
 
+  Future<void> truncate() async {
+    roomCache.clear();
+    database.execute('''
+      TRUNCATE TABLE $tableName
+    ''');
+  }
+
   Future<void> open() async {
     final dbPath = await getDatabasesPath();
     String path = join(dbPath, 'room.db');

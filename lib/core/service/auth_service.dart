@@ -1,5 +1,7 @@
 import 'package:badsound_counter_app/core/api/model/device_request.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
+import 'package:badsound_counter_app/core/repository/message_repository.dart';
+import 'package:badsound_counter_app/core/repository/room_repository.dart';
 import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:badsound_counter_app/core/state/push_store.dart';
 import 'package:badsound_counter_app/core/util/device_info_util.dart';
@@ -26,6 +28,10 @@ class AuthService {
     } else {
       print("Push not authorized!");
     }
+
+    //Phase: Clear all repositories
+    await inject<RoomRepository>().truncate();
+    await inject<MessageRepository>().truncate();
 
     //Phase 2: Navigate Page
     final currentRoute = Get.currentRoute;

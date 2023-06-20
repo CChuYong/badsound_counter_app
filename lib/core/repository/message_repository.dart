@@ -10,6 +10,12 @@ class MessageRepository {
     open();
   }
 
+  Future<void> truncate() async {
+    database.execute('''
+      TRUNCATE TABLE $tableName
+    ''');
+  }
+
   Future<void> open() async {
     final dbPath = await getDatabasesPath();
     String path = join(dbPath, 'messages.db');

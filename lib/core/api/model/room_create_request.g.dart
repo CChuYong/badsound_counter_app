@@ -9,9 +9,11 @@ part of 'room_create_request.dart';
 RoomCreateRequest _$RoomCreateRequestFromJson(Map<String, dynamic> json) =>
     RoomCreateRequest(
       json['roomName'] as String,
+      json['roomImageUrl'] as String,
     );
 
 Map<String, dynamic> _$RoomCreateRequestToJson(RoomCreateRequest instance) =>
     <String, dynamic>{
       'roomName': instance.roomName,
+      'roomImageUrl': instance.roomImageUrl,
     };

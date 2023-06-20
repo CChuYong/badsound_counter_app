@@ -35,15 +35,18 @@ class CreateNewRoomScreen extends BaseView<CreateNewRoomScreen,
               padding: EdgeInsets.only(left: 10.sp, right: 10.sp, top: 10.sp),
               child: Column(
                 children: [
-                  Container(
-                    width: 82.sp,
-                    height: 82.sp,
-                    decoration: BoxDecoration(
-                      color: BaseColor.warmGray700,
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: NetworkImage(state.profileImageUrl),
-                        fit: BoxFit.fitWidth,
+                  GestureDetector(
+                    onTap: action.uploadImage,
+                    child: Container(
+                      width: 82.sp,
+                      height: 82.sp,
+                      decoration: BoxDecoration(
+                        color: BaseColor.warmGray700,
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: NetworkImage(state.profileImageUrl),
+                          fit: BoxFit.fitWidth,
+                        ),
                       ),
                     ),
                   ),

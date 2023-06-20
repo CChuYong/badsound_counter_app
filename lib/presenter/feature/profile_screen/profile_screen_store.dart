@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:badsound_counter_app/core/api/model/upload_request.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
 import 'package:badsound_counter_app/core/framework/state_store.dart';
@@ -14,6 +15,9 @@ import 'package:badsound_counter_app/view/feature/navigator_screen/profile_scree
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:dio/dio.dart';
+import 'package:mime/mime.dart';
 
 import '../../../core/api/model/user_nickname_request.dart';
 import '../../../view/designsystem/theme/base_color.dart';
@@ -24,6 +28,7 @@ class ProfileScreenAction
   final AuthService authService = inject<AuthService>();
   final WebViewService webViewService = inject<WebViewService>();
   final OpenAPI openAPI = inject<OpenAPI>();
+  final Dio dio = inject<Dio>();
 
   ProfileScreenAction()
       : super(StateStore.loadState(ProfileScreenState)
@@ -43,6 +48,25 @@ class ProfileScreenAction
         retrievedData.nickname,
         DateParser.timeStampAsDate(retrievedData.createdAtTs),
         retrievedData.profileImgUrl);
+  }
+
+  void onTapSelectImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+
+    final mimeType = lookupMimeType(image.path);
+    final imageRequest = await openAPI.requestProfileImageUpload();
+
+    final bytes = await image.readAsBytes();
+    await dio.request(imageRequest.uploadUrl, data: bytes,
+        options: Options(method: 'PUT', headers: {'Content-Type': mimeType}));
+
+    final newMe = await openAPI.updateProfileImage(UploadRequest(imageRequest.downloadUrl));
+    infoSnackBar(message: '업로드에 성공했어요!');
+    setState(() {
+      state.profileImageUrl = newMe.profileImgUrl;
+    });
   }
 
   void updateNickname() {

@@ -41,18 +41,21 @@ class ProfilePage
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  width: 82.sp,
-                  height: 82.sp,
-                  decoration: BoxDecoration(
-                    color: BaseColor.warmGray700,
-                    shape: BoxShape.circle,
-                    image: state.profileImageUrl != ''
-                        ? DecorationImage(
-                            image: NetworkImage(state.profileImageUrl),
-                            fit: BoxFit.fitWidth,
-                          )
-                        : null,
+                GestureDetector(
+                  onTap: action.onTapSelectImage,
+                  child: Container(
+                    width: 82.sp,
+                    height: 82.sp,
+                    decoration: BoxDecoration(
+                      color: BaseColor.warmGray700,
+                      shape: BoxShape.circle,
+                      image: state.profileImageUrl != ''
+                          ? DecorationImage(
+                        image: NetworkImage(state.profileImageUrl),
+                        fit: BoxFit.fitWidth,
+                      )
+                          : null,
+                    ),
                   ),
                 ),
                 SizedBox(height: 6.sp),

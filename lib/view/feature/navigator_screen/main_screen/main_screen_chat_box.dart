@@ -1,5 +1,6 @@
 import 'package:badsound_counter_app/core/framework/base_view.dart';
 import 'package:badsound_counter_app/core/util/date_parser.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -135,7 +136,7 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                             color: BaseColor.warmGray700,
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                              image: NetworkImage(widget.roomImageUrl),
+                              image: CachedNetworkImageProvider(widget.roomImageUrl),
                               fit: BoxFit.cover,
                             ),
                           ),

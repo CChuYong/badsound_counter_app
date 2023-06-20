@@ -2,6 +2,7 @@ import 'package:badsound_counter_app/core/api/model/room_detail_response.dart';
 import 'package:badsound_counter_app/core/framework/base_view.dart';
 import 'package:badsound_counter_app/view/designsystem/component/base_top_bar.dart';
 import 'package:badsound_counter_app/view/feature/chat_screen/chat_box.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -101,7 +102,7 @@ class ChatScreen
                     decoration: BoxDecoration(
                       color: BaseColor.warmGray400,
                       shape: BoxShape.circle,
-                      image: action.state.speaker != null ? DecorationImage(image: NetworkImage(action.state.speaker!.profileImgUrl)) : null
+                      image: action.state.speaker != null ? DecorationImage(image: CachedNetworkImageProvider(action.state.speaker!.profileImgUrl)) : null
                     ),
                   )),
                 )

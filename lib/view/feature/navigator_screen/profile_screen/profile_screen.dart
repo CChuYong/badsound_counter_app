@@ -3,6 +3,7 @@ import 'package:badsound_counter_app/presenter/feature/profile_screen/profile_sc
 import 'package:badsound_counter_app/view/component/touchableopacity.dart';
 import 'package:badsound_counter_app/view/designsystem/component/safe_area_with_padding.dart';
 import 'package:badsound_counter_app/view/designsystem/theme/base_icon.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -50,7 +51,7 @@ class ProfilePage
                       shape: BoxShape.circle,
                       image: state.profileImageUrl != ''
                           ? DecorationImage(
-                        image: NetworkImage(state.profileImageUrl),
+                        image: CachedNetworkImageProvider(state.profileImageUrl),
                         fit: BoxFit.fitWidth,
                       )
                           : null,

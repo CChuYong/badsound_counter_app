@@ -3,6 +3,7 @@ import 'package:badsound_counter_app/presenter/feature/create_new_room_screen/cr
 import 'package:badsound_counter_app/view/designsystem/component/base_top_bar.dart';
 import 'package:badsound_counter_app/view/designsystem/component/gray_rounded_button.dart';
 import 'package:badsound_counter_app/view/designsystem/component/title_text_box.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -44,7 +45,7 @@ class CreateNewRoomScreen extends BaseView<CreateNewRoomScreen,
                         color: BaseColor.warmGray700,
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: NetworkImage(state.profileImageUrl),
+                          image: CachedNetworkImageProvider(state.profileImageUrl),
                           fit: BoxFit.fitWidth,
                         ),
                       ),

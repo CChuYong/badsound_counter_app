@@ -2,6 +2,7 @@ import 'package:badsound_counter_app/core/framework/base_view.dart';
 import 'package:badsound_counter_app/presenter/feature/chat_screen/chat_speaker_selector_screen_store.dart';
 import 'package:badsound_counter_app/view/component/touchableopacity.dart';
 import 'package:badsound_counter_app/view/designsystem/theme/base_icon.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -72,7 +73,7 @@ class ChatSpeakerSelectorScreen extends BaseView<ChatSpeakerSelectorScreen, Chat
                   decoration: BoxDecoration(
                       color: BaseColor.warmGray400,
                       shape: BoxShape.circle,
-                      image: DecorationImage(image: NetworkImage(user.profileImgUrl))
+                      image: DecorationImage(image: CachedNetworkImageProvider(user.profileImgUrl))
                   ),
                 ),
                 SizedBox(width: 10.sp),

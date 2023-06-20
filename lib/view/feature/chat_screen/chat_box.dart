@@ -2,6 +2,7 @@ import 'package:badsound_counter_app/core/model/chat.dart';
 import 'package:badsound_counter_app/core/util/currency_parser.dart';
 import 'package:badsound_counter_app/core/util/date_parser.dart';
 import 'package:badsound_counter_app/view/designsystem/theme/base_color.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -24,7 +25,7 @@ class ChatBox extends StatelessWidget {
                 color: BaseColor.warmGray300,
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: NetworkImage(chat.senderProfileImg),
+                  image: CachedNetworkImageProvider(chat.senderProfileImg),
                   fit: BoxFit.fill,
                 ),
               ),

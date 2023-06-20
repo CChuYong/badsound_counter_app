@@ -12,6 +12,7 @@ abstract class BaseView<V extends BaseView<V, A, S>,
   @override
   Widget build(BuildContext context) {
     A action = initAction();
+    print("Build called ${runtimeType.toString()}");
     return GetBuilder<A>(
       init: action,
       dispose: (State state) => action.dispose(),

@@ -1,19 +1,15 @@
-import 'package:badsound_counter_app/core/framework/base_view.dart';
+import 'package:badsound_counter_app/core/framework/base_child_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../presenter/feature/main_screen/main_screen_stat_box_state.dart';
-import '../../../../presenter/feature/main_screen/main_screen_stat_box_store.dart';
+import '../../../../presenter/feature/main_screen/main_screen_store.dart';
 import '../../../designsystem/theme/base_color.dart';
+import 'main_screen.dart';
 
-class MainPageStatBox extends BaseView<MainPageStatBox, MainPageStatBoxAction,
-    MainPageStatBoxState> {
-  @override
-  MainPageStatBoxAction initAction() => MainPageStatBoxAction();
+class MainPageStatBox extends BaseChildView<MainPage, MainScreenAction, MainScreenState> {
 
   @override
-  Widget render(BuildContext context, MainPageStatBoxAction action,
-      MainPageStatBoxState state) {
+  Widget render(BuildContext context, MainScreenAction action,
+      MainScreenState state) {
     return GestureDetector(
       child: Container(
           padding: EdgeInsets.only(
@@ -48,7 +44,7 @@ class MainPageStatBox extends BaseView<MainPageStatBox, MainPageStatBoxAction,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        state.title,
+                        state.statBoxState.title,
                         style: TextStyle(
                           color: BaseColor.warmGray900,
                           fontSize: 12.sp,
@@ -58,7 +54,7 @@ class MainPageStatBox extends BaseView<MainPageStatBox, MainPageStatBoxAction,
                       ),
                       //SizedBox(height: 6),
                       Text(
-                        state.money,
+                        state.statBoxState.money,
                         style: TextStyle(
                           color: BaseColor.defaultGreen,
                           fontSize: 36.sp,
@@ -77,7 +73,7 @@ class MainPageStatBox extends BaseView<MainPageStatBox, MainPageStatBoxAction,
                             size: 10.sp,
                           ),
                           Text(
-                            state.subTitle,
+                            state.statBoxState.subTitle,
                             style: TextStyle(
                               color: BaseColor.warmGray400,
                               fontSize: 10.sp,

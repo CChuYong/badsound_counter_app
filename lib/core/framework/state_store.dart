@@ -14,12 +14,12 @@ class StateStore {
   }
 
   static void saveState(Type key, Map<String, dynamic> state) {
-    log('saving state with ${key.toString()}');
+    log('saving state with ${key.toString()} as ${jsonEncode(state)}');
     sharedPreferences!.setString(key.toString(), jsonEncode(state));
   }
 
   static Map<String, dynamic>? loadState(Type key) {
-    log('loading state with ${key.toString()}');
+    print('loading state with ${key.toString()}');
     final data = sharedPreferences!.getString(key.toString());
     if (data == null) return null;
     return jsonDecode(data);

@@ -42,7 +42,6 @@ class ProfilePage
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 GestureDetector(
-                  onTap: action.onTapSelectImage,
                   child: Container(
                     width: 82.sp,
                     height: 82.sp,
@@ -82,8 +81,7 @@ class ProfilePage
                     Row(
                       children: [
                         GraySolidButton('프로필 사진 변경',
-                            onTap: () =>
-                                {Navigator.pushNamed(context, 'splash')}),
+                            onTap: action.onTapSelectImage),
                         SizedBox(width: 10.sp),
                         GraySolidButton('닉네임 변경', onTap: action.updateNickname),
                       ],

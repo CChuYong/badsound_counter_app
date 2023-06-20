@@ -79,4 +79,7 @@ abstract class OpenAPI {
 
   @POST('/users/profile-image')
   Future<MeResponse> updateProfileImage(@Body() UploadRequest request);
+
+  @POST('/rooms/{roomId}/profile-image')
+  Future<RoomResponse> updateRoomImage(@Path() String roomId, @Body() UploadRequest request);
 }

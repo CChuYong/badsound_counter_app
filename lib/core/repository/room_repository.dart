@@ -17,6 +17,9 @@ class RoomRepository {
     database.execute('''
       TRUNCATE TABLE $tableName
     ''');
+    database.execute('''
+      TRUNCATE TABLE ${tableName}_selected_user
+    ''');
   }
 
   Future<void> open() async {
@@ -40,6 +43,13 @@ class RoomRepository {
       )
     ''');
 
+    database.execute('''
+      CREATE TABLE IF NOT EXISTS ${tableName}_selected_user (
+        roomId TEXT PRIMARY KEY,
+        userId TEXT NOT NULL
+      )
+    ''');
+
     final currentRooms = await getRooms();
     currentRooms.forEach((element) {
       roomCache[element.roomId] = element;
@@ -48,6 +58,15 @@ class RoomRepository {
 
   List<RoomDetailResponse> getCachedRooms() {
     return roomCache.values.toList();
+  }
+
+  Future<String?> getSpeakerIdOfRoom(String roomID) async {
+    final result = await database.rawQuery('SELECT userId FROM ${tableName}_selected_user WHERE roomId = ?', [roomID]);
+    if (result.isNotEmpty) {
+      return result[0]["userId"] as String;
+    } else {
+      return null;
+    }
   }
 
   Future<RoomDetailResponse?> getRoomById(String roomId) async {
@@ -71,6 +90,15 @@ class RoomRepository {
       tableName,
       roomDetailResponse.toJson(),
       conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<void> setSpeakerIdOfRoom(String roomId, String speakerId) async {
+    await database.insert('${tableName}_selected_user', {
+      'roomId': roomId,
+      'userId': speakerId,
+    },
+      conflictAlgorithm: ConflictAlgorithm.replace
     );
   }
 }

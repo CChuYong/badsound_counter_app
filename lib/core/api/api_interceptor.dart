@@ -53,13 +53,13 @@ class ApiInterceptor extends Interceptor {
         }
       }
     } else {
+      log(err.response?.data?.toString() ?? 'unknown dio error');
       if (err.response != null) {
         final errorBody = GenericError.fromJson(err.response!.data);
         BaseAction.errorSnackBar(
             message: errorBody.message,
             margin: EdgeInsets.only(top: 20, left: 12, right: 12));
       }
-      log(err.response?.data?.toString() ?? 'unknown dio error');
     }
     return handler.next(err);
   }

@@ -6,9 +6,12 @@ import 'package:badsound_counter_app/core/api/model/room_detail_response.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
 import 'package:badsound_counter_app/core/model/chat.dart';
+import 'package:badsound_counter_app/core/model/user.dart';
 import 'package:badsound_counter_app/core/repository/message_repository.dart';
+import 'package:badsound_counter_app/core/repository/room_repository.dart';
 import 'package:badsound_counter_app/core/repository/user_repository.dart';
 import 'package:badsound_counter_app/core/state/push_store.dart';
+import 'package:badsound_counter_app/core/util/extension.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:badsound_counter_app/view/feature/chat_screen/chat_screen.dart';
 import 'package:badsound_counter_app/view/feature/chat_screen/chat_speaker_selector_screen.dart';
@@ -28,6 +31,7 @@ class ChatScreenAction
   final OpenAPI openAPI = inject<OpenAPI>();
   final UserRepository userRepository = inject<UserRepository>();
   final PushStore pushStore = inject<PushStore>();
+  final RoomRepository roomRepository = inject<RoomRepository>();
   final MessageRepository messageRepository = inject<MessageRepository>();
 
   final textController = TextEditingController();
@@ -35,6 +39,10 @@ class ChatScreenAction
   @override
   Future<ChatScreenState> initState() async {
     print("Before pull, initial message size : ${state.chatTreeSet.length}");
+    final userId = await roomRepository.getSpeakerIdOfRoom(roomResponse.roomId);
+    final speaker = await (userId?.let(userRepository.getUserOrPull) ?? userRepository.getMe());
+    state.speaker = speaker;
+
     await updateChat();
     pushStore.chatMessageConsumer = onMessageReceived;
     return state;
@@ -43,6 +51,9 @@ class ChatScreenAction
   @override
   void dispose() {
     pushStore.chatMessageConsumer = null;
+    if(state.speaker != null) {
+      roomRepository.setSpeakerIdOfRoom(roomResponse.roomId, state.speaker!.userId);
+    }
 
     for (var element in state.chatTreeSet) {
       messageRepository.persist(element);
@@ -115,7 +126,7 @@ class ChatScreenAction
     Get.to(() => ChatSpeakerSelectorScreen(users, this));
   }
 
-  void updateSpeaker(MeResponse user) {
+  void updateSpeaker(User user) {
     setState(() {
       state.speaker = user;
     });

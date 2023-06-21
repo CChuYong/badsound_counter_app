@@ -1,4 +1,6 @@
 import 'package:badsound_counter_app/core/framework/base_view.dart';
+import 'package:badsound_counter_app/core/model/room.dart';
+import 'package:badsound_counter_app/core/util/currency_parser.dart';
 import 'package:badsound_counter_app/core/util/date_parser.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
@@ -18,11 +20,8 @@ class MainPageChatBox extends BaseChildView<MainPage, MainScreenAction, MainScre
     final rooms = state.roomTreeSet
         .map((e) => [
               MainPageChatBoxElements(
-                  e.roomName,
-                  DateParser.lastMessageFormat(e.lastMessageAtTs),
-                  e.unreadMessageCount,
-                  () => action.openChatRoom(e),
-                  e.roomImageUrl),
+                  e,
+                  () => action.openChatRoom(e)),
               SizedBox(height: 13.sp)
             ])
         .flattened
@@ -70,6 +69,7 @@ class MainPageChatBox extends BaseChildView<MainPage, MainScreenAction, MainScre
                 ])),
               SliverToBoxAdapter(
                   child: MainPageChatBoxAddElements(action.createNewChatBox)),
+              SliverToBoxAdapter(child: SizedBox(height: 20.sp)),
             ]),
           ),
         )
@@ -79,14 +79,13 @@ class MainPageChatBox extends BaseChildView<MainPage, MainScreenAction, MainScre
 }
 
 class MainPageChatBoxElements extends StatefulWidget {
-  const MainPageChatBoxElements(this.roomName, this.lastTime,
-      this.unreadMessageCount, this.onTap, this.roomImageUrl,
-      {super.key});
+  const MainPageChatBoxElements(this.room, this.onTap, {super.key});
 
-  final String roomName;
-  final String lastTime;
-  final int unreadMessageCount;
-  final String roomImageUrl;
+  final Room room;
+  // final String roomName;
+  // final String lastTime;
+  // final int unreadMessageCount;
+  // final String roomImageUrl;
   final Function() onTap;
 
   @override
@@ -132,7 +131,7 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                             color: BaseColor.warmGray700,
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                              image: CachedNetworkImageProvider(widget.roomImageUrl),
+                              image: CachedNetworkImageProvider(widget.room.roomImageUrl),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -156,7 +155,7 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.roomName,
+                          widget.room.roomName,
                           style: TextStyle(
                             color: BaseColor.warmGray900,
                             fontSize: 12.sp,
@@ -166,9 +165,9 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                         ),
                         SizedBox(height: 5.sp),
                         Text(
-                          '+ 28,000원',
+                          widget.room.cumulatedPrice != 0 ? CurrencyParser.formatUnsigned(widget.room.cumulatedPrice) : '',
                           style: TextStyle(
-                            color: BaseColor.defaultGreen,
+                            color: widget.room.cumulatedPrice > 0 ? BaseColor.defaultGreen : BaseColor.defaultRed,
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w700,
                             height: 1.2,
@@ -182,7 +181,7 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      widget.lastTime,
+                      DateParser.lastMessageFormat(widget.room.lastMessageAtTs),
                       style: TextStyle(
                         color: BaseColor.warmGray500,
                         fontSize: 12.sp,
@@ -191,7 +190,7 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                       ),
                     ),
                     SizedBox(height: 5.sp),
-                    if (widget.unreadMessageCount >= 1)
+                    if (widget.room.unreadMessageCount >= 1)
                       Container(
                         alignment: AlignmentDirectional.center,
                         width: 14.sp,
@@ -201,7 +200,7 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                           shape: BoxShape.circle,
                         ),
                         child: Text(
-                          widget.unreadMessageCount.toString(),
+                          widget.room.unreadMessageCount.toString(),
                           style: TextStyle(
                             color: BaseColor.warmGray50,
                             fontSize: 10.sp,

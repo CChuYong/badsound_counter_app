@@ -5,10 +5,11 @@ class Room {
   final int createdAtTs;
   final int lastMessageAtTs;
   final int unreadMessageCount;
+  final int cumulatedPrice;
   final String roomImageUrl;
 
   Room(this.roomId, this.roomName, this.ownerId, this.createdAtTs,
-      this.lastMessageAtTs, this.unreadMessageCount, this.roomImageUrl);
+      this.lastMessageAtTs, this.unreadMessageCount, this.cumulatedPrice, this.roomImageUrl);
 
   @override
   int get hashCode => roomId.hashCode;

@@ -25,7 +25,7 @@ class RoomRepository {
 
   Future<void> open() async {
     final dbPath = await getDatabasesPath();
-    String path = join(dbPath, 'room.db');
+    String path = join(dbPath, 'room_data.db');
 
     database = await openDatabase(
       path,
@@ -40,6 +40,7 @@ class RoomRepository {
         createdAtTs LONG NOT NULL,
         lastMessageAtTs LONG NOT NULL,
         unreadMessageCount INT NOT NULL,
+        cumulatedPrice INT NOT NULL,
         roomImageUrl TEXT NOT NULL
       )
     ''');
@@ -82,6 +83,7 @@ class RoomRepository {
         json['createdAtTs'] as int,
         json['lastMessageAtTs'] as int,
         json['unreadMessageCount'] as int,
+        json['cumulatedPrice'] as int,
         json['roomImageUrl'] as String,
       );
     } else {
@@ -99,6 +101,7 @@ class RoomRepository {
         json['createdAtTs'] as int,
         json['lastMessageAtTs'] as int,
         json['unreadMessageCount'] as int,
+        json['cumulatedPrice'] as int,
         json['roomImageUrl'] as String,
       );
     }).toList();
@@ -115,6 +118,7 @@ class RoomRepository {
         'createdAtTs': room.createdAtTs,
         'lastMessageAtTs': room.lastMessageAtTs,
         'unreadMessageCount': room.unreadMessageCount,
+        'cumulatedPrice': room.cumulatedPrice,
         'roomImageUrl': room.roomImageUrl,
       },
       conflictAlgorithm: ConflictAlgorithm.replace,

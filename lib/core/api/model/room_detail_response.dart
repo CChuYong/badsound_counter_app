@@ -17,11 +17,13 @@ class RoomDetailResponse {
   final int lastMessageAtTs;
   @JsonKey(name: 'unreadMessageCount')
   final int unreadMessageCount;
+  @JsonKey(name: 'cumulatedPrice')
+  final int cumulatedPrice;
   @JsonKey(name: 'roomImageUrl')
   final String roomImageUrl;
 
   RoomDetailResponse(this.roomId, this.roomName, this.ownerId, this.createdAtTs,
-      this.lastMessageAtTs, this.unreadMessageCount, this.roomImageUrl);
+      this.lastMessageAtTs, this.unreadMessageCount, this.cumulatedPrice, this.roomImageUrl);
 
   factory RoomDetailResponse.fromJson(Map<String, dynamic> json) =>
       _$RoomDetailResponseFromJson(json);
@@ -29,6 +31,6 @@ class RoomDetailResponse {
   Map<String, dynamic> toJson() => _$RoomDetailResponseToJson(this);
 
   Room toModel() {
-    return Room(roomId, roomName, ownerId, createdAtTs, lastMessageAtTs, unreadMessageCount, roomImageUrl);
+    return Room(roomId, roomName, ownerId, createdAtTs, lastMessageAtTs, unreadMessageCount, cumulatedPrice, roomImageUrl);
   }
 }

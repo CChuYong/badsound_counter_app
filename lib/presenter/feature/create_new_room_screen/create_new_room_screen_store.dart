@@ -37,6 +37,7 @@ class CreateNewRoomScreenAction extends BaseAction<CreateNewRoomScreen,
       roomResponse.createdAtTs,
       roomResponse.createdAtTs,
       0,
+      0,
       roomResponse.roomImageUrl,
     );
     openChatRoom(mockRoom);

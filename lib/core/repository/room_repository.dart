@@ -15,11 +15,11 @@ class RoomRepository {
 
   Future<void> truncate() async {
     roomCache.clear();
-    database.execute('''
-      TRUNCATE TABLE $tableName
+    await database.execute('''
+      DELETE FROM $tableName
     ''');
-    database.execute('''
-      TRUNCATE TABLE ${tableName}_selected_user
+    await database.execute('''
+      DELETE FROM ${tableName}_selected_user
     ''');
   }
 

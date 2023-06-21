@@ -103,7 +103,6 @@ class ChatScreen
       ),
     );
   }
-
   Widget buildViolent(Violent violent){
     return Column(
       children: [
@@ -136,6 +135,7 @@ class ChatScreen
       ],
     );
   }
+
 
   PreferredSizeWidget buildAppBar() {
     return AppBar(

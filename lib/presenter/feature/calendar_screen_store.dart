@@ -32,12 +32,14 @@ class SocialScreenAction extends BaseAction<SocialScreen,
   @override
   Future<SocialScreenState> initState() async {
     await updateFriends();
-    return SocialScreenState();
+    return state;
   }
 
   Future<void> updateFriends() async {
     final friends = await openAPI.getMyFriends();
-    state.friendSet.addAll(friends.map((e) => e.toModel()));
+    setState(() {
+      state.friendSet.addAll(friends.map((e) => e.toModel()));
+    });
   }
 
   Future<void> addFriend() async {

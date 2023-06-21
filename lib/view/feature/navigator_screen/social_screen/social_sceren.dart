@@ -1,6 +1,8 @@
 import 'package:badsound_counter_app/core/framework/base_view.dart';
+import 'package:badsound_counter_app/core/model/user.dart';
 import 'package:badsound_counter_app/presenter/feature/calendar_screen_store.dart';
 import 'package:badsound_counter_app/view/designsystem/component/safe_area_with_padding.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -35,6 +37,10 @@ class SocialScreen
                 triggerMode: RefreshIndicatorTriggerMode.onEdge,
                 onRefresh: action.updateFriends,
                 child: CustomScrollView(reverse: false, slivers: [
+                  SliverList(
+                      delegate: SliverChildListDelegate(state.friendSet
+                          .map(buildFriend)
+                          .toList())),
                   SliverToBoxAdapter(child: SizedBox(height: 5.sp)),
                   SliverToBoxAdapter(child: friendAddButton(action))
                 ]),
@@ -42,6 +48,71 @@ class SocialScreen
             ),
           ],
         ));
+  }
+  Widget buildFriend(User user){
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 30.sp,
+                  height: 30.sp,
+                  decoration: BoxDecoration(
+                    color: BaseColor.warmGray700,
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: CachedNetworkImageProvider(user.profileImgUrl),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10.sp),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                        user.nickname,
+                        style: TextStyle(
+                          color: BaseColor.warmGray600,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w700,
+                          height: 1.2,
+                        )
+                    ),
+                    Text(
+                        user.taggedNickname,
+                        style: TextStyle(
+                          color: BaseColor.warmGray400,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w700,
+                          height: 1.2,
+                        )
+                    )
+                  ],
+                )
+
+              ],
+            ),
+            Text(
+                'asdf',
+                style: TextStyle(
+                  color: BaseColor.warmGray600,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w700,
+                  height: 1.2,
+                )
+            )
+          ],
+        ),
+        SizedBox(
+          height: 10.sp,
+        ),
+        Divider(),
+      ],
+    );
   }
   Widget friendAddButton(SocialScreenAction action) {
     return TouchableOpacity(

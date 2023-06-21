@@ -11,8 +11,8 @@ class MessageRepository {
   }
 
   Future<void> truncate() async {
-    database.execute('''
-      TRUNCATE TABLE $tableName
+    await database.execute('''
+      DELETE FROM $tableName
     ''');
   }
 

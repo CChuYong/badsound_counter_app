@@ -60,6 +60,8 @@ class AuthService {
 
   Future<void> logout() async {
     print("Logging out..");
+    await inject<RoomRepository>().truncate();
+    await inject<MessageRepository>().truncate();
     authProvider.clearAuthentication();
     await Get.offNamed('/login');
   }

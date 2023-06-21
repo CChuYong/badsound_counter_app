@@ -1,4 +1,5 @@
 import 'package:badsound_counter_app/core/framework/base_child_view.dart';
+import 'package:badsound_counter_app/core/util/currency_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -55,9 +56,9 @@ class MainPageStatBox
                       ),
                       //SizedBox(height: 6),
                       Text(
-                        state.statBoxState.money,
+                        CurrencyParser.format(state.statBoxState.money),
                         style: TextStyle(
-                          color: BaseColor.defaultGreen,
+                          color: state.statBoxState.money > 0 ? BaseColor.defaultGreen : BaseColor.defaultRed,
                           fontSize: 36.sp,
                           fontWeight: FontWeight.w600,
                           height: 1.2,

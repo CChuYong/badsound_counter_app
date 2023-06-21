@@ -41,6 +41,18 @@ class SocialScreen
               SliverList(
                   delegate: SliverChildListDelegate(
                       state.friendSet.map(buildFriend).toList())),
+              SliverToBoxAdapter(child: SizedBox(height: 15.sp)),
+              SliverToBoxAdapter(
+                  child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Text(
+                        '내 태그: ${state.myTag}',
+                      style: TextStyle(
+                        color: BaseColor.warmGray700,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    )
+                  ])),
               SliverToBoxAdapter(child: SizedBox(height: 5.sp)),
               SliverToBoxAdapter(child: friendAddButton(action))
             ]),

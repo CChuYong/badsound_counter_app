@@ -56,6 +56,7 @@ class ChatScreenAction
   Future<void> reloadViolents() async {
     final violents = await openAPI.getRoomViolents(roomResponse.roomId);
     setState(() {
+      state.violentSet.clear();
       state.violentSet.addAll(violents.map((e) => Violent(
           id: e.violentId,
           name: e.name,

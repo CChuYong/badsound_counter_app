@@ -35,7 +35,7 @@ class UserRepository {
   Future<MainPageStatBoxState> getDashboard() async {
     final data = await api.getDashboard();
     return MainPageStatBoxState(
-        CurrencyParser.format(data.weeklyPrice),
+        data.weeklyPrice,
         '${data.currentMonth}월 ${data.currentWeek}주차 합산',
         '${data.currentMonth}/${data.weekStartDay} ~ ${data.currentMonth}/${data.weekEndDay} 사이의 내역이에요!');
   }

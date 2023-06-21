@@ -9,7 +9,7 @@ part of 'main_screen_stat_box_state.dart';
 MainPageStatBoxState _$MainPageStatBoxStateFromJson(
         Map<String, dynamic> json) =>
     MainPageStatBoxState(
-      json['money'] as String,
+      json['money'] as int,
       json['since'] as String,
       json['subTitle'] as String,
     );

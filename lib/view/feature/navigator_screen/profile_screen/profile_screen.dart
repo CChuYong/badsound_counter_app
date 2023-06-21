@@ -76,14 +76,6 @@ class ProfilePage
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                Text(
-                  state.taggedNickname,
-                  style: TextStyle(
-                    color: BaseColor.warmGray700,
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
                 SizedBox(height: 20.sp),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,

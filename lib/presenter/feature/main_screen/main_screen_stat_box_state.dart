@@ -5,7 +5,7 @@ part 'main_screen_stat_box_state.g.dart';
 @JsonSerializable()
 class MainPageStatBoxState {
   @JsonKey(name: 'money')
-  String money;
+  int money;
 
   @JsonKey(name: 'since')
   String title;

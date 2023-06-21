@@ -6,8 +6,10 @@ class CurrencyParser {
   static String format(int value) {
     final String formattedCurrency =
         value == 0 ? '' : (value < 0 ? '- ' : '+ ');
-    return formattedCurrency + formatCurrency.format(value);
+    return formattedCurrency + formatCurrency.format(abs(value));
   }
+
+  static int abs(int input) => input < 0 ? input * -1 : input;
 
   static String formatUnsigned(int value) {
     return formatCurrency.format(value);

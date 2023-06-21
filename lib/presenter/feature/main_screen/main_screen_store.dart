@@ -32,8 +32,8 @@ class MainScreenAction
   MainScreenAction()
       : super(MainScreenState(
             StateStore.loadState(MainPageStatBoxState)
-                    ?.let(MainPageStatBoxState.fromJson) ??
-                MainPageStatBoxState('...', '', ''),
+                    ?.letCatching(MainPageStatBoxState.fromJson) ??
+                MainPageStatBoxState(0, '', ''),
             inject<RoomRepository>().getCachedRooms()));
 
   final UserRepository userRepository = inject<UserRepository>();
@@ -65,6 +65,7 @@ class MainScreenAction
   Future<void> pullRooms() async {
     final data = await openAPI.getMyRooms();
     setState(() {
+      state.roomTreeSet.clear();
       state.roomTreeSet.addAll(data.map((e) => e.toModel()));
     });
   }

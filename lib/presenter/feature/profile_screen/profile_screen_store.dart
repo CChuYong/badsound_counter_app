@@ -32,7 +32,7 @@ class ProfileScreenAction
 
   ProfileScreenAction()
       : super(StateStore.loadState(ProfileScreenState)
-                ?.let(ProfileScreenState.fromJson) ??
+                ?.letCatching(ProfileScreenState.fromJson) ??
             ProfileScreenState('', '', '', '#'));
 
   @override

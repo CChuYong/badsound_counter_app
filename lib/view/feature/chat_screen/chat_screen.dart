@@ -114,13 +114,20 @@ class ChatScreen
                   fontWeight: FontWeight.w700,
                   height: 1.2,
                 )),
-            Text(CurrencyParser.formatUnsigned(violent.price),
-                style: TextStyle(
-                  color: BaseColor.warmGray600,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w700,
-                  height: 1.2,
-                ))
+            Row(
+              children: [
+                Text(CurrencyParser.formatUnsigned(violent.price),
+                    style: TextStyle(
+                      color: BaseColor.warmGray600,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w700,
+                      height: 1.2,
+                    )),
+                SizedBox(width: 3.sp),
+                Icon(Icons.delete_forever, color: BaseColor.defaultRed, size: 17.sp)
+              ],
+            )
+            
           ],
         ),
         SizedBox(

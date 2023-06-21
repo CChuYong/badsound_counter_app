@@ -1,5 +1,6 @@
 import 'package:badsound_counter_app/core/framework/base_view.dart';
 import 'package:badsound_counter_app/core/model/user.dart';
+import 'package:badsound_counter_app/core/util/date_parser.dart';
 import 'package:badsound_counter_app/presenter/feature/calendar_screen_store.dart';
 import 'package:badsound_counter_app/view/designsystem/component/safe_area_with_padding.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -91,10 +92,11 @@ class SocialScreen
                 )
               ],
             ),
-            Text('asdf',
+            Text(
+            "",
                 style: TextStyle(
                   color: BaseColor.warmGray600,
-                  fontSize: 14.sp,
+                  fontSize: 10.sp,
                   fontWeight: FontWeight.w700,
                   height: 1.2,
                 ))

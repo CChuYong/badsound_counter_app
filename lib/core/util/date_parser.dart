@@ -21,7 +21,7 @@ class DateParser {
   static String lastMessageFormat(int timestamp) {
     final date = fromTimeStamp(timestamp);
     final diffOfToday = calculateDifference(date);
-    if (diffOfToday == 0){
+    if (diffOfToday == 0) {
       String dayNight = date.hour < 12 ? "오전 " : "오후 ";
       return dayNight + lastMessageTimeFormat.format(fromTimeStamp(timestamp));
     }

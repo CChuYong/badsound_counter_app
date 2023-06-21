@@ -21,35 +21,35 @@ class SocialScreen
       SocialScreenState state) {
     return SafeAreaWithPadding(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '내 친구',
-              style: TextStyle(
-                color: BaseColor.warmGray700,
-                fontSize: 15.sp,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-            SizedBox(height: 18.sp),
-            Expanded(
-              child: RefreshIndicator(
-                triggerMode: RefreshIndicatorTriggerMode.onEdge,
-                onRefresh: action.updateFriends,
-                child: CustomScrollView(reverse: false, slivers: [
-                  SliverList(
-                      delegate: SliverChildListDelegate(state.friendSet
-                          .map(buildFriend)
-                          .toList())),
-                  SliverToBoxAdapter(child: SizedBox(height: 5.sp)),
-                  SliverToBoxAdapter(child: friendAddButton(action))
-                ]),
-              ),
-            ),
-          ],
-        ));
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '내 친구',
+          style: TextStyle(
+            color: BaseColor.warmGray700,
+            fontSize: 15.sp,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        SizedBox(height: 18.sp),
+        Expanded(
+          child: RefreshIndicator(
+            triggerMode: RefreshIndicatorTriggerMode.onEdge,
+            onRefresh: action.updateFriends,
+            child: CustomScrollView(reverse: false, slivers: [
+              SliverList(
+                  delegate: SliverChildListDelegate(
+                      state.friendSet.map(buildFriend).toList())),
+              SliverToBoxAdapter(child: SizedBox(height: 5.sp)),
+              SliverToBoxAdapter(child: friendAddButton(action))
+            ]),
+          ),
+        ),
+      ],
+    ));
   }
-  Widget buildFriend(User user){
+
+  Widget buildFriend(User user) {
     return Column(
       children: [
         Row(
@@ -73,38 +73,31 @@ class SocialScreen
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                        user.nickname,
+                    Text(user.nickname,
                         style: TextStyle(
                           color: BaseColor.warmGray600,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w700,
                           height: 1.2,
-                        )
-                    ),
-                    Text(
-                        user.taggedNickname,
+                        )),
+                    Text(user.taggedNickname,
                         style: TextStyle(
                           color: BaseColor.warmGray400,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w700,
                           height: 1.2,
-                        )
-                    )
+                        ))
                   ],
                 )
-
               ],
             ),
-            Text(
-                'asdf',
+            Text('asdf',
                 style: TextStyle(
                   color: BaseColor.warmGray600,
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w700,
                   height: 1.2,
-                )
-            )
+                ))
           ],
         ),
         SizedBox(
@@ -114,11 +107,11 @@ class SocialScreen
       ],
     );
   }
+
   Widget friendAddButton(SocialScreenAction action) {
     return TouchableOpacity(
         onTap: action.addFriend,
-        child:
-        Container(
+        child: Container(
           padding: EdgeInsets.only(top: 14.sp, bottom: 14.sp),
           width: double.infinity,
           decoration: BoxDecoration(

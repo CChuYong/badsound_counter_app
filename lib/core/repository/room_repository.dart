@@ -2,8 +2,6 @@ import 'package:badsound_counter_app/core/model/room.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../api/model/room_detail_response.dart';
-
 class RoomRepository {
   late Database database;
   final String tableName = "rooms";
@@ -63,7 +61,9 @@ class RoomRepository {
   }
 
   Future<String?> getSpeakerIdOfRoom(String roomID) async {
-    final result = await database.rawQuery('SELECT userId FROM ${tableName}_selected_user WHERE roomId = ?', [roomID]);
+    final result = await database.rawQuery(
+        'SELECT userId FROM ${tableName}_selected_user WHERE roomId = ?',
+        [roomID]);
     if (result.isNotEmpty) {
       return result[0]["userId"] as String;
     } else {
@@ -126,11 +126,12 @@ class RoomRepository {
   }
 
   Future<void> setSpeakerIdOfRoom(String roomId, String speakerId) async {
-    await database.insert('${tableName}_selected_user', {
-      'roomId': roomId,
-      'userId': speakerId,
-    },
-      conflictAlgorithm: ConflictAlgorithm.replace
-    );
+    await database.insert(
+        '${tableName}_selected_user',
+        {
+          'roomId': roomId,
+          'userId': speakerId,
+        },
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 }

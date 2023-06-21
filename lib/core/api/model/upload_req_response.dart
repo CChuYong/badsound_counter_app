@@ -9,6 +9,7 @@ class UploadRequestResponse {
 
   @JsonKey(name: 'downloadUrl')
   final String downloadUrl;
+
   UploadRequestResponse(this.uploadUrl, this.downloadUrl);
 
   factory UploadRequestResponse.fromJson(Map<String, dynamic> json) =>

@@ -1,4 +1,3 @@
-import 'package:badsound_counter_app/presenter/feature/main_screen/main_screen_stat_box_state.dart';
 import 'package:badsound_counter_app/view/designsystem/theme/base_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

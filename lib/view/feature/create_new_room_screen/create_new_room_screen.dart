@@ -31,8 +31,8 @@ class CreateNewRoomScreen extends BaseView<CreateNewRoomScreen,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             BaseTopBar('방 생성하기', border: null),
-            Expanded(child:
-            Padding(
+            Expanded(
+                child: Padding(
               padding: EdgeInsets.only(left: 10.sp, right: 10.sp, top: 10.sp),
               child: Column(
                 children: [
@@ -45,7 +45,8 @@ class CreateNewRoomScreen extends BaseView<CreateNewRoomScreen,
                         color: BaseColor.warmGray700,
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: CachedNetworkImageProvider(state.profileImageUrl),
+                          image:
+                              CachedNetworkImageProvider(state.profileImageUrl),
                           fit: BoxFit.fitWidth,
                         ),
                       ),
@@ -58,10 +59,9 @@ class CreateNewRoomScreen extends BaseView<CreateNewRoomScreen,
                   SizedBox(height: 12.sp),
                 ],
               ),
-            )
-            ),
+            )),
             Padding(
-                padding: EdgeInsets.only(left: 10.sp, right: 10.sp),
+              padding: EdgeInsets.only(left: 10.sp, right: 10.sp),
               child: GrayRoundedButton('생성하기', onTap: action.createRoom),
             ),
           ],

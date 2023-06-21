@@ -13,7 +13,8 @@ class ProfileScreenState {
   @JsonKey(name: 'taggedNickname')
   String taggedNickname;
 
-  ProfileScreenState(this.nickname, this.since, this.profileImageUrl, this.taggedNickname);
+  ProfileScreenState(
+      this.nickname, this.since, this.profileImageUrl, this.taggedNickname);
 
   factory ProfileScreenState.fromJson(Map<String, dynamic> json) =>
       _$ProfileScreenStateFromJson(json);

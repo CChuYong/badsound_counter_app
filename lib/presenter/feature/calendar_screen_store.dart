@@ -4,27 +4,23 @@ import 'package:badsound_counter_app/core/framework/base_action.dart';
 import 'package:badsound_counter_app/core/model/user.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:badsound_counter_app/view/designsystem/component/mini_info_message.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:quiver/collection.dart';
 
 import '../../view/designsystem/theme/base_color.dart';
 import '../../view/feature/navigator_screen/social_screen/social_sceren.dart';
 
 class SocialScreenState {
-  TreeSet<User> friendSet = TreeSet<User>(
-      comparator: (a, b) {
-        if(a.userId == b.userId) return 0;
-        return b.nickname.compareTo(a.nickname);
-      }
-  );
+  TreeSet<User> friendSet = TreeSet<User>(comparator: (a, b) {
+    if (a.userId == b.userId) return 0;
+    return b.nickname.compareTo(a.nickname);
+  });
 }
 
-class SocialScreenAction extends BaseAction<SocialScreen,
-    SocialScreenAction, SocialScreenState> {
+class SocialScreenAction
+    extends BaseAction<SocialScreen, SocialScreenAction, SocialScreenState> {
   SocialScreenAction() : super(SocialScreenState());
 
   final OpenAPI openAPI = inject<OpenAPI>();
@@ -97,9 +93,9 @@ class SocialScreenAction extends BaseAction<SocialScreen,
             style: TextStyle(color: BaseColor.warmGray500),
           ),
           onPressed: () async {
-            try{
+            try {
               await openAPI.createFriend(FriendRequest(textController.text));
-            }finally {
+            } finally {
               Get.back();
               await updateFriends();
             }

@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:badsound_counter_app/core/api/model/chat_request.dart';
 import 'package:badsound_counter_app/core/api/model/chat_response.dart';
-import 'package:badsound_counter_app/core/api/model/room_detail_response.dart';
 import 'package:badsound_counter_app/core/api/model/violent_request.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
@@ -17,13 +16,10 @@ import 'package:badsound_counter_app/core/util/extension.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:badsound_counter_app/view/feature/chat_screen/chat_screen.dart';
 import 'package:badsound_counter_app/view/feature/chat_screen/chat_speaker_selector_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
-import '../../../core/api/model/me_response.dart';
 import '../../../core/model/violent.dart';
 import '../../../view/designsystem/theme/base_color.dart';
 import 'chat_screen_state.dart';
@@ -46,7 +42,8 @@ class ChatScreenAction
   Future<ChatScreenState> initState() async {
     print("Before pull, initial message size : ${state.chatTreeSet.length}");
     final userId = await roomRepository.getSpeakerIdOfRoom(roomResponse.roomId);
-    final speaker = await (userId?.let(userRepository.getUserOrPull) ?? userRepository.getMe());
+    final speaker = await (userId?.let(userRepository.getUserOrPull) ??
+        userRepository.getMe());
     state.speaker = speaker;
 
     await updateChat();
@@ -59,7 +56,11 @@ class ChatScreenAction
   Future<void> reloadViolents() async {
     final violents = await openAPI.getRoomViolents(roomResponse.roomId);
     setState(() {
-      state.violentSet.addAll(violents.map((e) => Violent(id: e.violentId, name: e.name, description: e.description, price: e.violentPrice)));
+      state.violentSet.addAll(violents.map((e) => Violent(
+          id: e.violentId,
+          name: e.name,
+          description: e.description,
+          price: e.violentPrice)));
     });
   }
 
@@ -144,11 +145,12 @@ class ChatScreenAction
               return;
             }
             await openAPI.createRoomViolent(
-                roomResponse.roomId, ViolentRequest(name: name, description: desc, violentPrice: price));
+                roomResponse.roomId,
+                ViolentRequest(
+                    name: name, description: desc, violentPrice: price));
             await reloadViolents();
             Get.back();
             infoSnackBar(message: '나쁜말을 성공적으로 추가했어요!');
-
           }),
     );
   }
@@ -156,8 +158,9 @@ class ChatScreenAction
   @override
   void dispose() {
     pushStore.chatMessageConsumer = null;
-    if(state.speaker != null) {
-      roomRepository.setSpeakerIdOfRoom(roomResponse.roomId, state.speaker!.userId);
+    if (state.speaker != null) {
+      roomRepository.setSpeakerIdOfRoom(
+          roomResponse.roomId, state.speaker!.userId);
     }
 
     for (var element in state.chatTreeSet) {

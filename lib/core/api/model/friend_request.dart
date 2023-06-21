@@ -8,6 +8,7 @@ class FriendRequest {
   final String tag;
 
   FriendRequest(this.tag);
+
   factory FriendRequest.fromJson(Map<String, dynamic> json) =>
       _$FriendRequestFromJson(json);
 

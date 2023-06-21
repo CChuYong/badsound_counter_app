@@ -11,8 +11,10 @@ class ViolentRequest {
   @JsonKey(name: 'price')
   final int violentPrice;
 
-  ViolentRequest({required this.name, required this.description, required this.violentPrice});
-
+  ViolentRequest(
+      {required this.name,
+      required this.description,
+      required this.violentPrice});
 
   factory ViolentRequest.fromJson(Map<String, dynamic> json) =>
       _$ViolentRequestFromJson(json);

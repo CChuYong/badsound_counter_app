@@ -6,6 +6,7 @@ part 'upload_request.g.dart';
 class UploadRequest {
   @JsonKey(name: 'imageUrl')
   final String imageUrl;
+
   UploadRequest(this.imageUrl);
 
   factory UploadRequest.fromJson(Map<String, dynamic> json) =>

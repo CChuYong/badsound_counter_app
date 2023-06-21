@@ -30,7 +30,8 @@ abstract class OpenAPI {
   Future<UploadRequestResponse> requestProfileImageUpload();
 
   @GET('/upload-request?type=ROOM')
-  Future<UploadRequestResponse> requestRoomImageUpload(@Query("roomId") String roomId);
+  Future<UploadRequestResponse> requestRoomImageUpload(
+      @Query("roomId") String roomId);
 
   // Auth (인증 관련) API
   @POST('/auth')
@@ -98,11 +99,13 @@ abstract class OpenAPI {
       @Path() String roomId, @Body() ChatRequest request);
 
   @POST('/rooms/{roomId}/profile-image')
-  Future<RoomResponse> updateRoomImage(@Path() String roomId, @Body() UploadRequest request);
+  Future<RoomResponse> updateRoomImage(
+      @Path() String roomId, @Body() UploadRequest request);
 
   @GET('/rooms/{roomId}/violents')
   Future<List<ViolentResponse>> getRoomViolents(@Path() String roomId);
 
   @POST('/rooms/{roomId}/violents')
-  Future<ViolentResponse> createRoomViolent(@Path() String roomId, @Body() ViolentRequest request);
+  Future<ViolentResponse> createRoomViolent(
+      @Path() String roomId, @Body() ViolentRequest request);
 }

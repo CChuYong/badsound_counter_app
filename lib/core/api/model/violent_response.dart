@@ -13,8 +13,8 @@ class ViolentResponse {
   @JsonKey(name: 'violentPrice')
   final int violentPrice;
 
-  ViolentResponse(this.violentId, this.name, this.description, this.violentPrice);
-
+  ViolentResponse(
+      this.violentId, this.name, this.description, this.violentPrice);
 
   factory ViolentResponse.fromJson(Map<String, dynamic> json) =>
       _$ViolentResponseFromJson(json);

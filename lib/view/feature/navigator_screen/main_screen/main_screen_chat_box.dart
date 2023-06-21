@@ -1,4 +1,3 @@
-import 'package:badsound_counter_app/core/framework/base_view.dart';
 import 'package:badsound_counter_app/core/model/room.dart';
 import 'package:badsound_counter_app/core/util/currency_parser.dart';
 import 'package:badsound_counter_app/core/util/date_parser.dart';
@@ -13,15 +12,14 @@ import '../../../component/touchableopacity.dart';
 import '../../../designsystem/theme/base_color.dart';
 import 'main_screen.dart';
 
-class MainPageChatBox extends BaseChildView<MainPage, MainScreenAction, MainScreenState>{
+class MainPageChatBox
+    extends BaseChildView<MainPage, MainScreenAction, MainScreenState> {
   @override
-  Widget render(BuildContext context, MainScreenAction action,
-      MainScreenState state) {
+  Widget render(
+      BuildContext context, MainScreenAction action, MainScreenState state) {
     final rooms = state.roomTreeSet
         .map((e) => [
-              MainPageChatBoxElements(
-                  e,
-                  () => action.openChatRoom(e)),
+              MainPageChatBoxElements(e, () => action.openChatRoom(e)),
               SizedBox(height: 13.sp)
             ])
         .flattened
@@ -127,7 +125,8 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                             color: BaseColor.warmGray700,
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                              image: CachedNetworkImageProvider(widget.room.roomImageUrl),
+                              image: CachedNetworkImageProvider(
+                                  widget.room.roomImageUrl),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -161,9 +160,14 @@ class _MainPageChatBoxElementState extends State<MainPageChatBoxElements> {
                         ),
                         SizedBox(height: 5.sp),
                         Text(
-                          widget.room.cumulatedPrice != 0 ? CurrencyParser.formatUnsigned(widget.room.cumulatedPrice) : '',
+                          widget.room.cumulatedPrice != 0
+                              ? CurrencyParser.formatUnsigned(
+                                  widget.room.cumulatedPrice)
+                              : '',
                           style: TextStyle(
-                            color: widget.room.cumulatedPrice > 0 ? BaseColor.defaultGreen : BaseColor.defaultRed,
+                            color: widget.room.cumulatedPrice > 0
+                                ? BaseColor.defaultGreen
+                                : BaseColor.defaultRed,
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w700,
                             height: 1.2,

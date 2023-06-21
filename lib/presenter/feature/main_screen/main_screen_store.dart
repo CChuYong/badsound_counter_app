@@ -2,10 +2,8 @@ import 'package:badsound_counter_app/core/model/room.dart';
 import 'package:badsound_counter_app/core/util/extension.dart';
 import 'package:badsound_counter_app/view/feature/navigator_screen/main_screen/main_screen.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:quiver/collection.dart';
 
-import '../../../core/api/model/room_detail_response.dart';
 import '../../../core/api/open_api.dart';
 import '../../../core/framework/base_action.dart';
 import '../../../core/framework/state_store.dart';
@@ -19,11 +17,11 @@ import 'main_screen_stat_box_state.dart';
 
 class MainScreenState {
   MainPageStatBoxState statBoxState;
-  TreeSet<Room> roomTreeSet = TreeSet<Room>(
-      comparator: (a, b) {
-        if(a.roomId == b.roomId) return 0;
-        return b.lastMessageAtTs.compareTo(a.lastMessageAtTs);
-      });
+  TreeSet<Room> roomTreeSet = TreeSet<Room>(comparator: (a, b) {
+    if (a.roomId == b.roomId) return 0;
+    return b.lastMessageAtTs.compareTo(a.lastMessageAtTs);
+  });
+
   MainScreenState(this.statBoxState, List<Room> rooms) {
     roomTreeSet.addAll(rooms);
   }
@@ -31,9 +29,12 @@ class MainScreenState {
 
 class MainScreenAction
     extends BaseAction<MainPage, MainScreenAction, MainScreenState> {
-  MainScreenAction() : super(MainScreenState(StateStore.loadState(MainPageStatBoxState)
-      ?.let(MainPageStatBoxState.fromJson) ??
-      MainPageStatBoxState('...', '', ''), inject<RoomRepository>().getCachedRooms()));
+  MainScreenAction()
+      : super(MainScreenState(
+            StateStore.loadState(MainPageStatBoxState)
+                    ?.let(MainPageStatBoxState.fromJson) ??
+                MainPageStatBoxState('...', '', ''),
+            inject<RoomRepository>().getCachedRooms()));
 
   final UserRepository userRepository = inject<UserRepository>();
   final OpenAPI openAPI = inject<OpenAPI>();
@@ -57,7 +58,7 @@ class MainScreenAction
 
   void openChatRoom(Room roomDetail) async {
     final messages =
-    await messageRepository.getMessagesByRoom(roomDetail.roomId);
+        await messageRepository.getMessagesByRoom(roomDetail.roomId);
     Get.to(() => ChatScreen(roomDetail, messages));
   }
 

@@ -51,9 +51,10 @@ class ProfilePage
                       shape: BoxShape.circle,
                       image: state.profileImageUrl != ''
                           ? DecorationImage(
-                        image: CachedNetworkImageProvider(state.profileImageUrl),
-                        fit: BoxFit.fitWidth,
-                      )
+                              image: CachedNetworkImageProvider(
+                                  state.profileImageUrl),
+                              fit: BoxFit.fitWidth,
+                            )
                           : null,
                     ),
                   ),

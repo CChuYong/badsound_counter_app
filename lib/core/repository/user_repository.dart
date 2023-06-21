@@ -46,12 +46,12 @@ class UserRepository {
 
     final pulledUser = await api.getUserById(userId);
     final user = User(
-        userId: pulledUser.id,
-        email: pulledUser.email,
-        nickname: pulledUser.nickname,
-        createdAtTs: pulledUser.createdAtTs,
-        profileImgUrl: pulledUser.profileImgUrl,
-        taggedNickname: pulledUser.taggedNickname,
+      userId: pulledUser.id,
+      email: pulledUser.email,
+      nickname: pulledUser.nickname,
+      createdAtTs: pulledUser.createdAtTs,
+      profileImgUrl: pulledUser.profileImgUrl,
+      taggedNickname: pulledUser.taggedNickname,
     );
     userStore.save(user);
     return user;

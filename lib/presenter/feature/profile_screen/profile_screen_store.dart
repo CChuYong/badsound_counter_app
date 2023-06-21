@@ -12,11 +12,11 @@ import 'package:badsound_counter_app/core/util/extension.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:badsound_counter_app/presenter/feature/profile_screen/profile_screen_state.dart';
 import 'package:badsound_counter_app/view/feature/navigator_screen/profile_screen/profile_screen.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:dio/dio.dart';
 import 'package:mime/mime.dart';
 
 import '../../../core/api/model/user_nickname_request.dart';
@@ -48,8 +48,7 @@ class ProfileScreenAction
         retrievedData.nickname,
         DateParser.timeStampAsDate(retrievedData.createdAtTs),
         retrievedData.profileImgUrl,
-        retrievedData.taggedNickname
-    );
+        retrievedData.taggedNickname);
   }
 
   void onTapSelectImage() async {
@@ -61,10 +60,12 @@ class ProfileScreenAction
     final imageRequest = await openAPI.requestProfileImageUpload();
 
     final bytes = await image.readAsBytes();
-    await dio.request(imageRequest.uploadUrl, data: bytes,
+    await dio.request(imageRequest.uploadUrl,
+        data: bytes,
         options: Options(method: 'PUT', headers: {'Content-Type': mimeType}));
 
-    final newMe = await openAPI.updateProfileImage(UploadRequest(imageRequest.downloadUrl));
+    final newMe = await openAPI
+        .updateProfileImage(UploadRequest(imageRequest.downloadUrl));
     infoSnackBar(message: '업로드에 성공했어요!');
     setState(() {
       state.profileImageUrl = newMe.profileImgUrl;

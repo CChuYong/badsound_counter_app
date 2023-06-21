@@ -58,15 +58,15 @@ class ChatBox extends StatelessWidget {
                   ))
             ])
           ]),
-          if(chat.violentPrice != 0)
-          Text(CurrencyParser.format(chat.violentPrice),
-              style: TextStyle(
-                color: chat.violentPrice > 0
-                    ? BaseColor.defaultGreen
-                    : BaseColor.defaultRed,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w700,
-              ))
+          if (chat.violentPrice != 0)
+            Text(CurrencyParser.format(chat.violentPrice),
+                style: TextStyle(
+                  color: chat.violentPrice > 0
+                      ? BaseColor.defaultGreen
+                      : BaseColor.defaultRed,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w700,
+                ))
         ]));
   }
 }

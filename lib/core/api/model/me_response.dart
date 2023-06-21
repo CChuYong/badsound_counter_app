@@ -38,11 +38,11 @@ class MeResponse {
   Map<String, dynamic> toJson() => _$MeResponseToJson(this);
 
   User toModel() => User(
-    userId: id,
-    email: email,
-    nickname: nickname,
-    createdAtTs: createdAtTs,
-    profileImgUrl: profileImgUrl,
-    taggedNickname: taggedNickname,
-  );
+        userId: id,
+        email: email,
+        nickname: nickname,
+        createdAtTs: createdAtTs,
+        profileImgUrl: profileImgUrl,
+        taggedNickname: taggedNickname,
+      );
 }

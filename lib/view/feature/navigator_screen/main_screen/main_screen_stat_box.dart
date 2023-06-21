@@ -1,15 +1,16 @@
 import 'package:badsound_counter_app/core/framework/base_child_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../presenter/feature/main_screen/main_screen_store.dart';
 import '../../../designsystem/theme/base_color.dart';
 import 'main_screen.dart';
 
-class MainPageStatBox extends BaseChildView<MainPage, MainScreenAction, MainScreenState> {
-
+class MainPageStatBox
+    extends BaseChildView<MainPage, MainScreenAction, MainScreenState> {
   @override
-  Widget render(BuildContext context, MainScreenAction action,
-      MainScreenState state) {
+  Widget render(
+      BuildContext context, MainScreenAction action, MainScreenState state) {
     return GestureDetector(
       child: Container(
           padding: EdgeInsets.only(

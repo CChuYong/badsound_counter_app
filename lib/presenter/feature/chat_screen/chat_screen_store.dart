@@ -223,7 +223,7 @@ class ChatScreenAction
     final me = await userRepository.getCachedMe();
     log('message send');
     final message = textController.text;
-    final chat = ChatRequest('test', me.userId, me.userId, message);
+    final chat = ChatRequest('test', state.speaker!.userId, me.userId, message);
     textController.text = '';
     await openAPI.sendMessage(roomResponse.roomId, chat);
     //await updateChat();

@@ -1,3 +1,4 @@
+import 'package:badsound_counter_app/core/api/model/friend_request.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
 import 'package:badsound_counter_app/core/model/user.dart';
@@ -90,11 +91,16 @@ class SocialScreenAction extends BaseAction<SocialScreen,
                 borderRadius: BorderRadius.circular(3.sp)),
           ),
           child: const Text(
-            '변경하기',
+            '추가하기',
             style: TextStyle(color: BaseColor.warmGray500),
           ),
-          onPressed: () {
-
+          onPressed: () async {
+            try{
+              await openAPI.createFriend(FriendRequest(textController.text));
+            }finally {
+              Get.back();
+              await updateFriends();
+            }
           }),
     );
   }

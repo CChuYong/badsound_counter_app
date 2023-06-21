@@ -18,7 +18,7 @@ class ApiInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     print(
-        '[REQ] [${options.method}] ${options.uri} ${authProvider.authToken?.accessToken}');
+        '[REQ] [${options.method}] ${options.uri} ${authProvider.authToken?.accessToken ?? '[NO-TOKEN]'}');
 
     if (authProvider.isAuthenticated()) {
       options.headers["X-BCA-APP-TOKEN"] = authProvider.authToken?.accessToken;

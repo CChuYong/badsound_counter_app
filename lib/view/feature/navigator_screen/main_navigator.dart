@@ -95,16 +95,16 @@ class _BottomBarState extends State<BottomBar> {
       elevation: 24.0,
       items: const [
         BottomNavigationBarItem(
-          icon: Icon(Icons.calendar_month),
-          label: 'calendar_page',
+          icon: Icon(Icons.people_alt),
+          label: 'social_page',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'home_page',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'profile_page',
+          icon: Icon(Icons.menu),
+          label: 'menu_page',
         )
       ],
       showSelectedLabels: false,

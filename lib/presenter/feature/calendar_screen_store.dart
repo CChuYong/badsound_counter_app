@@ -1,14 +1,15 @@
 import 'package:badsound_counter_app/core/framework/base_action.dart';
-import 'package:badsound_counter_app/view/feature/navigator_screen/calendar_screen/calendar_screen.dart';
 
-class CalendarScreenState {}
+import '../../view/feature/navigator_screen/social_screen/social_sceren.dart';
 
-class CalendarScreenAction extends BaseAction<CalendarPage,
-    CalendarScreenAction, CalendarScreenState> {
-  CalendarScreenAction() : super(CalendarScreenState());
+class SocialScreenState {}
+
+class SocialScreenAction extends BaseAction<SocialScreen,
+    SocialScreenAction, SocialScreenState> {
+  SocialScreenAction() : super(SocialScreenState());
 
   @override
-  Future<CalendarScreenState> initState() async {
-    return CalendarScreenState();
+  Future<SocialScreenState> initState() async {
+    return SocialScreenState();
   }
 }

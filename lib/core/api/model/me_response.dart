@@ -1,3 +1,4 @@
+import 'package:badsound_counter_app/core/model/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'me_response.g.dart';
@@ -13,6 +14,9 @@ class MeResponse {
   @JsonKey(name: 'nickname')
   String nickname;
 
+  @JsonKey(name: 'taggedNickname')
+  String taggedNickname;
+
   @JsonKey(name: 'createdAtTs')
   int createdAtTs;
 
@@ -23,6 +27,7 @@ class MeResponse {
     required this.id,
     required this.email,
     required this.nickname,
+    required this.taggedNickname,
     required this.createdAtTs,
     required this.profileImgUrl,
   });
@@ -31,4 +36,13 @@ class MeResponse {
       _$MeResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$MeResponseToJson(this);
+
+  User toModel() => User(
+    userId: id,
+    email: email,
+    nickname: nickname,
+    createdAtTs: createdAtTs,
+    profileImgUrl: profileImgUrl,
+    taggedNickname: taggedNickname,
+  );
 }

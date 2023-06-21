@@ -6,16 +6,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../designsystem/theme/base_color.dart';
 
-class CalendarPage
-    extends BaseView<CalendarPage, CalendarScreenAction, CalendarScreenState> {
-  const CalendarPage({super.key});
+class SocialScreen
+    extends BaseView<SocialScreen, SocialScreenAction, SocialScreenState> {
+  const SocialScreen({super.key});
 
   @override
-  CalendarScreenAction initAction() => CalendarScreenAction();
+  SocialScreenAction initAction() => SocialScreenAction();
 
   @override
-  Widget render(BuildContext context, CalendarScreenAction action,
-      CalendarScreenState state) {
+  Widget render(BuildContext context, SocialScreenAction action,
+      SocialScreenState state) {
     return SafeAreaWithPadding(
         child: Center(
       child: Text(

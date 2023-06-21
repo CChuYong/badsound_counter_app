@@ -20,9 +20,7 @@ class ChatSpeakerSelectorScreenAction extends BaseAction<ChatSpeakerSelectorScre
   Future<ChatSpeakerSelectorScreenState> initState() async => state;
 
   void selectUser(MeResponse user) async {
-    chatScreenAction.updateSpeaker(
-      User(userId: user.id, email: user.email, nickname: user.nickname, createdAtTs: user.createdAtTs, profileImgUrl: user.profileImgUrl)
-    );
+    chatScreenAction.updateSpeaker(user.toModel());
     Get.back();
   }
 

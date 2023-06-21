@@ -33,7 +33,7 @@ class ProfileScreenAction
   ProfileScreenAction()
       : super(StateStore.loadState(ProfileScreenState)
                 ?.let(ProfileScreenState.fromJson) ??
-            ProfileScreenState('', '', ''));
+            ProfileScreenState('', '', '', '#'));
 
   @override
   void dispose() {
@@ -47,7 +47,9 @@ class ProfileScreenAction
     return ProfileScreenState(
         retrievedData.nickname,
         DateParser.timeStampAsDate(retrievedData.createdAtTs),
-        retrievedData.profileImgUrl);
+        retrievedData.profileImgUrl,
+        retrievedData.taggedNickname
+    );
   }
 
   void onTapSelectImage() async {

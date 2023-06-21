@@ -18,6 +18,7 @@ class UserRepository {
       email: data.email,
       createdAtTs: data.createdAtTs,
       profileImgUrl: data.profileImgUrl,
+      taggedNickname: data.taggedNickname,
     );
     return retrievedMe;
   }
@@ -49,7 +50,9 @@ class UserRepository {
         email: pulledUser.email,
         nickname: pulledUser.nickname,
         createdAtTs: pulledUser.createdAtTs,
-        profileImgUrl: pulledUser.profileImgUrl);
+        profileImgUrl: pulledUser.profileImgUrl,
+        taggedNickname: pulledUser.taggedNickname,
+    );
     userStore.save(user);
     return user;
   }

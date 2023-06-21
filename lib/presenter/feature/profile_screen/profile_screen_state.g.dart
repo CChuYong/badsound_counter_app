@@ -11,6 +11,7 @@ ProfileScreenState _$ProfileScreenStateFromJson(Map<String, dynamic> json) =>
       json['nickname'] as String,
       json['since'] as String,
       json['profileImageUrl'] as String,
+      json['taggedNickname'] as String,
     );
 
 Map<String, dynamic> _$ProfileScreenStateToJson(ProfileScreenState instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$ProfileScreenStateToJson(ProfileScreenState instance) =>
       'nickname': instance.nickname,
       'since': instance.since,
       'profileImageUrl': instance.profileImageUrl,
+      'taggedNickname': instance.taggedNickname,
     };

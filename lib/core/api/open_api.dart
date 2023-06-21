@@ -57,6 +57,9 @@ abstract class OpenAPI {
   @POST('/me/profile-image')
   Future<MeResponse> updateProfileImage(@Body() UploadRequest request);
 
+  @GET('/me/friends')
+  Future<List<MeResponse>> getMyFriends();
+
   //User (다른 사람) 관련 API
   @GET('/users/{userId}')
   Future<MeResponse> getUserById(@Path() String userId);

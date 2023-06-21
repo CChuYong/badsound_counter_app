@@ -1,9 +1,10 @@
 import 'package:badsound_counter_app/core/api/model/room_detail_response.dart';
 import 'package:badsound_counter_app/core/framework/base_view.dart';
+import 'package:badsound_counter_app/core/model/room.dart';
 import 'package:badsound_counter_app/core/model/violent.dart';
 import 'package:badsound_counter_app/core/util/currency_parser.dart';
 import 'package:badsound_counter_app/view/component/touchableopacity.dart';
-import 'package:badsound_counter_app/view/designsystem/component/base_top_bar.dart';
+import 'package:badsound_counter_app/view/designsystem/component/mini_info_message.dart';
 import 'package:badsound_counter_app/view/feature/chat_screen/chat_box.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ import '../../designsystem/theme/base_color.dart';
 
 class ChatScreen
     extends BaseView<ChatScreen, ChatScreenAction, ChatScreenState> {
-  final RoomDetailResponse room;
+  final Room room;
   final List<Chat> initialMessages;
 
   ChatScreen(this.room, this.initialMessages, {super.key});
@@ -90,7 +91,9 @@ class ChatScreen
                                   .map(buildViolent)
                                   .toList())),
                           SliverToBoxAdapter(child: SizedBox(height: 20.sp)),
-                          SliverToBoxAdapter(child: violentAddButton(action))
+                          SliverToBoxAdapter(child: violentAddButton(action)),
+                          SliverToBoxAdapter(child: SizedBox(height: 5.sp)),
+                          SliverToBoxAdapter(child: MiniInfoMessage('혼자 있는 방에선 나쁜말이 적립되지 않아요', size: 11.sp)),
                         ]),
                       ),
                 ),

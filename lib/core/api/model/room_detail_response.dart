@@ -1,3 +1,4 @@
+import 'package:badsound_counter_app/core/model/room.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'room_detail_response.g.dart';
@@ -27,14 +28,7 @@ class RoomDetailResponse {
 
   Map<String, dynamic> toJson() => _$RoomDetailResponseToJson(this);
 
-  @override
-  int get hashCode => roomId.hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    if(other is RoomDetailResponse) {
-      return other.roomId == roomId;
-    }
-    return false;
+  Room toModel() {
+    return Room(roomId, roomName, ownerId, createdAtTs, lastMessageAtTs, unreadMessageCount, roomImageUrl);
   }
 }

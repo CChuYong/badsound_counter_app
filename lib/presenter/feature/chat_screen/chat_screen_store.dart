@@ -7,6 +7,7 @@ import 'package:badsound_counter_app/core/api/model/violent_request.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
 import 'package:badsound_counter_app/core/model/chat.dart';
+import 'package:badsound_counter_app/core/model/room.dart';
 import 'package:badsound_counter_app/core/model/user.dart';
 import 'package:badsound_counter_app/core/repository/message_repository.dart';
 import 'package:badsound_counter_app/core/repository/room_repository.dart';
@@ -32,7 +33,7 @@ class ChatScreenAction
   ChatScreenAction(this.roomResponse, List<Chat> initialMessages)
       : super(ChatScreenState(initialMessages, null));
 
-  final RoomDetailResponse roomResponse;
+  final Room roomResponse;
   final OpenAPI openAPI = inject<OpenAPI>();
   final UserRepository userRepository = inject<UserRepository>();
   final PushStore pushStore = inject<PushStore>();
@@ -146,6 +147,7 @@ class ChatScreenAction
                 roomResponse.roomId, ViolentRequest(name: name, description: desc, violentPrice: price));
             await reloadViolents();
             Get.back();
+            infoSnackBar(message: '나쁜말을 성공적으로 추가했어요!');
 
           }),
     );

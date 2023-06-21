@@ -46,7 +46,7 @@ class CreateNewRoomScreenAction extends BaseAction<CreateNewRoomScreen,
     final messages =
         await messageRepository.getMessagesByRoom(roomDetail.roomId);
     Get.back();
-    await Get.to(() => ChatScreen(roomDetail, messages));
+    await Get.to(() => ChatScreen(roomDetail.toModel(), messages));
   }
 
   void uploadImage() async {

@@ -1,3 +1,4 @@
+import 'package:badsound_counter_app/core/model/room.dart';
 import 'package:badsound_counter_app/core/util/extension.dart';
 import 'package:badsound_counter_app/view/feature/navigator_screen/main_screen/main_screen.dart';
 import 'package:get/get.dart';
@@ -18,9 +19,12 @@ import 'main_screen_stat_box_state.dart';
 
 class MainScreenState {
   MainPageStatBoxState statBoxState;
-  TreeSet<RoomDetailResponse> roomTreeSet = TreeSet<RoomDetailResponse>(
-      comparator: (a, b) => b.lastMessageAtTs.compareTo(a.lastMessageAtTs));
-  MainScreenState(this.statBoxState, List<RoomDetailResponse> rooms) {
+  TreeSet<Room> roomTreeSet = TreeSet<Room>(
+      comparator: (a, b) {
+        if(a.roomId == b.roomId) return 0;
+        return b.lastMessageAtTs.compareTo(a.lastMessageAtTs);
+      });
+  MainScreenState(this.statBoxState, List<Room> rooms) {
     roomTreeSet.addAll(rooms);
   }
 }
@@ -40,7 +44,7 @@ class MainScreenAction
   Future<MainScreenState> initState() async {
     final statBox = await userRepository.getDashboard();
     final chatBox = await openAPI.getMyRooms();
-    return MainScreenState(statBox, chatBox);
+    return MainScreenState(statBox, chatBox.map((e) => e.toModel()).toList());
   }
 
   @override
@@ -51,14 +55,7 @@ class MainScreenAction
     });
   }
 
-  Future<void> updateFromServer() async {
-    final data = await openAPI.getMyRooms();
-    setState(() {
-      state.roomTreeSet.addAll(data);
-    });
-  }
-
-  void openChatRoom(RoomDetailResponse roomDetail) async {
+  void openChatRoom(Room roomDetail) async {
     final messages =
     await messageRepository.getMessagesByRoom(roomDetail.roomId);
     Get.to(() => ChatScreen(roomDetail, messages));
@@ -67,7 +64,7 @@ class MainScreenAction
   Future<void> pullRooms() async {
     final data = await openAPI.getMyRooms();
     setState(() {
-      state.roomTreeSet.addAll(data);
+      state.roomTreeSet.addAll(data.map((e) => e.toModel()));
     });
   }
 

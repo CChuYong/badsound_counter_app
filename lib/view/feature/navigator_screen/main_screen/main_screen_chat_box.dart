@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/framework/base_child_view.dart';
-import '../../../../presenter/feature/main_screen/main_screen_chat_box_store.dart';
 import '../../../../presenter/feature/main_screen/main_screen_store.dart';
 import '../../../component/touchableopacity.dart';
 import '../../../designsystem/theme/base_color.dart';
@@ -16,6 +15,8 @@ class MainPageChatBox extends BaseChildView<MainPage, MainScreenAction, MainScre
   @override
   Widget render(BuildContext context, MainScreenAction action,
       MainScreenState state) {
+    print("BUIILDING.. size : ${state.roomTreeSet.length}");
+    state.roomTreeSet.forEach((element) { print(element.roomId); });
     final rooms = state.roomTreeSet
         .map((e) => [
               MainPageChatBoxElements(

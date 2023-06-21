@@ -21,6 +21,52 @@ class _OpenAPI implements OpenAPI {
   String? baseUrl;
 
   @override
+  Future<UploadRequestResponse> requestProfileImageUpload() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UploadRequestResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/upload-request?type=USER',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UploadRequestResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UploadRequestResponse> requestRoomImageUpload(roomId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'roomId': roomId};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UploadRequestResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/upload-request?type=ROOM',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UploadRequestResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<AuthResult> authenticate(request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -35,7 +81,7 @@ class _OpenAPI implements OpenAPI {
     )
             .compose(
               _dio.options,
-              '/users/oauth',
+              '/auth',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -58,7 +104,7 @@ class _OpenAPI implements OpenAPI {
     )
         .compose(
           _dio.options,
-          '/users/device',
+          '/auth/device',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -82,7 +128,7 @@ class _OpenAPI implements OpenAPI {
     )
             .compose(
               _dio.options,
-              '/users/refresh',
+              '/auth/refresh',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -105,7 +151,104 @@ class _OpenAPI implements OpenAPI {
     )
             .compose(
               _dio.options,
-              '/users/me',
+              '/me',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = MeResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DashboardResponse> getDashboard() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<DashboardResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/me/dashboard',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = DashboardResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<RoomDetailResponse>> getMyRooms() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<RoomDetailResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/me/rooms',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) =>
+            RoomDetailResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<MeResponse> updateNickname(request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<MeResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/me/nickname',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = MeResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MeResponse> updateProfileImage(request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<MeResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/me/profile-image',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -138,25 +281,25 @@ class _OpenAPI implements OpenAPI {
   }
 
   @override
-  Future<DashboardResponse> getDashboard() async {
+  Future<MeResponse> getUserByTag(tag) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'tag': tag};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<DashboardResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<MeResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/users/dashboard',
+              '/users',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = DashboardResponse.fromJson(_result.data!);
+    final value = MeResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -181,56 +324,6 @@ class _OpenAPI implements OpenAPI {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = RoomResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<List<RoomDetailResponse>> getMyRooms() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<RoomDetailResponse>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/users/rooms',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!
-        .map((dynamic i) =>
-            RoomDetailResponse.fromJson(i as Map<String, dynamic>))
-        .toList();
-    return value;
-  }
-
-  @override
-  Future<MeResponse> updateNickname(request) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<MeResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/users/nickname',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MeResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -364,76 +457,6 @@ class _OpenAPI implements OpenAPI {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ChatResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<UploadRequestResponse> requestProfileImageUpload() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UploadRequestResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/upload-request?type=USER',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UploadRequestResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<UploadRequestResponse> requestRoomImageUpload(roomId) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'roomId': roomId};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UploadRequestResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/upload-request?type=ROOM',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = UploadRequestResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<MeResponse> updateProfileImage(request) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<MeResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/users/profile-image',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MeResponse.fromJson(_result.data!);
     return value;
   }
 

@@ -24,32 +24,49 @@ part 'open_api.g.dart';
 abstract class OpenAPI {
   factory OpenAPI(Dio dio, {String baseUrl}) = _OpenAPI;
 
-  @POST('/users/oauth')
+  //앱용 기본 API
+  @GET('/upload-request?type=USER')
+  Future<UploadRequestResponse> requestProfileImageUpload();
+
+  @GET('/upload-request?type=ROOM')
+  Future<UploadRequestResponse> requestRoomImageUpload(@Query("roomId") String roomId);
+
+  // Auth (인증 관련) API
+  @POST('/auth')
   Future<AuthResult> authenticate(@Body() AuthRequest request);
 
-  @POST('/users/device')
+  @POST('/auth/device')
   Future<dynamic> registerDevice(@Body() DeviceRequest request);
 
-  @POST('/users/refresh')
+  @POST('/auth/refresh')
   Future<AuthResult> refresh(@Body() RefreshRequest request);
 
-  @GET('/users/me')
+  /// Me (나에 관한) API
+  @GET('/me')
   Future<MeResponse> getMe();
 
+  @GET('/me/dashboard')
+  Future<DashboardResponse> getDashboard();
+
+  @GET('/me/rooms')
+  Future<List<RoomDetailResponse>> getMyRooms();
+
+  @POST('/me/nickname')
+  Future<MeResponse> updateNickname(@Body() UserNicknameRequest request);
+
+  @POST('/me/profile-image')
+  Future<MeResponse> updateProfileImage(@Body() UploadRequest request);
+
+  //User (다른 사람) 관련 API
   @GET('/users/{userId}')
   Future<MeResponse> getUserById(@Path() String userId);
 
-  @GET('/users/dashboard')
-  Future<DashboardResponse> getDashboard();
+  @GET('/users')
+  Future<MeResponse> getUserByTag(@Query("tag") String tag);
 
+  //Room 관련 API
   @POST('/rooms')
   Future<RoomResponse> createNewRoom(@Body() RoomCreateRequest request);
-
-  @GET('/users/rooms')
-  Future<List<RoomDetailResponse>> getMyRooms();
-
-  @POST('/users/nickname')
-  Future<MeResponse> updateNickname(@Body() UserNicknameRequest request);
 
   @GET('/rooms/{roomId}/messages')
   Future<List<ChatResponse>> getChattings(@Path() String roomId);
@@ -72,15 +89,6 @@ abstract class OpenAPI {
   @POST('/rooms/{roomId}/messages')
   Future<ChatResponse> sendMessage(
       @Path() String roomId, @Body() ChatRequest request);
-
-  @GET('/upload-request?type=USER')
-  Future<UploadRequestResponse> requestProfileImageUpload();
-
-  @GET('/upload-request?type=ROOM')
-  Future<UploadRequestResponse> requestRoomImageUpload(@Query("roomId") String roomId);
-
-  @POST('/users/profile-image')
-  Future<MeResponse> updateProfileImage(@Body() UploadRequest request);
 
   @POST('/rooms/{roomId}/profile-image')
   Future<RoomResponse> updateRoomImage(@Path() String roomId, @Body() UploadRequest request);

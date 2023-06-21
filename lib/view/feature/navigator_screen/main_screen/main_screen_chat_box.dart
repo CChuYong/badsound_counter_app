@@ -82,10 +82,6 @@ class MainPageChatBoxElements extends StatefulWidget {
   const MainPageChatBoxElements(this.room, this.onTap, {super.key});
 
   final Room room;
-  // final String roomName;
-  // final String lastTime;
-  // final int unreadMessageCount;
-  // final String roomImageUrl;
   final Function() onTap;
 
   @override

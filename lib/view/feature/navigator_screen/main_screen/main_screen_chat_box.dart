@@ -15,8 +15,6 @@ class MainPageChatBox extends BaseChildView<MainPage, MainScreenAction, MainScre
   @override
   Widget render(BuildContext context, MainScreenAction action,
       MainScreenState state) {
-    print("BUIILDING.. size : ${state.roomTreeSet.length}");
-    state.roomTreeSet.forEach((element) { print(element.roomId); });
     final rooms = state.roomTreeSet
         .map((e) => [
               MainPageChatBoxElements(

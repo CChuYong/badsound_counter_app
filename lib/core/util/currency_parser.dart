@@ -7,4 +7,8 @@ class CurrencyParser {
     final String formattedCurrency = value == 0 ? '' : (value < 0 ? '- ' : '+ ');
     return formattedCurrency + formatCurrency.format(value);
   }
+
+  static String formatUnsigned(int value) {
+    return formatCurrency.format(value);
+  }
 }

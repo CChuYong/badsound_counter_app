@@ -1,5 +1,8 @@
 import 'package:badsound_counter_app/core/api/model/room_detail_response.dart';
 import 'package:badsound_counter_app/core/framework/base_view.dart';
+import 'package:badsound_counter_app/core/model/violent.dart';
+import 'package:badsound_counter_app/core/util/currency_parser.dart';
+import 'package:badsound_counter_app/view/component/touchableopacity.dart';
 import 'package:badsound_counter_app/view/designsystem/component/base_top_bar.dart';
 import 'package:badsound_counter_app/view/feature/chat_screen/chat_box.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -28,13 +31,14 @@ class ChatScreen
       width: double.infinity,
       height: double.infinity,
       color: BaseColor.defaultBackgroundColor,
-      child: SafeArea(
+
           child: Scaffold(
+            appBar: buildAppBar(),
+        endDrawer: buildDrawer(action, state),
         backgroundColor: BaseColor.defaultBackgroundColor,
-        body: Column(
+        body: SafeArea(child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            BaseTopBar(room.roomName),
             Expanded(
               child: Padding(
                   padding: EdgeInsets.only(left: 15.sp, right: 15.sp),
@@ -51,9 +55,135 @@ class ChatScreen
             ),
             buildInputArea(context, action),
           ],
-        ),
-      )),
+        )),
+      ),
     );
+  }
+
+  Widget buildDrawer(ChatScreenAction action, ChatScreenState state) {
+    return Drawer(
+      backgroundColor: BaseColor.warmGray200,
+      child: SafeArea(child:
+          Padding(
+            padding: EdgeInsets.only(left: 15.sp, right: 15.sp),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                    '이 방의 나쁜말',
+                    style: TextStyle(
+                      color: BaseColor.warmGray600,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
+                      height: 1.2,
+                    )
+                ),
+                SizedBox(height: 16.sp),
+                Expanded(
+                  child: RefreshIndicator(
+                        triggerMode: RefreshIndicatorTriggerMode.onEdge,
+                        onRefresh: action.reloadViolents,
+                        child: CustomScrollView(reverse: false, slivers: [
+                          SliverList(
+                              delegate: SliverChildListDelegate(state.violentSet
+                                  .map(buildViolent)
+                                  .toList())),
+                          SliverToBoxAdapter(child: SizedBox(height: 20.sp)),
+                          SliverToBoxAdapter(child: violentAddButton(action))
+                        ]),
+                      ),
+                ),
+              ],
+            ),
+          )
+      ),
+    );
+  }
+
+  Widget buildViolent(Violent violent){
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+                violent.name,
+                style: TextStyle(
+                  color: BaseColor.warmGray600,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w700,
+                  height: 1.2,
+                )
+            ),
+            Text(
+                CurrencyParser.formatUnsigned(violent.price),
+                style: TextStyle(
+                  color: BaseColor.warmGray600,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w700,
+                  height: 1.2,
+                )
+            )
+          ],
+        ),
+        SizedBox(
+          height: 10.sp,
+        )
+      ],
+    );
+  }
+
+  PreferredSizeWidget buildAppBar() {
+    return AppBar(
+      backgroundColor: BaseColor.defaultBackgroundColor,
+      elevation: 0,
+      title: Text(
+        room.roomName,
+        style: TextStyle(
+          color: BaseColor.warmGray500,
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      centerTitle: true,
+    );
+  }
+
+  Widget violentAddButton(ChatScreenAction action) {
+    return TouchableOpacity(
+      onTap: action.onTapCreateViolent,
+        child:
+    Container(
+      padding: EdgeInsets.only(top: 14.sp, bottom: 14.sp),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(11.sp),
+        color: BaseColor.warmGray100,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(children: [
+            Icon(
+              Icons.message,
+              color: BaseColor.warmGray600,
+              size: 14.sp,
+            ),
+            SizedBox(width: 5.sp),
+            Text(
+              '나쁜말 추가하기',
+              style: TextStyle(
+                color: BaseColor.warmGray600,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w700,
+                height: 1.2,
+              ),
+            ),
+          ])
+        ],
+      ),
+    ));
   }
 
   Widget buildInputArea(BuildContext context, ChatScreenAction action) {
@@ -117,24 +247,4 @@ class ChatScreen
       ),
     );
   }
-
-// Widget buildMessageList() {
-//   return Expanded(
-//     child: ListView.builder(
-//       shrinkWrap: true,
-//       itemCount: 50,
-//       controller: _controller,
-//       itemBuilder: (BuildContext context, int index) {
-//         return Padding(
-//           padding: EdgeInsets.all(10),
-//           child: Container(
-//             color: Colors.red,
-//             height: 20,
-//             child: Text(index.toString()),
-//           ),
-//         );
-//       },
-//     ),
-//   );
-// }
 }

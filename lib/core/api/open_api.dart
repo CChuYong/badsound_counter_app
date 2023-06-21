@@ -8,6 +8,8 @@ import 'package:badsound_counter_app/core/api/model/room_detail_response.dart';
 import 'package:badsound_counter_app/core/api/model/room_response.dart';
 import 'package:badsound_counter_app/core/api/model/upload_request.dart';
 import 'package:badsound_counter_app/core/api/model/user_nickname_request.dart';
+import 'package:badsound_counter_app/core/api/model/violent_request.dart';
+import 'package:badsound_counter_app/core/api/model/violent_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
@@ -82,4 +84,10 @@ abstract class OpenAPI {
 
   @POST('/rooms/{roomId}/profile-image')
   Future<RoomResponse> updateRoomImage(@Path() String roomId, @Body() UploadRequest request);
+
+  @GET('/rooms/{roomId}/violents')
+  Future<List<ViolentResponse>> getRoomViolents(@Path() String roomId);
+
+  @POST('/rooms/{roomId}/violents')
+  Future<ViolentResponse> createRoomViolent(@Path() String roomId, @Body() ViolentRequest request);
 }

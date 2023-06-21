@@ -8,8 +8,10 @@ class RoomCreateRequest {
   final String roomName;
   @JsonKey(name: 'roomImageUrl')
   final String roomImageUrl;
+  @JsonKey(name: 'initialUserIds')
+  final List<String> initialUserIds;
 
-  RoomCreateRequest(this.roomName, this.roomImageUrl);
+  RoomCreateRequest(this.roomName, this.roomImageUrl, this.initialUserIds);
 
   factory RoomCreateRequest.fromJson(Map<String, dynamic> json) =>
       _$RoomCreateRequestFromJson(json);

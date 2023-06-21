@@ -24,7 +24,7 @@ class SocialScreen
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '내 친구',
+          '내 친구 (${state.friendSet.length}명)',
           style: TextStyle(
             color: BaseColor.warmGray700,
             fontSize: 15.sp,

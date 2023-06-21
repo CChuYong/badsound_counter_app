@@ -24,12 +24,29 @@ class CreateNewRoomScreenAction extends BaseAction<CreateNewRoomScreen,
   CreateNewRoomScreenAction() : super(CreateNewRoomScreenState());
 
   @override
-  Future<CreateNewRoomScreenState> initState() async =>
-      CreateNewRoomScreenState();
+  Future<CreateNewRoomScreenState> initState() async  {
+    await updateFriends();
+    return state;
+  }
+
+  void toggleSelection(String userId) {
+    setState(() {
+      if(state.selectedUserIds.contains(userId)) {
+        state.selectedUserIds.remove(userId);
+      }else{
+        state.selectedUserIds.add(userId);
+      }
+    });
+  }
+
+  bool isSelected(String userId) {
+    return state.selectedUserIds.contains(userId);
+  }
+
 
   Future<void> createRoom() async {
     final roomResponse = await openAPI.createNewRoom(
-        RoomCreateRequest(roomTitleController.text, state.profileImageUrl));
+        RoomCreateRequest(roomTitleController.text, state.profileImageUrl, state.selectedUserIds.toList()));
     final mockRoom = RoomDetailResponse(
       roomResponse.roomId,
       roomResponse.roomName,
@@ -48,6 +65,13 @@ class CreateNewRoomScreenAction extends BaseAction<CreateNewRoomScreen,
         await messageRepository.getMessagesByRoom(roomDetail.roomId);
     Get.back();
     await Get.to(() => ChatScreen(roomDetail.toModel(), messages));
+  }
+
+  Future<void> updateFriends() async {
+    final friends = await openAPI.getMyFriends();
+    setState(() {
+      friends.forEach((element) { state.friendsMap[element.id] = element.toModel(); });
+    });
   }
 
   void uploadImage() async {

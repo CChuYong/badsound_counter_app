@@ -85,7 +85,7 @@ class ChatScreen
                 child: CustomScrollView(reverse: false, slivers: [
                   SliverList(
                       delegate: SliverChildListDelegate(
-                          state.violentSet.map(buildViolent).toList())),
+                          state.violentSet.map((e) => buildViolent(action, e)).toList())),
                   SliverToBoxAdapter(child: SizedBox(height: 20.sp)),
                   SliverToBoxAdapter(child: violentAddButton(action)),
                   SliverToBoxAdapter(child: SizedBox(height: 5.sp)),
@@ -101,7 +101,7 @@ class ChatScreen
     );
   }
 
-  Widget buildViolent(Violent violent) {
+  Widget buildViolent(ChatScreenAction action, Violent violent) {
     return Column(
       children: [
         Row(
@@ -124,7 +124,11 @@ class ChatScreen
                       height: 1.2,
                     )),
                 SizedBox(width: 3.sp),
-                Icon(Icons.delete_forever, color: BaseColor.defaultRed, size: 17.sp)
+                GestureDetector(
+                  onTap: () => action.deleteViolents(violent.id),
+                  child: Icon(Icons.delete_forever, color: BaseColor.defaultRed, size: 17.sp),
+                )
+
               ],
             )
             

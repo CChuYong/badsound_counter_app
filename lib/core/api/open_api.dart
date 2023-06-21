@@ -108,4 +108,8 @@ abstract class OpenAPI {
   @POST('/rooms/{roomId}/violents')
   Future<ViolentResponse> createRoomViolent(
       @Path() String roomId, @Body() ViolentRequest request);
+
+  @DELETE('/rooms/{roomId}/violents/{violentId}')
+  Future<dynamic> deleteViolent(
+      @Path() String roomId, @Path() String violentId);
 }

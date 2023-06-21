@@ -64,6 +64,17 @@ class ChatScreenAction
     });
   }
 
+  Future<void> deleteViolents(String violentId) async {
+    confirmModal(
+        content: '정말 삭제 할까요?',
+        confirmText: '삭제',
+        onConfirm: () async{
+          await openAPI.deleteViolent(roomResponse.roomId, violentId);
+          await reloadViolents();
+          Get.back();
+        });
+  }
+
   void onTapCreateViolent() {
     final nameController = TextEditingController();
     final descController = TextEditingController();

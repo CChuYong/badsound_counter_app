@@ -3,13 +3,16 @@ import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
 import 'package:badsound_counter_app/core/model/user.dart';
 import 'package:badsound_counter_app/core/repository/user_repository.dart';
+import 'package:badsound_counter_app/core/util/extension.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
+import 'package:badsound_counter_app/presenter/feature/profile_screen/profile_screen_state.dart';
 import 'package:badsound_counter_app/view/designsystem/component/mini_info_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:quiver/collection.dart';
 
+import '../../core/framework/state_store.dart';
 import '../../view/designsystem/theme/base_color.dart';
 import '../../view/feature/navigator_screen/social_screen/social_sceren.dart';
 
@@ -24,7 +27,11 @@ class SocialScreenState {
 
 class SocialScreenAction
     extends BaseAction<SocialScreen, SocialScreenAction, SocialScreenState> {
-  SocialScreenAction() : super(SocialScreenState('#'));
+  SocialScreenAction() : super(SocialScreenState(
+      StateStore.loadState(ProfileScreenState)
+      ?.letCatching(ProfileScreenState.fromJson)?.taggedNickname ?? '#')) {
+    state.friendSet.addAll(inject<UserRepository>().friendsCache);
+  }
 
   final OpenAPI openAPI = inject<OpenAPI>();
   final UserRepository userRepository = inject<UserRepository>();
@@ -34,6 +41,13 @@ class SocialScreenAction
     state.myTag = (await userRepository.getCachedMe()).taggedNickname;
     await updateFriends();
     return state;
+  }
+
+  @override
+  void dispose() {
+    final friends = state.friendSet.toList();
+    userRepository.friendsCache.addAll(friends);
+    userRepository.saveFriends(friends);
   }
 
   Future<void> updateFriends() async {

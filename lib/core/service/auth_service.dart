@@ -3,8 +3,10 @@ import 'dart:typed_data';
 
 import 'package:badsound_counter_app/core/api/model/device_request.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
+import 'package:badsound_counter_app/core/framework/state_store.dart';
 import 'package:badsound_counter_app/core/repository/message_repository.dart';
 import 'package:badsound_counter_app/core/repository/room_repository.dart';
+import 'package:badsound_counter_app/core/repository/user_repository.dart';
 import 'package:badsound_counter_app/core/service/socket_service.dart';
 import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:badsound_counter_app/core/state/push_store.dart';
@@ -21,8 +23,6 @@ class AuthService {
   final pushStore = inject<PushStore>();
   final openAPI = inject<OpenAPI>();
 
-
-
   Future<void> authenticate(AuthToken token) async {
     print("Try authenticating");
     //Phase 1: Store tokens
@@ -37,8 +37,7 @@ class AuthService {
     }
 
     //Phase: Clear all repositories
-    await inject<RoomRepository>().truncate();
-    await inject<MessageRepository>().truncate();
+    await cleanupData();
 
     await initializePostAuth();
 
@@ -74,9 +73,15 @@ class AuthService {
 
   Future<void> logout() async {
     print("Logging out..");
-    await inject<RoomRepository>().truncate();
-    await inject<MessageRepository>().truncate();
+    await cleanupData();
     authProvider.clearAuthentication();
     await Get.offNamed('/login');
+  }
+
+  Future<void> cleanupData() async {
+    await inject<RoomRepository>().truncate();
+    await inject<MessageRepository>().truncate();
+    await inject<UserRepository>().truncate();
+    StateStore.clear();
   }
 }

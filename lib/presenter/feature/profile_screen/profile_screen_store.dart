@@ -156,7 +156,8 @@ class ProfileScreenAction
             });
         break;
       case ProfileScreenMenuType.notification:
-        Get.to(() => UpdateNotificationConfig());
+        openAPI.getNotificationConfig()
+            .then((value) => Get.to(() => UpdateNotificationConfig(value)));
         break;
       default:
         break;

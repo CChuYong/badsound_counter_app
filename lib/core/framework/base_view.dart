@@ -20,7 +20,18 @@ abstract class BaseView<V extends BaseView<V, A, S>,
         state.context,
       ),
       builder: (A action) => WillPopScope(
-        child: render(context, action, action.state),
+        child: Stack(
+          children: [
+            render(context, action, action.state),
+            action.isLoading ? Positioned(
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  color: Colors.black.withOpacity(0.1),
+                )
+            ): Container()
+          ],
+        ),
         onWillPop: () => action.onWillPop(),
       ),
     );

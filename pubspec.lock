@@ -888,6 +888,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0+1"
+  rsocket:
+    dependency: "direct main"
+    description:
+      name: rsocket
+      sha256: fdd155541434c7f31518488a4cbe10ef66ad9c26a83d57b1457aa312bf4c3428
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   rxdart:
     dependency: transitive
     description:

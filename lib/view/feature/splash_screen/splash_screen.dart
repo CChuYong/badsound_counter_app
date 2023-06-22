@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:badsound_counter_app/core/service/auth_service.dart';
 import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:badsound_counter_app/view/feature/login_screen.dart/login_screen.dart';
@@ -18,6 +19,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final AuthService authService = inject<AuthService>();
   final AuthProvider authProvider = inject<AuthProvider>();
 
   @override
@@ -25,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(Duration(seconds: 3), () {
       if (authProvider.isAuthenticated()) {
-        Get.offNamed('/navigator');
+        authService.initializePostAuth().then((value) => Get.offNamed('/navigator'));
       } else {
         Navigator.pushReplacement(
           context,

@@ -16,6 +16,7 @@ abstract class BaseAction<V extends BaseView<V, A, S>,
   BaseAction(this.state);
 
   bool isBusy = true; // must be started as true
+  bool isLoading = false;
 
   final Debouncer reloadDbn = Debouncer(const Duration(milliseconds: 300));
   final Debouncer renderDbn = Debouncer(const Duration(milliseconds: 50));
@@ -29,6 +30,12 @@ abstract class BaseAction<V extends BaseView<V, A, S>,
   @protected
   void render() {
     if (state != null) renderDbn.runLastCall(() => update());
+  }
+
+
+  void setLoading(bool loading) {
+    isLoading = loading;
+    render();
   }
 
   Future<bool> onWillPop() async => true;

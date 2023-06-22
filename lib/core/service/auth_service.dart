@@ -1,12 +1,17 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:badsound_counter_app/core/api/model/device_request.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/repository/message_repository.dart';
 import 'package:badsound_counter_app/core/repository/room_repository.dart';
+import 'package:badsound_counter_app/core/service/socket_service.dart';
 import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:badsound_counter_app/core/state/push_store.dart';
 import 'package:badsound_counter_app/core/util/device_info_util.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:get/get.dart';
+
 
 import '../api/model/refresh_request.dart';
 import '../model/auth_token.dart';
@@ -15,6 +20,8 @@ class AuthService {
   final authProvider = inject<AuthProvider>();
   final pushStore = inject<PushStore>();
   final openAPI = inject<OpenAPI>();
+
+
 
   Future<void> authenticate(AuthToken token) async {
     print("Try authenticating");
@@ -33,11 +40,18 @@ class AuthService {
     await inject<RoomRepository>().truncate();
     await inject<MessageRepository>().truncate();
 
+    await initializePostAuth();
+
     //Phase 2: Navigate Page
     final currentRoute = Get.currentRoute;
     if (currentRoute == '/' || currentRoute == '/login') {
       await Get.offNamed('navigator');
     }
+  }
+
+  Future<void> initializePostAuth() async {
+    final socketService = inject<SocketService>();
+    socketService.connect();
   }
 
   Future<bool> refresh() async {

@@ -22,6 +22,7 @@ import 'model/upload_req_response.dart';
 part 'open_api.g.dart';
 
 @RestApi(baseUrl: 'https://bsc.chuyong.kr/app')
+//@RestApi(baseUrl: 'http://192.168.50.81:8080/app')
 abstract class OpenAPI {
   factory OpenAPI(Dio dio, {String baseUrl}) = _OpenAPI;
 

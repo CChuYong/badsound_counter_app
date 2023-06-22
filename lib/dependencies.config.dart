@@ -4,6 +4,7 @@ import 'package:badsound_counter_app/core/repository/message_repository.dart';
 import 'package:badsound_counter_app/core/repository/room_repository.dart';
 import 'package:badsound_counter_app/core/repository/user_repository.dart';
 import 'package:badsound_counter_app/core/service/auth_service.dart';
+import 'package:badsound_counter_app/core/service/socket_service.dart';
 import 'package:badsound_counter_app/core/service/webview_service.dart';
 import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:badsound_counter_app/core/state/push_store.dart';
@@ -24,6 +25,7 @@ Future<void> init() async {
   inject.registerSingleton(UserStore());
   inject.registerSingleton(PushStore());
   inject.registerSingleton(AuthService());
+  inject.registerSingleton(SocketService());
   inject.registerSingleton(MessageRepository());
   inject.registerSingleton(RoomRepository());
 

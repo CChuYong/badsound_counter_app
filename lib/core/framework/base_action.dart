@@ -65,6 +65,15 @@ abstract class BaseAction<V extends BaseView<V, A, S>,
     render();
   }
 
+  Future doUpdate(Future func) async{
+    try{
+      setLoading(true);
+      return await func;
+    } finally {
+      setLoading(false);
+    }
+  }
+
   static void errorSnackBar({
     required String message,
     SnackBarType type = SnackBarType.GREY, // neutral

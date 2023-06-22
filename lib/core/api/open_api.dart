@@ -6,6 +6,7 @@ import 'package:badsound_counter_app/core/api/model/device_request.dart';
 import 'package:badsound_counter_app/core/api/model/room_create_request.dart';
 import 'package:badsound_counter_app/core/api/model/room_detail_response.dart';
 import 'package:badsound_counter_app/core/api/model/room_response.dart';
+import 'package:badsound_counter_app/core/api/model/update_notification_request.dart';
 import 'package:badsound_counter_app/core/api/model/upload_request.dart';
 import 'package:badsound_counter_app/core/api/model/user_nickname_request.dart';
 import 'package:badsound_counter_app/core/api/model/violent_request.dart';
@@ -69,6 +70,9 @@ abstract class OpenAPI {
 
   @GET('/me/notification')
   Future<NotificationConfigResponse> getNotificationConfig();
+
+  @POST('/me/notification')
+  Future<NotificationConfigResponse> updateNotification(@Body() UpdateNotificationRequest request);
 
   //User (다른 사람) 관련 API
   @GET('/users/{userId}')

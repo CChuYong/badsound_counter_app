@@ -23,13 +23,14 @@ abstract class BaseView<V extends BaseView<V, A, S>,
         child: Stack(
           children: [
             render(context, action, action.state),
-            action.isLoading ? Positioned(
-                child: Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  color: Colors.black.withOpacity(0.1),
-                )
-            ): Container()
+            action.isLoading
+                ? Positioned(
+                    child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    color: Colors.black.withOpacity(0.1),
+                  ))
+                : Container()
           ],
         ),
         onWillPop: () => action.onWillPop(),

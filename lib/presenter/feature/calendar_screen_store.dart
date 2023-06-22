@@ -22,14 +22,17 @@ class SocialScreenState {
     if (a.userId == b.userId) return 0;
     return b.nickname.compareTo(a.nickname);
   });
+
   SocialScreenState(this.myTag);
 }
 
 class SocialScreenAction
     extends BaseAction<SocialScreen, SocialScreenAction, SocialScreenState> {
-  SocialScreenAction() : super(SocialScreenState(
-      StateStore.loadState(ProfileScreenState)
-      ?.letCatching(ProfileScreenState.fromJson)?.taggedNickname ?? '#')) {
+  SocialScreenAction()
+      : super(SocialScreenState(StateStore.loadState(ProfileScreenState)
+                ?.letCatching(ProfileScreenState.fromJson)
+                ?.taggedNickname ??
+            '#')) {
     state.friendSet.addAll(inject<UserRepository>().friendsCache);
   }
 

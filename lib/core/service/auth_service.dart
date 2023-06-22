@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:badsound_counter_app/core/api/model/device_request.dart';
 import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/state_store.dart';
@@ -13,8 +10,6 @@ import 'package:badsound_counter_app/core/state/push_store.dart';
 import 'package:badsound_counter_app/core/util/device_info_util.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:get/get.dart';
-
-
 import '../api/model/refresh_request.dart';
 import '../model/auth_token.dart';
 

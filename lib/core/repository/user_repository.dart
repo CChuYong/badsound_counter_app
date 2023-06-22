@@ -1,12 +1,11 @@
 import 'dart:collection';
 
 import 'package:badsound_counter_app/core/api/open_api.dart';
-import 'package:badsound_counter_app/core/framework/state_store.dart';
 import 'package:badsound_counter_app/core/model/user.dart';
 import 'package:badsound_counter_app/core/state/user_store.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../../presenter/feature/main_screen/main_screen_stat_box_state.dart';
 
@@ -16,14 +15,17 @@ class UserRepository {
   final OpenAPI api = inject<OpenAPI>();
   final UserStore userStore = inject<UserStore>();
   final HashSet<User> friendsCache = HashSet();
+
   UserRepository() {
     open();
   }
+
   Future<void> truncate() async {
     await database.execute('''
       DELETE FROM $tableName
     ''');
-}
+  }
+
   Future<void> open() async {
     final dbPath = await getDatabasesPath();
     String path = join(dbPath, 'room_data.db');

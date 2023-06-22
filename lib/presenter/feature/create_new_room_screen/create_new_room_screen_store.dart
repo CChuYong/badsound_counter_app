@@ -24,16 +24,16 @@ class CreateNewRoomScreenAction extends BaseAction<CreateNewRoomScreen,
   CreateNewRoomScreenAction() : super(CreateNewRoomScreenState());
 
   @override
-  Future<CreateNewRoomScreenState> initState() async  {
+  Future<CreateNewRoomScreenState> initState() async {
     await updateFriends();
     return state;
   }
 
   void toggleSelection(String userId) {
     setState(() {
-      if(state.selectedUserIds.contains(userId)) {
+      if (state.selectedUserIds.contains(userId)) {
         state.selectedUserIds.remove(userId);
-      }else{
+      } else {
         state.selectedUserIds.add(userId);
       }
     });
@@ -43,10 +43,11 @@ class CreateNewRoomScreenAction extends BaseAction<CreateNewRoomScreen,
     return state.selectedUserIds.contains(userId);
   }
 
-
   Future<void> createRoom() async {
-    final roomResponse = await openAPI.createNewRoom(
-        RoomCreateRequest(roomTitleController.text, state.profileImageUrl, state.selectedUserIds.toList()));
+    final roomResponse = await openAPI.createNewRoom(RoomCreateRequest(
+        roomTitleController.text,
+        state.profileImageUrl,
+        state.selectedUserIds.toList()));
     final mockRoom = RoomDetailResponse(
       roomResponse.roomId,
       roomResponse.roomName,
@@ -70,7 +71,9 @@ class CreateNewRoomScreenAction extends BaseAction<CreateNewRoomScreen,
   Future<void> updateFriends() async {
     final friends = await openAPI.getMyFriends();
     setState(() {
-      friends.forEach((element) { state.friendsMap[element.id] = element.toModel(); });
+      friends.forEach((element) {
+        state.friendsMap[element.id] = element.toModel();
+      });
     });
   }
 

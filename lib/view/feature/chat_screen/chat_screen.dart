@@ -84,8 +84,9 @@ class ChatScreen
                 onRefresh: action.reloadViolents,
                 child: CustomScrollView(reverse: false, slivers: [
                   SliverList(
-                      delegate: SliverChildListDelegate(
-                          state.violentSet.map((e) => buildViolent(action, e)).toList())),
+                      delegate: SliverChildListDelegate(state.violentSet
+                          .map((e) => buildViolent(action, e))
+                          .toList())),
                   SliverToBoxAdapter(child: SizedBox(height: 20.sp)),
                   SliverToBoxAdapter(child: violentAddButton(action)),
                   SliverToBoxAdapter(child: SizedBox(height: 5.sp)),
@@ -126,12 +127,11 @@ class ChatScreen
                 SizedBox(width: 3.sp),
                 GestureDetector(
                   onTap: () => action.deleteViolents(violent.id),
-                  child: Icon(Icons.delete_forever, color: BaseColor.defaultRed, size: 17.sp),
+                  child: Icon(Icons.delete_forever,
+                      color: BaseColor.defaultRed, size: 17.sp),
                 )
-
               ],
             )
-            
           ],
         ),
         SizedBox(

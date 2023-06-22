@@ -1,7 +1,6 @@
 import 'package:badsound_counter_app/core/framework/base_view.dart';
 import 'package:badsound_counter_app/presenter/feature/create_new_room_screen/create_new_room_screen_store.dart';
 import 'package:badsound_counter_app/view/component/touchableopacity.dart';
-import 'package:badsound_counter_app/view/designsystem/component/base_top_bar.dart';
 import 'package:badsound_counter_app/view/designsystem/component/gray_rounded_button.dart';
 import 'package:badsound_counter_app/view/designsystem/component/title_text_box.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -42,11 +41,11 @@ class CreateNewRoomScreen extends BaseView<CreateNewRoomScreen,
       width: double.infinity,
       height: double.infinity,
       color: BaseColor.defaultBackgroundColor,
-      child:  Scaffold(
-            appBar: buildAppBar(),
-        backgroundColor: BaseColor.defaultBackgroundColor,
-        body: SafeArea(child:
-        Padding(
+      child: Scaffold(
+          appBar: buildAppBar(),
+          backgroundColor: BaseColor.defaultBackgroundColor,
+          body: SafeArea(
+            child: Padding(
               padding: EdgeInsets.only(left: 10.sp, right: 10.sp, top: 10.sp),
               child: Column(
                 children: [
@@ -73,9 +72,7 @@ class CreateNewRoomScreen extends BaseView<CreateNewRoomScreen,
                   SizedBox(height: 12.sp),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text('초대할 친구 선택')
-                    ],
+                    children: [Text('초대할 친구 선택')],
                   ),
                   SizedBox(height: 14.sp),
                   Expanded(
@@ -95,58 +92,56 @@ class CreateNewRoomScreen extends BaseView<CreateNewRoomScreen,
                 ],
               ),
             ),
-
-      )),
+          )),
     );
   }
 
   Widget buildFriend(CreateNewRoomScreenAction action, User user) {
     return TouchableOpacity(
-      onTap: () => action.toggleSelection(user.userId),
-        child:
-      Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        onTap: () => action.toggleSelection(user.userId),
+        child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  width: 18.sp,
-                  height: 18.sp,
-                  decoration: BoxDecoration(
-                    color: BaseColor.warmGray700,
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: CachedNetworkImageProvider(user.profileImgUrl),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10.sp),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Text(user.nickname,
-                        style: TextStyle(
-                          color: BaseColor.warmGray600,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w700,
-                          height: 1.2,
-                        )),
+                    Container(
+                      width: 18.sp,
+                      height: 18.sp,
+                      decoration: BoxDecoration(
+                        color: BaseColor.warmGray700,
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: CachedNetworkImageProvider(user.profileImgUrl),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10.sp),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(user.nickname,
+                            style: TextStyle(
+                              color: BaseColor.warmGray600,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w700,
+                              height: 1.2,
+                            )),
+                      ],
+                    )
                   ],
-                )
+                ),
+                if (action.isSelected(user.userId))
+                  Icon(Icons.check, size: 14.sp, color: BaseColor.warmGray600),
               ],
             ),
-            if(action.isSelected(user.userId))
-              Icon(Icons.check, size: 14.sp, color: BaseColor.warmGray600),
+            SizedBox(
+              height: 10.sp,
+            ),
+            Divider(),
           ],
-        ),
-        SizedBox(
-          height: 10.sp,
-        ),
-        Divider(),
-      ],
-    ));
+        ));
   }
 }

@@ -58,7 +58,9 @@ class MainPageStatBox
                       Text(
                         CurrencyParser.format(state.statBoxState.money),
                         style: TextStyle(
-                          color: state.statBoxState.money > 0 ? BaseColor.defaultGreen : BaseColor.defaultRed,
+                          color: state.statBoxState.money > 0
+                              ? BaseColor.defaultGreen
+                              : BaseColor.defaultRed,
                           fontSize: 36.sp,
                           fontWeight: FontWeight.w600,
                           height: 1.2,

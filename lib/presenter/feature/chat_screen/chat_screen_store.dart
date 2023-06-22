@@ -69,7 +69,7 @@ class ChatScreenAction
     confirmModal(
         content: '정말 삭제 할까요?',
         confirmText: '삭제',
-        onConfirm: () async{
+        onConfirm: () async {
           await openAPI.deleteViolent(roomResponse.roomId, violentId);
           await reloadViolents();
           Get.back();

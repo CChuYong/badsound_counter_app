@@ -1,6 +1,5 @@
 import 'package:badsound_counter_app/core/framework/base_view.dart';
 import 'package:badsound_counter_app/core/model/user.dart';
-import 'package:badsound_counter_app/core/util/date_parser.dart';
 import 'package:badsound_counter_app/presenter/feature/calendar_screen_store.dart';
 import 'package:badsound_counter_app/view/designsystem/component/safe_area_with_padding.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -43,9 +42,11 @@ class SocialScreen
                       state.friendSet.map(buildFriend).toList())),
               SliverToBoxAdapter(child: SizedBox(height: 15.sp)),
               SliverToBoxAdapter(
-                  child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
                     Text(
-                        '내 태그: ${state.myTag}',
+                      '내 태그: ${state.myTag}',
                       style: TextStyle(
                         color: BaseColor.warmGray700,
                         fontSize: 12.sp,
@@ -104,8 +105,7 @@ class SocialScreen
                 )
               ],
             ),
-            Text(
-            "",
+            Text("",
                 style: TextStyle(
                   color: BaseColor.warmGray600,
                   fontSize: 10.sp,

@@ -27,7 +27,9 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(Duration(seconds: 3), () {
       if (authProvider.isAuthenticated()) {
-        authService.initializePostAuth().then((value) => Get.offNamed('/navigator'));
+        authService
+            .initializePostAuth()
+            .then((value) => Get.offNamed('/navigator'));
       } else {
         Navigator.pushReplacement(
           context,

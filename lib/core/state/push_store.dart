@@ -68,7 +68,8 @@ class PushStore {
     switch (data["packetType"]) {
       case "MESSAGE_RECEIVED":
         final body = data["payload"];
-        final message = ChatResponse.fromJson(body is String ? jsonDecode(data["payload"]) : body);
+        final message = ChatResponse.fromJson(
+            body is String ? jsonDecode(data["payload"]) : body);
         chatMessageConsumer?.let((e) => e(message));
         break;
       default:

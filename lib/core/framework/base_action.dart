@@ -32,7 +32,6 @@ abstract class BaseAction<V extends BaseView<V, A, S>,
     if (state != null) renderDbn.runLastCall(() => update());
   }
 
-
   void setLoading(bool loading) {
     isLoading = loading;
     render();

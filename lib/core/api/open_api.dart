@@ -16,6 +16,7 @@ import 'package:retrofit/http.dart';
 import 'model/chat_request.dart';
 import 'model/friend_request.dart';
 import 'model/me_response.dart';
+import 'model/notification_config_response.dart';
 import 'model/refresh_request.dart';
 import 'model/upload_req_response.dart';
 
@@ -65,6 +66,9 @@ abstract class OpenAPI {
 
   @POST('/me/friends')
   Future<dynamic> createFriend(@Body() FriendRequest request);
+
+  @GET('/me/notification')
+  Future<NotificationConfigResponse> getNotificationConfig();
 
   //User (다른 사람) 관련 API
   @GET('/users/{userId}')

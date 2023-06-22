@@ -306,6 +306,29 @@ class _OpenAPI implements OpenAPI {
   }
 
   @override
+  Future<NotificationConfigResponse> getNotificationConfig() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<NotificationConfigResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/me/notification',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = NotificationConfigResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<MeResponse> getUserById(userId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

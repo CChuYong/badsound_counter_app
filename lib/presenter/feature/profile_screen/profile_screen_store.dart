@@ -12,6 +12,7 @@ import 'package:badsound_counter_app/core/util/extension.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:badsound_counter_app/presenter/feature/profile_screen/profile_screen_state.dart';
 import 'package:badsound_counter_app/view/feature/navigator_screen/profile_screen/profile_screen.dart';
+import 'package:badsound_counter_app/view/feature/update_notification_config/update_notification_config.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -153,6 +154,9 @@ class ProfileScreenAction
             onConfirm: () {
               authService.logout();
             });
+        break;
+      case ProfileScreenMenuType.notification:
+        Get.to(() => UpdateNotificationConfig());
         break;
       default:
         break;

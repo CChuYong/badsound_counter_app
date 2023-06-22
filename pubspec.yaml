@@ -31,6 +31,7 @@ dependencies:
   image_picker: ^0.8.9
   cached_network_image: ^3.2.3
   rsocket: ^1.0.0
+  toggle_switch: ^2.1.0
 
 dev_dependencies:
   flutter_test:

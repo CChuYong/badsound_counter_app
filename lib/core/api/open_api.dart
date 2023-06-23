@@ -1,5 +1,6 @@
 import 'package:badsound_counter_app/core/api/model/auth_request.dart';
 import 'package:badsound_counter_app/core/api/model/auth_result.dart';
+import 'package:badsound_counter_app/core/api/model/break_friend_request.dart';
 import 'package:badsound_counter_app/core/api/model/chat_response.dart';
 import 'package:badsound_counter_app/core/api/model/dashboard_response.dart';
 import 'package:badsound_counter_app/core/api/model/device_request.dart';
@@ -64,6 +65,9 @@ abstract class OpenAPI {
 
   @GET('/me/friends')
   Future<List<MeResponse>> getMyFriends();
+
+  @DELETE('/me/friends')
+  Future<dynamic> breakFriend(@Body() BreakFriendRequest request);
 
   @GET('/me/friends/requests')
   Future<List<MeResponse>> getMyFriendRequests();

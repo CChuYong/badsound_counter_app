@@ -13,7 +13,6 @@ import 'package:toggle_switch/toggle_switch.dart';
 import '../../../core/api/model/notification_config_response.dart';
 import '../../../core/model/user.dart';
 import '../../../presenter/feature/create_new_room_screen/create_new_room_screen_state.dart';
-import '../../../presenter/feature/update_notification_config/update_notification_config_store.dart';
 import '../../designsystem/component/gray_solid_button.dart';
 import '../../designsystem/theme/base_color.dart';
 import '../../designsystem/theme/base_icon.dart';
@@ -110,9 +109,9 @@ class ProfileViewScreen extends BaseView<ProfileViewScreen,
                           SizedBox(height: 20.sp),
                           state.isFriend ?
                           GraySolidButton('친구 추가',
-                              onTap: () => {}) :
+                              onTap: action.onTapBeFriend) :
                           GraySolidButton('친구 삭제',
-                              onTap: () => {})
+                              onTap: action.onTapBreakFriend)
                           ,
                         ],
                       )

@@ -23,6 +23,11 @@ class SocialScreenState {
     return b.nickname.compareTo(a.nickname);
   });
 
+  TreeSet<User> friendRequests = TreeSet<User>(comparator: (a, b) {
+    if (a.userId == b.userId) return 0;
+    return b.nickname.compareTo(a.nickname);
+  });
+
   SocialScreenState(this.myTag);
 }
 
@@ -43,6 +48,7 @@ class SocialScreenAction
   Future<SocialScreenState> initState() async {
     state.myTag = (await userRepository.getCachedMe()).taggedNickname;
     await updateFriends();
+    await updateRequests();
     return state;
   }
 
@@ -58,6 +64,26 @@ class SocialScreenAction
     setState(() {
       state.friendSet.clear();
       state.friendSet.addAll(friends.map((e) => e.toModel()));
+    });
+  }
+
+  Future<void> acceptFriendRequest(User user) async {
+    await openAPI.acceptFriendRequest(FriendRequest(user.taggedNickname));
+    await updateFriends();
+    await updateRequests();
+  }
+
+  Future<void> denyFriendRequest(User user) async {
+    await openAPI.denyFriendRequest(FriendRequest(user.taggedNickname));
+    await updateFriends();
+    await updateRequests();
+  }
+
+  Future<void> updateRequests() async {
+    final friends = await openAPI.getMyFriendRequests();
+    setState(() {
+      state.friendRequests.clear();
+      state.friendRequests.addAll(friends.map((e) => e.toModel()));
     });
   }
 
@@ -117,7 +143,7 @@ class SocialScreenAction
           ),
           onPressed: () async {
             try {
-              await openAPI.createFriend(FriendRequest(textController.text));
+              await openAPI.createFriendRequest(FriendRequest(textController.text));
             } finally {
               Get.back();
               await updateFriends();

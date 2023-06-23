@@ -23,16 +23,23 @@ class SocialScreen
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          '내 친구 (${state.friendSet.length}명)',
-          style: TextStyle(
-            color: BaseColor.warmGray700,
-            fontSize: 15.sp,
-            fontWeight: FontWeight.w800,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              '내 친구 (${state.friendSet.length}명)',
+              style: TextStyle(
+                color: BaseColor.warmGray700,
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            Icon(Icons.add_rounded, size: 30.sp, color: BaseColor.warmGray700)
+          ],
         ),
         SizedBox(height: 18.sp),
         Expanded(
+          flex: 3,
           child: RefreshIndicator(
             triggerMode: RefreshIndicatorTriggerMode.onEdge,
             onRefresh: action.updateFriends,
@@ -41,24 +48,34 @@ class SocialScreen
                   delegate: SliverChildListDelegate(
                       state.friendSet.map(buildFriend).toList())),
               SliverToBoxAdapter(child: SizedBox(height: 15.sp)),
-              SliverToBoxAdapter(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                    Text(
-                      '내 태그: ${state.myTag}',
-                      style: TextStyle(
-                        color: BaseColor.warmGray700,
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    )
-                  ])),
-              SliverToBoxAdapter(child: SizedBox(height: 5.sp)),
-              SliverToBoxAdapter(child: friendAddButton(action))
             ]),
           ),
         ),
+        SizedBox(height: 10.sp),
+        Text(
+          '친구 요청 (${state.friendRequests.length}명)',
+          style: TextStyle(
+            color: BaseColor.warmGray700,
+            fontSize: 15.sp,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        SizedBox(
+          height: 5.sp,
+        ),
+        Expanded(
+          flex: 1,
+          child: RefreshIndicator(
+            triggerMode: RefreshIndicatorTriggerMode.onEdge,
+            onRefresh: action.updateRequests,
+            child: CustomScrollView(reverse: false, slivers: [
+              SliverList(
+                  delegate: SliverChildListDelegate(
+                      state.friendRequests.map((e) => buildFriendRequest(action, e)).toList())),
+              SliverToBoxAdapter(child: SizedBox(height: 15.sp)),
+            ]),
+          ),
+        )
       ],
     ));
   }
@@ -155,5 +172,107 @@ class SocialScreen
             ],
           ),
         ));
+  }
+  Widget buildFriendRequest(SocialScreenAction action, User user) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 30.sp,
+                  height: 30.sp,
+                  decoration: BoxDecoration(
+                    color: BaseColor.warmGray700,
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: CachedNetworkImageProvider(user.profileImgUrl),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10.sp),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(user.taggedNickname,
+                        style: TextStyle(
+                          color: BaseColor.warmGray600,
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w700,
+                          height: 1.2,
+                        ))
+                  ],
+                )
+              ],
+            ),
+            Row(
+              children: [
+                acceptButton(action, user),
+                SizedBox(width: 5.sp),
+                denyButton(action, user)
+              ],
+            )
+
+          ],
+        ),
+        SizedBox(
+          height: 3.sp,
+        ),
+        Divider(),
+      ],
+    );
+  }
+
+  Widget acceptButton(SocialScreenAction action, User user) {
+    return TouchableOpacity(
+        onTap: () => action.acceptFriendRequest(user),
+        child:
+    Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4.sp),
+          color: BaseColor.defaultGreen.withOpacity(0.7),
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(top: 4.sp, bottom: 4.sp, left: 6.sp, right: 6.sp),
+          child: Text(
+              "수락",
+              style: TextStyle(
+                color: BaseColor.warmGray50,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w700,
+                height: 1.2,
+              )
+          ),
+        )
+    )
+    );
+  }
+
+  Widget denyButton(SocialScreenAction action, User user) {
+    return TouchableOpacity(
+      onTap: () => action.denyFriendRequest(user),
+        child:
+    Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4.sp),
+          color: BaseColor.warmGray300,
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(top: 4.sp, bottom: 4.sp, left: 6.sp, right: 6.sp),
+          child: Text(
+              "거절",
+              style: TextStyle(
+                color: BaseColor.warmGray600,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w700,
+                height: 1.2,
+              )
+          ),
+        )
+    )
+    );
   }
 }

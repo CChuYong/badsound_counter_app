@@ -283,7 +283,32 @@ class _OpenAPI implements OpenAPI {
   }
 
   @override
-  Future<dynamic> createFriend(request) async {
+  Future<List<MeResponse>> getMyFriendRequests() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<MeResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/me/friends/requests',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => MeResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<dynamic> createFriendRequest(request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -296,7 +321,53 @@ class _OpenAPI implements OpenAPI {
     )
         .compose(
           _dio.options,
-          '/me/friends',
+          '/me/friends/requests',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<dynamic> acceptFriendRequest(request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/me/friends/requests/accept',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<dynamic> denyFriendRequest(request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/me/friends/requests/deny',
           queryParameters: queryParameters,
           data: _data,
         )

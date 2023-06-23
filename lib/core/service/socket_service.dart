@@ -22,20 +22,27 @@ class SocketService {
   }
 
   Future<void> connect() async {
+    if (authProvider.authToken == null || pushStore.token == null) return;
     final data = jsonEncode({
       'accessToken': authProvider.authToken!.accessToken,
       'deviceToken': pushStore.token,
     });
-    await RSocketConnector.create()
-        .keepAlive(2000, 999999999)
-        .connect('wss://gateway.chuyong.kr')
-        .catchError((err) => print(err))
-        .asStream()
-        .asyncExpand((event) => event
-            .requestStream!(routeAndDataPayload('/v1/event-gateway', data)))
-        .map((event) => event!.getDataUtf8())
-        .forEach((element) {
-      pushStore.processMessage(jsonDecode(element ?? ''));
-    });
+    try{
+      await RSocketConnector.create()
+          .keepAlive(2000, 999999999)
+          .connect('wss://gateway.chuyong.kr')
+          .catchError((err) => print(err))
+          .asStream()
+          .asyncExpand((event) => event.requestStream!(routeAndDataPayload('/v1/event-gateway', data)))
+          .map((event) => event!.getDataUtf8())
+          .forEach((element) {
+            pushStore.processMessage(jsonDecode(element ?? ''));
+          });
+    }catch(e) {
+      print("WebSocket Disconnection Detected!! try reconnect after 5 seconds..");
+      await Future.delayed(Duration(milliseconds: 5000));
+      await connect();
+    }
+
   }
 }

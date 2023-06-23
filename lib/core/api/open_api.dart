@@ -65,8 +65,18 @@ abstract class OpenAPI {
   @GET('/me/friends')
   Future<List<MeResponse>> getMyFriends();
 
-  @POST('/me/friends')
-  Future<dynamic> createFriend(@Body() FriendRequest request);
+  @GET('/me/friends/requests')
+  Future<List<MeResponse>> getMyFriendRequests();
+
+  @POST('/me/friends/requests')
+  Future<dynamic> createFriendRequest(@Body() FriendRequest request);
+
+  @POST('/me/friends/requests/accept')
+  Future<dynamic> acceptFriendRequest(@Body() FriendRequest request);
+
+  @POST('/me/friends/requests/deny')
+  Future<dynamic> denyFriendRequest(@Body() FriendRequest request);
+
 
   @GET('/me/notification')
   Future<NotificationConfigResponse> getNotificationConfig();

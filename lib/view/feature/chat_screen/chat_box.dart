@@ -21,7 +21,8 @@ class ChatBox extends StatelessWidget {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Row(children: [
             GestureDetector(
-              onTap: () => inject<UserService>().openUserProfilePage(chat.senderId),
+              onTap: () =>
+                  inject<UserService>().openUserProfilePage(chat.senderId),
               child: Container(
                 width: 44.sp,
                 height: 44.sp,

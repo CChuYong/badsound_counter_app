@@ -145,7 +145,8 @@ class SocialScreenAction
           ),
           onPressed: () async {
             try {
-              await openAPI.createFriendRequest(FriendRequest(textController.text));
+              await openAPI
+                  .createFriendRequest(FriendRequest(textController.text));
             } finally {
               Get.back();
               await updateFriends();

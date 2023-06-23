@@ -1,25 +1,17 @@
-import 'package:badsound_counter_app/core/api/model/me_response.dart';
 import 'package:badsound_counter_app/core/framework/base_view.dart';
 import 'package:badsound_counter_app/core/util/date_parser.dart';
-import 'package:badsound_counter_app/presenter/feature/create_new_room_screen/create_new_room_screen_store.dart';
 import 'package:badsound_counter_app/presenter/feature/profile_view_screen/profile_view_screen_store.dart';
-import 'package:badsound_counter_app/view/component/touchableopacity.dart';
-import 'package:badsound_counter_app/view/designsystem/component/title_text_box.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
-import '../../../core/api/model/notification_config_response.dart';
-import '../../../core/model/user.dart';
-import '../../../presenter/feature/create_new_room_screen/create_new_room_screen_state.dart';
 import '../../designsystem/component/gray_solid_button.dart';
 import '../../designsystem/theme/base_color.dart';
-import '../../designsystem/theme/base_icon.dart';
 
 class ProfileViewScreen extends BaseView<ProfileViewScreen,
     ProfileViewScreenAction, ProfileViewScreenState> {
   final ProfileViewScreenState profile;
+
   ProfileViewScreen(this.profile, {super.key});
 
   @override
@@ -73,10 +65,10 @@ class ProfileViewScreen extends BaseView<ProfileViewScreen,
                                 shape: BoxShape.circle,
                                 image: state.profile.profileImgUrl != ''
                                     ? DecorationImage(
-                                  image: CachedNetworkImageProvider(
-                                      state.profile.profileImgUrl),
-                                  fit: BoxFit.fitWidth,
-                                )
+                                        image: CachedNetworkImageProvider(
+                                            state.profile.profileImgUrl),
+                                        fit: BoxFit.fitWidth,
+                                      )
                                     : null,
                               ),
                             ),
@@ -107,17 +99,15 @@ class ProfileViewScreen extends BaseView<ProfileViewScreen,
                             ),
                           ),
                           SizedBox(height: 20.sp),
-                          state.isFriend ?
-                          GraySolidButton('친구 추가',
-                              onTap: action.onTapBeFriend) :
-                          GraySolidButton('친구 삭제',
-                              onTap: action.onTapBreakFriend)
-                          ,
+                          state.isFriend
+                              ? GraySolidButton('친구 추가',
+                                  onTap: action.onTapBeFriend)
+                              : GraySolidButton('친구 삭제',
+                                  onTap: action.onTapBreakFriend),
                         ],
                       )
                     ],
                   ),
-
                 ],
               ),
             ),

@@ -10,16 +10,22 @@ class UpdateNotificationConfigState {
   bool badSoundAlert;
   bool nonBadSoundAlert;
   bool noticeAlert;
-  UpdateNotificationConfigState(this.socialAlert, this.badSoundAlert, this.nonBadSoundAlert, this.noticeAlert);
+
+  UpdateNotificationConfigState(this.socialAlert, this.badSoundAlert,
+      this.nonBadSoundAlert, this.noticeAlert);
 }
 
-class UpdateNotificationConfigAction extends BaseAction<UpdateNotificationConfig, UpdateNotificationConfigAction, UpdateNotificationConfigState> {
-  UpdateNotificationConfigAction(NotificationConfigResponse config) : super(UpdateNotificationConfigState(
-    config.socialAlert,
-    config.badSoundAlert,
-    config.nonBadSoundAlert,
-    config.noticeAlert,
-  ));
+class UpdateNotificationConfigAction extends BaseAction<
+    UpdateNotificationConfig,
+    UpdateNotificationConfigAction,
+    UpdateNotificationConfigState> {
+  UpdateNotificationConfigAction(NotificationConfigResponse config)
+      : super(UpdateNotificationConfigState(
+          config.socialAlert,
+          config.badSoundAlert,
+          config.nonBadSoundAlert,
+          config.noticeAlert,
+        ));
 
   final OpenAPI openAPI = inject<OpenAPI>();
 
@@ -27,8 +33,7 @@ class UpdateNotificationConfigAction extends BaseAction<UpdateNotificationConfig
   Future<UpdateNotificationConfigState> initState() async => state;
 
   Future<bool> changeSetting(String type, bool enabled) async {
-      await openAPI.updateNotification(UpdateNotificationRequest(type, enabled));
+    await openAPI.updateNotification(UpdateNotificationRequest(type, enabled));
     return false;
   }
-
 }

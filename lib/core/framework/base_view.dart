@@ -31,24 +31,22 @@ abstract class BaseView<V extends BaseView<V, A, S>,
                     color: Colors.black.withOpacity(0.1),
                   ))
                 : Container(),
-            action.imagePreviewUrl != null ? Positioned(
-                child: GestureDetector(
-                  onTap: action.clearImagePreview,
-                  child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      color: Colors.black.withOpacity(0.6),
-                      child: Center(
-                        child: Image.network(
-                          action.imagePreviewUrl!,
-                          fit: BoxFit.fitWidth,
-                        ),
-                      )
-                  ),
-                )
-                )
+            action.imagePreviewUrl != null
+                ? Positioned(
+                    child: GestureDetector(
+                    onTap: action.clearImagePreview,
+                    child: Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        color: Colors.black.withOpacity(0.6),
+                        child: Center(
+                          child: Image.network(
+                            action.imagePreviewUrl!,
+                            fit: BoxFit.fitWidth,
+                          ),
+                        )),
+                  ))
                 : Container(),
-
           ],
         ),
         onWillPop: () => action.onWillPop(),

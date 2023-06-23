@@ -10,6 +10,7 @@ import 'package:badsound_counter_app/core/state/push_store.dart';
 import 'package:badsound_counter_app/core/util/device_info_util.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:get/get.dart';
+
 import '../api/model/refresh_request.dart';
 import '../model/auth_token.dart';
 

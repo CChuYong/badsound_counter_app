@@ -1,4 +1,3 @@
-import 'package:badsound_counter_app/core/framework/base_action.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../view/feature/navigator_screen/main_navigator.dart';
@@ -10,9 +9,9 @@ class MainNavigatorState {
   MainNavigatorState({this.pageNumber = 1});
 }
 
-class MainNavigatorAction
-    extends State<MainNavigator> {
+class MainNavigatorAction extends State<MainNavigator> {
   MainNavigatorAction();
+
   final MainNavigatorState state = MainNavigatorState();
 
   void bottomBarTap(int index) async {

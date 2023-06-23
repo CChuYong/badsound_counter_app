@@ -45,8 +45,9 @@ class SocialScreen
             onRefresh: action.updateFriends,
             child: CustomScrollView(reverse: false, slivers: [
               SliverList(
-                  delegate: SliverChildListDelegate(
-                      state.friendSet.map((e)=>buildFriend(action, e)).toList())),
+                  delegate: SliverChildListDelegate(state.friendSet
+                      .map((e) => buildFriend(action, e))
+                      .toList())),
               SliverToBoxAdapter(child: SizedBox(height: 15.sp)),
             ]),
           ),
@@ -70,8 +71,9 @@ class SocialScreen
             onRefresh: action.updateRequests,
             child: CustomScrollView(reverse: false, slivers: [
               SliverList(
-                  delegate: SliverChildListDelegate(
-                      state.friendRequests.map((e) => buildFriendRequest(action, e)).toList())),
+                  delegate: SliverChildListDelegate(state.friendRequests
+                      .map((e) => buildFriendRequest(action, e))
+                      .toList())),
               SliverToBoxAdapter(child: SizedBox(height: 15.sp)),
             ]),
           ),
@@ -82,66 +84,63 @@ class SocialScreen
 
   Widget buildFriend(SocialScreenAction action, User user) {
     return TouchableOpacity(
-      onTap: () => action.onTapFriend(user),
-        child:
-    Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        onTap: () => action.onTapFriend(user),
+        child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  width: 30.sp,
-                  height: 30.sp,
-                  decoration: BoxDecoration(
-                    color: BaseColor.warmGray700,
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: CachedNetworkImageProvider(user.profileImgUrl),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10.sp),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Text(user.nickname,
-                        style: TextStyle(
-                          color: BaseColor.warmGray600,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w700,
-                          height: 1.2,
-                        )),
-                    Text(user.taggedNickname,
-                        style: TextStyle(
-                          color: BaseColor.warmGray400,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w700,
-                          height: 1.2,
-                        ))
+                    Container(
+                      width: 30.sp,
+                      height: 30.sp,
+                      decoration: BoxDecoration(
+                        color: BaseColor.warmGray700,
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: CachedNetworkImageProvider(user.profileImgUrl),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10.sp),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(user.nickname,
+                            style: TextStyle(
+                              color: BaseColor.warmGray600,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w700,
+                              height: 1.2,
+                            )),
+                        Text(user.taggedNickname,
+                            style: TextStyle(
+                              color: BaseColor.warmGray400,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w700,
+                              height: 1.2,
+                            ))
+                      ],
+                    )
                   ],
-                )
+                ),
+                Text("",
+                    style: TextStyle(
+                      color: BaseColor.warmGray600,
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w700,
+                      height: 1.2,
+                    ))
               ],
             ),
-            Text("",
-                style: TextStyle(
-                  color: BaseColor.warmGray600,
-                  fontSize: 10.sp,
-                  fontWeight: FontWeight.w700,
-                  height: 1.2,
-                ))
+            SizedBox(
+              height: 10.sp,
+            ),
+            Divider(),
           ],
-        ),
-        SizedBox(
-          height: 10.sp,
-        ),
-        Divider(),
-      ],
-    )
-    )
-      ;
+        ));
   }
 
   Widget friendAddButton(SocialScreenAction action) {
@@ -178,6 +177,7 @@ class SocialScreen
           ),
         ));
   }
+
   Widget buildFriendRequest(SocialScreenAction action, User user) {
     return Column(
       children: [
@@ -186,37 +186,35 @@ class SocialScreen
           children: [
             TouchableOpacity(
                 onTap: () => action.onTapFriend(user),
-                child:
-            Row(
-              children: [
-                Container(
-                  width: 30.sp,
-                  height: 30.sp,
-                  decoration: BoxDecoration(
-                    color: BaseColor.warmGray700,
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: CachedNetworkImageProvider(user.profileImgUrl),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10.sp),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: [
-                    Text(user.taggedNickname,
-                        style: TextStyle(
-                          color: BaseColor.warmGray600,
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w700,
-                          height: 1.2,
-                        ))
+                    Container(
+                      width: 30.sp,
+                      height: 30.sp,
+                      decoration: BoxDecoration(
+                        color: BaseColor.warmGray700,
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: CachedNetworkImageProvider(user.profileImgUrl),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10.sp),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(user.taggedNickname,
+                            style: TextStyle(
+                              color: BaseColor.warmGray600,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.w700,
+                              height: 1.2,
+                            ))
+                      ],
+                    )
                   ],
-                )
-              ],
-            )
-            ),
+                )),
             Row(
               children: [
                 acceptButton(action, user),
@@ -224,7 +222,6 @@ class SocialScreen
                 denyButton(action, user)
               ],
             )
-
           ],
         ),
         SizedBox(
@@ -238,50 +235,42 @@ class SocialScreen
   Widget acceptButton(SocialScreenAction action, User user) {
     return TouchableOpacity(
         onTap: () => action.acceptFriendRequest(user),
-        child:
-    Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4.sp),
-          color: BaseColor.defaultGreen.withOpacity(0.7),
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(top: 4.sp, bottom: 4.sp, left: 6.sp, right: 6.sp),
-          child: Text(
-              "수락",
-              style: TextStyle(
-                color: BaseColor.warmGray50,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w700,
-                height: 1.2,
-              )
-          ),
-        )
-    )
-    );
+        child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4.sp),
+              color: BaseColor.defaultGreen.withOpacity(0.7),
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(
+                  top: 4.sp, bottom: 4.sp, left: 6.sp, right: 6.sp),
+              child: Text("수락",
+                  style: TextStyle(
+                    color: BaseColor.warmGray50,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w700,
+                    height: 1.2,
+                  )),
+            )));
   }
 
   Widget denyButton(SocialScreenAction action, User user) {
     return TouchableOpacity(
-      onTap: () => action.denyFriendRequest(user),
-        child:
-    Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4.sp),
-          color: BaseColor.warmGray300,
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(top: 4.sp, bottom: 4.sp, left: 6.sp, right: 6.sp),
-          child: Text(
-              "거절",
-              style: TextStyle(
-                color: BaseColor.warmGray600,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w700,
-                height: 1.2,
-              )
-          ),
-        )
-    )
-    );
+        onTap: () => action.denyFriendRequest(user),
+        child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4.sp),
+              color: BaseColor.warmGray300,
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(
+                  top: 4.sp, bottom: 4.sp, left: 6.sp, right: 6.sp),
+              child: Text("거절",
+                  style: TextStyle(
+                    color: BaseColor.warmGray600,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w700,
+                    height: 1.2,
+                  )),
+            )));
   }
 }

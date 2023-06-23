@@ -10,6 +10,7 @@ class UpdateNotificationRequest {
   final bool value;
 
   UpdateNotificationRequest(this.type, this.value);
+
   factory UpdateNotificationRequest.fromJson(Map<String, dynamic> json) =>
       _$UpdateNotificationRequestFromJson(json);
 

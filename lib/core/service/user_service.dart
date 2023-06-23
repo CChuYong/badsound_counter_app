@@ -10,10 +10,7 @@ class UserService {
 
   Future<void> openUserProfilePage(String userId) async {
     final profile = await repository.getUserOrPull(userId);
-    final state = ProfileViewScreenState(
-        profile,
-      repository.isFriend(profile)
-    );
+    final state = ProfileViewScreenState(profile, repository.isFriend(profile));
     Get.to(() => ProfileViewScreen(state));
   }
 }

@@ -14,8 +14,9 @@ class NotificationConfigResponse {
   final bool nonBadSoundAlert;
   @JsonKey(name: 'noticeAlert')
   final bool noticeAlert;
-  NotificationConfigResponse(this.userId, this.socialAlert, this.badSoundAlert, this.nonBadSoundAlert, this.noticeAlert);
 
+  NotificationConfigResponse(this.userId, this.socialAlert, this.badSoundAlert,
+      this.nonBadSoundAlert, this.noticeAlert);
 
   factory NotificationConfigResponse.fromJson(Map<String, dynamic> json) =>
       _$NotificationConfigResponseFromJson(json);

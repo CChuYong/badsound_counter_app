@@ -77,8 +77,8 @@ abstract class BaseAction<V extends BaseView<V, A, S>,
     render();
   }
 
-  Future doUpdate(Future func) async{
-    try{
+  Future doUpdate(Future func) async {
+    try {
       setLoading(true);
       return await func;
     } finally {

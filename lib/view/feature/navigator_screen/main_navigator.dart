@@ -1,12 +1,10 @@
-import 'package:badsound_counter_app/core/framework/base_view.dart';
 import 'package:badsound_counter_app/presenter/feature/main_navigator_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../designsystem/theme/base_color.dart';
 
-class MainNavigator
-    extends StatefulWidget {
+class MainNavigator extends StatefulWidget {
   final Duration animationDuration = const Duration(milliseconds: 50);
   final List<Widget> pages;
 

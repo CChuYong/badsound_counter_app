@@ -81,12 +81,12 @@ abstract class OpenAPI {
   @POST('/me/friends/requests/deny')
   Future<dynamic> denyFriendRequest(@Body() FriendRequest request);
 
-
   @GET('/me/notification')
   Future<NotificationConfigResponse> getNotificationConfig();
 
   @POST('/me/notification')
-  Future<NotificationConfigResponse> updateNotification(@Body() UpdateNotificationRequest request);
+  Future<NotificationConfigResponse> updateNotification(
+      @Body() UpdateNotificationRequest request);
 
   //User (다른 사람) 관련 API
   @GET('/users/{userId}')

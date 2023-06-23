@@ -52,6 +52,8 @@ class UserRepository {
 
   List<User> getFriends() => friendsCache.toList();
 
+  bool isFriend(User user) => friendsCache.contains(user);
+
   Future<List<User>> _getFriends() async {
     final result = await database.rawQuery('SELECT * FROM $tableName', []);
     return result.map((json) {

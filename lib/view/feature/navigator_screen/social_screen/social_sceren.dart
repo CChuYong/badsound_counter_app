@@ -46,7 +46,7 @@ class SocialScreen
             child: CustomScrollView(reverse: false, slivers: [
               SliverList(
                   delegate: SliverChildListDelegate(
-                      state.friendSet.map(buildFriend).toList())),
+                      state.friendSet.map((e)=>buildFriend(action, e)).toList())),
               SliverToBoxAdapter(child: SizedBox(height: 15.sp)),
             ]),
           ),
@@ -80,8 +80,11 @@ class SocialScreen
     ));
   }
 
-  Widget buildFriend(User user) {
-    return Column(
+  Widget buildFriend(SocialScreenAction action, User user) {
+    return TouchableOpacity(
+      onTap: () => action.onTapFriend(user),
+        child:
+    Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -136,7 +139,9 @@ class SocialScreen
         ),
         Divider(),
       ],
-    );
+    )
+    )
+      ;
   }
 
   Widget friendAddButton(SocialScreenAction action) {
@@ -179,6 +184,9 @@ class SocialScreen
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            TouchableOpacity(
+                onTap: () => action.onTapFriend(user),
+                child:
             Row(
               children: [
                 Container(
@@ -207,6 +215,7 @@ class SocialScreen
                   ],
                 )
               ],
+            )
             ),
             Row(
               children: [

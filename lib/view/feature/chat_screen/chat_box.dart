@@ -1,6 +1,8 @@
 import 'package:badsound_counter_app/core/model/chat.dart';
+import 'package:badsound_counter_app/core/service/user_service.dart';
 import 'package:badsound_counter_app/core/util/currency_parser.dart';
 import 'package:badsound_counter_app/core/util/date_parser.dart';
+import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:badsound_counter_app/view/designsystem/theme/base_color.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,15 +20,18 @@ class ChatBox extends StatelessWidget {
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Row(children: [
-            Container(
-              width: 44.sp,
-              height: 44.sp,
-              decoration: BoxDecoration(
-                color: BaseColor.warmGray300,
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: CachedNetworkImageProvider(chat.senderProfileImg),
-                  fit: BoxFit.fill,
+            GestureDetector(
+              onTap: () => inject<UserService>().openUserProfilePage(chat.senderId),
+              child: Container(
+                width: 44.sp,
+                height: 44.sp,
+                decoration: BoxDecoration(
+                  color: BaseColor.warmGray300,
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: CachedNetworkImageProvider(chat.senderProfileImg),
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
             ),

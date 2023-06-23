@@ -3,6 +3,7 @@ import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
 import 'package:badsound_counter_app/core/model/user.dart';
 import 'package:badsound_counter_app/core/repository/user_repository.dart';
+import 'package:badsound_counter_app/core/service/user_service.dart';
 import 'package:badsound_counter_app/core/util/extension.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:badsound_counter_app/presenter/feature/profile_screen/profile_screen_state.dart';
@@ -42,6 +43,7 @@ class SocialScreenAction
   }
 
   final OpenAPI openAPI = inject<OpenAPI>();
+  final UserService userService = inject<UserService>();
   final UserRepository userRepository = inject<UserRepository>();
 
   @override
@@ -150,5 +152,9 @@ class SocialScreenAction
             }
           }),
     );
+  }
+
+  onTapFriend(User user) {
+    userService.openUserProfilePage(user.userId);
   }
 }

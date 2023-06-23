@@ -5,6 +5,7 @@ import 'package:badsound_counter_app/core/repository/room_repository.dart';
 import 'package:badsound_counter_app/core/repository/user_repository.dart';
 import 'package:badsound_counter_app/core/service/auth_service.dart';
 import 'package:badsound_counter_app/core/service/socket_service.dart';
+import 'package:badsound_counter_app/core/service/user_service.dart';
 import 'package:badsound_counter_app/core/service/webview_service.dart';
 import 'package:badsound_counter_app/core/state/auth_store.dart';
 import 'package:badsound_counter_app/core/state/push_store.dart';
@@ -33,4 +34,5 @@ Future<void> init() async {
   dio.interceptors.add(interceptor);
 
   inject.registerSingleton(UserRepository());
+  inject.registerSingleton(UserService());
 }

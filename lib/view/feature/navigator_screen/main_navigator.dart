@@ -6,16 +6,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../designsystem/theme/base_color.dart';
 
 class MainNavigator
-    extends BaseView<MainNavigator, MainNavigatorAction, MainNavigatorState> {
+    extends StatefulWidget {
   final Duration animationDuration = const Duration(milliseconds: 50);
   final List<Widget> pages;
 
   const MainNavigator({super.key, required this.pages});
 
-  @override
-  MainNavigatorAction initAction() => MainNavigatorAction();
-
-  @override
   Widget render(BuildContext context, MainNavigatorAction action,
       MainNavigatorState state) {
     return Scaffold(
@@ -63,6 +59,9 @@ class MainNavigator
       ),
     );
   }
+
+  @override
+  State<StatefulWidget> createState() => MainNavigatorAction();
 }
 
 class BottomBar extends StatefulWidget {

@@ -15,4 +15,8 @@ class ProfileViewScreenAction extends BaseAction<ProfileViewScreen, ProfileViewS
 
   @override
   Future<ProfileViewScreenState> initState() async => state;
+
+  void onTapImageView() {
+    setImagePreview(state.profile.profileImgUrl);
+  }
 }

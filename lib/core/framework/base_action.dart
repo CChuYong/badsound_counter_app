@@ -18,6 +18,8 @@ abstract class BaseAction<V extends BaseView<V, A, S>,
   bool isBusy = true; // must be started as true
   bool isLoading = false;
 
+  String? imagePreviewUrl = null;
+
   final Debouncer reloadDbn = Debouncer(const Duration(milliseconds: 300));
   final Debouncer renderDbn = Debouncer(const Duration(milliseconds: 50));
 
@@ -58,6 +60,16 @@ abstract class BaseAction<V extends BaseView<V, A, S>,
 
   void didChangeDependencies(BuildContext context) {
     // there sould be nothing here, only helper for mixin
+  }
+
+  void setImagePreview(String url) {
+    imagePreviewUrl = url;
+    render();
+  }
+
+  void clearImagePreview() {
+    imagePreviewUrl = null;
+    render();
   }
 
   void setState(VoidCallback fn) {

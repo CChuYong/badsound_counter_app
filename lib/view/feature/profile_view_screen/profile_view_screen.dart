@@ -65,6 +65,7 @@ class ProfileViewScreen extends BaseView<ProfileViewScreen,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           GestureDetector(
+                            onTap: action.onTapImageView,
                             child: Container(
                               width: 82.sp,
                               height: 82.sp,

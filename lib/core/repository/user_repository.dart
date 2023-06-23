@@ -69,6 +69,8 @@ class UserRepository {
   }
 
   Future<void> saveFriends(List<User> friends) async {
+    friendsCache.clear();
+    friendsCache.addAll(friends);
     await truncate();
     friends.forEach((friend) async {
       await database.rawInsert('''

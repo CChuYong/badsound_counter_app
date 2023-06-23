@@ -57,7 +57,6 @@ class SocialScreenAction
   @override
   void dispose() {
     final friends = state.friendSet.toList();
-    userRepository.friendsCache.addAll(friends);
     userRepository.saveFriends(friends);
   }
 

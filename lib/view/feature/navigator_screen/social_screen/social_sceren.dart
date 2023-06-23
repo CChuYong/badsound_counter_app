@@ -34,7 +34,11 @@ class SocialScreen
                 fontWeight: FontWeight.w800,
               ),
             ),
-            Icon(Icons.add_rounded, size: 30.sp, color: BaseColor.warmGray700)
+            GestureDetector(
+              onTap: action.addFriend,
+              child: Icon(Icons.add_rounded, size: 30.sp, color: BaseColor.warmGray700)
+            )
+
           ],
         ),
         SizedBox(height: 18.sp),

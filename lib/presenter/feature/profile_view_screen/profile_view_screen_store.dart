@@ -28,9 +28,11 @@ class ProfileViewScreenAction extends BaseAction<ProfileViewScreen,
   }
 
   Future<void> onTapBreakFriend() async {
-    await openAPI.breakFriend(BreakFriendRequest(state.profile.userId));
-    setState(() {
-      state.isFriend = false;
+    confirmModal(content: '정말로 친구 목록에서 삭제할까요?', confirmText: '삭제하기', onConfirm: () async {
+      await openAPI.breakFriend(BreakFriendRequest(state.profile.userId));
+      setState(() {
+        state.isFriend = false;
+      });
     });
   }
 

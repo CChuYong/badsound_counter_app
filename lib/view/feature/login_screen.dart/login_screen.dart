@@ -40,14 +40,13 @@ class LoginScreenV2
                       size: 24.sp,
                     ),
                     SizedBox(width: 5.sp),
-                    Text(
+                    DefaultTextStyle(style: TextStyle(
+                      color: BaseColor.warmGray500,
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.w900,
+                    ), child: Text(
                       '나쁜말 카운터',
-                      style: TextStyle(
-                        color: BaseColor.warmGray500,
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    )
+                    ))
                   ],
                 ),
               ),

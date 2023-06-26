@@ -110,8 +110,8 @@ class ProfilePage
             ProfileScreenMenuType.notice, onTapHandler),
         ProfileMenuElement('알림', Icons.notifications,
             ProfileScreenMenuType.notification, onTapHandler),
-        ProfileMenuElement('환경설정', Icons.settings,
-            ProfileScreenMenuType.settings, onTapHandler),
+        // ProfileMenuElement('환경설정', Icons.settings,
+        //     ProfileScreenMenuType.settings, onTapHandler),
         ProfileMenuElement('개인정보처리방침', Icons.file_copy_sharp,
             ProfileScreenMenuType.privacy, onTapHandler),
         ProfileMenuElement(

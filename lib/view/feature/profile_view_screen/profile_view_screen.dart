@@ -100,10 +100,10 @@ class ProfileViewScreen extends BaseView<ProfileViewScreen,
                           ),
                           SizedBox(height: 20.sp),
                           state.isFriend
-                              ? GraySolidButton('친구 추가',
-                                  onTap: action.onTapBeFriend)
-                              : GraySolidButton('친구 삭제',
-                                  onTap: action.onTapBreakFriend),
+                              ? GraySolidButton('친구 삭제',
+                                  onTap: action.onTapBreakFriend)
+                              : GraySolidButton('친구 추가',
+                                  onTap: action.onTapBeFriend),
                         ],
                       )
                     ],

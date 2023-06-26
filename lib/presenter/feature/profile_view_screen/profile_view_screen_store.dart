@@ -4,6 +4,8 @@ import 'package:badsound_counter_app/core/api/open_api.dart';
 import 'package:badsound_counter_app/core/framework/base_action.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:badsound_counter_app/view/feature/profile_view_screen/profile_view_screen.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../../core/model/user.dart';
 
@@ -33,11 +35,13 @@ class ProfileViewScreenAction extends BaseAction<ProfileViewScreen,
       setState(() {
         state.isFriend = false;
       });
+      Get.back();
     });
   }
 
   Future<void> onTapBeFriend() async {
     await openAPI
         .createFriendRequest(FriendRequest(state.profile.taggedNickname));
+    infoSnackBar(message: '친구 추가 요청을 보냈어요!');
   }
 }

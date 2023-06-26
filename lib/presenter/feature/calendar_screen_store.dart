@@ -28,6 +28,10 @@ class SocialScreenState {
     if (a.userId == b.userId) return 0;
     return b.nickname.compareTo(a.nickname);
   });
+  TreeSet<User> sentFriendRequests = TreeSet<User>(comparator: (a, b) {
+    if (a.userId ==b.userId) return 0;
+    return b.nickname.compareTo(a.nickname);
+  });
 
   SocialScreenState(this.myTag);
 }
@@ -82,9 +86,13 @@ class SocialScreenAction
 
   Future<void> updateRequests() async {
     final friends = await openAPI.getMyFriendRequests();
+    final sendRequests = await openAPI.getMySentFriendRequests();
     setState(() {
       state.friendRequests.clear();
       state.friendRequests.addAll(friends.map((e) => e.toModel()));
+
+      state.sentFriendRequests.clear();
+      state.sentFriendRequests.addAll(sendRequests.map((e) => e.toModel()));
     });
   }
 
@@ -149,6 +157,7 @@ class SocialScreenAction
             } finally {
               Get.back();
               await updateFriends();
+              await updateRequests();
             }
           }),
     );

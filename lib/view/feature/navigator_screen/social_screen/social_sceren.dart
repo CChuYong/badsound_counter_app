@@ -46,7 +46,7 @@ class SocialScreen
           flex: 3,
           child: RefreshIndicator(
             triggerMode: RefreshIndicatorTriggerMode.onEdge,
-            onRefresh: action.updateFriends,
+            onRefresh: action.initState,
             child: CustomScrollView(reverse: false, slivers: [
               SliverList(
                   delegate: SliverChildListDelegate(state.friendSet
@@ -72,11 +72,15 @@ class SocialScreen
           flex: 1,
           child: RefreshIndicator(
             triggerMode: RefreshIndicatorTriggerMode.onEdge,
-            onRefresh: action.updateRequests,
+            onRefresh: action.initState,
             child: CustomScrollView(reverse: false, slivers: [
               SliverList(
                   delegate: SliverChildListDelegate(state.friendRequests
                       .map((e) => buildFriendRequest(action, e))
+                      .toList())),
+              SliverList(
+                  delegate: SliverChildListDelegate(state.sentFriendRequests
+                      .map((e) => buildSentFriendRequest(action, e))
                       .toList())),
               SliverToBoxAdapter(child: SizedBox(height: 15.sp)),
             ]),
@@ -225,6 +229,56 @@ class SocialScreen
                 SizedBox(width: 5.sp),
                 denyButton(action, user)
               ],
+            )
+          ],
+        ),
+        SizedBox(
+          height: 3.sp,
+        ),
+        Divider(),
+      ],
+    );
+  }
+
+  Widget buildSentFriendRequest(SocialScreenAction action, User user) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TouchableOpacity(
+                onTap: () => action.onTapFriend(user),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 30.sp,
+                      height: 30.sp,
+                      decoration: BoxDecoration(
+                        color: BaseColor.warmGray700,
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: CachedNetworkImageProvider(user.profileImgUrl),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10.sp),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(user.taggedNickname,
+                            style: TextStyle(
+                              color: BaseColor.warmGray600,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.w700,
+                              height: 1.2,
+                            ))
+                      ],
+                    )
+                  ],
+                )),
+            Text(
+              '보낸 친구 요청'
             )
           ],
         ),

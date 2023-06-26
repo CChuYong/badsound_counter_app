@@ -17,6 +17,7 @@ import 'package:retrofit/http.dart';
 
 import 'model/chat_request.dart';
 import 'model/friend_request.dart';
+import 'model/last_message_id_request.dart';
 import 'model/me_response.dart';
 import 'model/notification_config_response.dart';
 import 'model/refresh_request.dart';
@@ -104,6 +105,9 @@ abstract class OpenAPI {
 
   @GET('/rooms/{roomId}/messages')
   Future<List<ChatResponse>> getChattings(@Path() String roomId);
+
+  @POST('/rooms/{roomId}/messages/last-id')
+  Future<dynamic> updateLastReadMessageId(@Path() String roomId, @Body() UpdateLastMessageIdRequest request);
 
   @GET('/rooms/{roomId}/messages?fetchType=BACKWARD')
   Future<List<ChatResponse>> getChattingsBefore(

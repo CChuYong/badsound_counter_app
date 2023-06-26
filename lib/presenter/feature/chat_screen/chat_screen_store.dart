@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../core/api/model/last_message_id_request.dart';
 import '../../../core/model/violent.dart';
 import '../../../view/designsystem/theme/base_color.dart';
 import 'chat_screen_state.dart';
@@ -48,9 +49,17 @@ class ChatScreenAction
 
     await updateChat();
     pushStore.chatMessageConsumer = onMessageReceived;
+    updateLastChatId();
 
     await reloadViolents();
     return state;
+  }
+
+  Future<void> updateLastChatId() async {
+    if(state.chatTreeSet.isNotEmpty) {
+      final lastChat = state.chatTreeSet.first;
+      await openAPI.updateLastReadMessageId(roomResponse.roomId, UpdateLastMessageIdRequest(lastChat.messageId));
+    }
   }
 
   Future<void> reloadViolents() async {
@@ -178,6 +187,8 @@ class ChatScreenAction
     for (var element in state.chatTreeSet) {
       messageRepository.persist(element);
     }
+
+    updateLastChatId();
   }
 
   void onMessageReceived(ChatResponse chat) async {
@@ -185,6 +196,7 @@ class ChatScreenAction
     setState(() {
       state.chatTreeSet.add(message);
     });
+    updateLastChatId();
   }
 
   Future<List<Chat>> pullAllChat() async {

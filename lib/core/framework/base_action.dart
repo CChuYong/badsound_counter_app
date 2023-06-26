@@ -77,6 +77,11 @@ abstract class BaseAction<V extends BaseView<V, A, S>,
     render();
   }
 
+  void setStateAsync(Future fn) async {
+    await fn;
+    render();
+  }
+
   Future doUpdate(Future func) async {
     try {
       setLoading(true);

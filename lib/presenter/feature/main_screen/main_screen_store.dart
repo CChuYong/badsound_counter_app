@@ -43,9 +43,16 @@ class MainScreenAction
 
   @override
   Future<MainScreenState> initState() async {
+    await refreshState();
+    return state;
+  }
+
+  Future<void> refreshState() async {
     final statBox = await userRepository.getDashboard();
     final chatBox = await openAPI.getMyRooms();
-    return MainScreenState(statBox, chatBox.map((e) => e.toModel()).toList());
+    state.statBoxState = statBox;
+    state.roomTreeSet.clear();
+    state.roomTreeSet.addAll(chatBox.map((e) => e.toModel()).toList());
   }
 
   @override
@@ -59,7 +66,9 @@ class MainScreenAction
   void openChatRoom(Room roomDetail) async {
     final messages =
         await messageRepository.getMessagesByRoom(roomDetail.roomId);
-    Get.to(() => ChatScreen(roomDetail, messages));
+    Get.to(() => ChatScreen(roomDetail, messages))?.then((value) {
+      refreshState().then((value) => setState((){}));
+    });
   }
 
   Future<void> pullRooms() async {

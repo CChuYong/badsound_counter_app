@@ -173,11 +173,80 @@ abstract class BaseAction<V extends BaseView<V, A, S>,
           ),
           child: Text(
             cancelText,
-            style: TextStyle(color: BaseColor.warmGray400),
+            style: TextStyle(color: BaseColor.warmGray400, ),
           ),
           onPressed: () {
             Get.back();
           }),
+    );
+  }
+
+  Future<T?> defaultDialog<T>({
+    String? contentText,
+    Widget? content,
+    VoidCallback? onPerform,
+    String? buttonText,
+  }) {
+    return showDialog(
+      context: Get.context!,
+      builder: (_) => AlertDialog(
+        backgroundColor: BaseColor.defaultBackgroundColor,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(24.0),
+          ),
+        ),
+        content: Builder(
+          builder: (context) {
+            var width = MediaQuery.of(context).size.width;
+            return Container(
+              width: width - 10,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 5.sp),
+                  content ?? Text(contentText ?? '내용을 입력해주세요',
+                      style: TextStyle(
+                        color: BaseColor.warmGray600,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w700,
+                        height: 1.2,
+                      )),
+                  SizedBox(height: 15.sp),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      minimumSize: Size.fromHeight(5.sp),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 12),
+                      backgroundColor: BaseColor.green600,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18)),
+                    ),
+                    onPressed: () {
+                      onPerform?.call();
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 6.sp),
+                      child: Text(
+                        buttonText ?? "이거슨 버튼입니당",
+                        style: TextStyle(
+                          color: BaseColor.green100,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w600,
+                          height: 1.2,
+                        ),
+                    ),
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 

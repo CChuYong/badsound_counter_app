@@ -1,6 +1,6 @@
 name: badsound_counter_app
-description: A new Flutter project.
-version: 1.0.0+1
+description: Find And Punish your friend's bad words!
+version: 0.0.1+1
 
 environment:
   sdk: '>=3.0.2 <4.0.0'

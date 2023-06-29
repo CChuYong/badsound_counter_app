@@ -98,6 +98,8 @@ class SocialScreenAction
 
   Future<void> addFriend() async {
     final textController = TextEditingController();
+    defaultDialog();
+    return;
     Get.defaultDialog(
       title: '',
       content: Padding(

@@ -98,6 +98,7 @@ abstract class BaseAction<V extends BaseView<V, A, S>,
     int msDuration = 2000,
     SnackPosition position = SnackPosition.TOP,
   }) {
+    print("Invoking snackbar");
     Get.snackbar(
       '',
       message,
@@ -137,47 +138,10 @@ abstract class BaseAction<V extends BaseView<V, A, S>,
     String cancelText = '취소',
     required Function onConfirm,
   }) {
-    Get.defaultDialog(
-      title: '',
-      middleText: content,
-      backgroundColor: Colors.white,
-      titleStyle: const TextStyle(fontSize: 0),
-      middleTextStyle: const TextStyle(color: BaseColor.warmGray800),
-      textConfirm: confirmText,
-      textCancel: cancelText,
-      confirmTextColor: Colors.black,
-      cancelTextColor: Colors.black,
-      onConfirm: () {},
-      onCancel: () {},
-      contentPadding: EdgeInsets.only(bottom: 15.sp),
-      confirm: TextButton(
-          style: TextButton.styleFrom(
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            backgroundColor: BaseColor.warmGray300,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(3.sp)),
-          ),
-          child: Text(
-            confirmText,
-            style: TextStyle(color: BaseColor.warmGray500),
-          ),
-          onPressed: () {
-            onConfirm();
-          }),
-      cancel: TextButton(
-          style: TextButton.styleFrom(
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            backgroundColor: BaseColor.warmGray200,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(3.sp)),
-          ),
-          child: Text(
-            cancelText,
-            style: TextStyle(color: BaseColor.warmGray400, ),
-          ),
-          onPressed: () {
-            Get.back();
-          }),
+    defaultDialog(
+      contentText: content,
+      buttonText: confirmText,
+      onPerform: () => onConfirm(),
     );
   }
 
@@ -187,9 +151,18 @@ abstract class BaseAction<V extends BaseView<V, A, S>,
     VoidCallback? onPerform,
     String? buttonText,
   }) {
-    return showDialog(
+    return showGeneralDialog(
       context: Get.context!,
-      builder: (_) => AlertDialog(
+      barrierDismissible: true,
+      barrierLabel: '',
+      transitionDuration: Duration(milliseconds: 350),
+      transitionBuilder: (context, anim1, anim2, child) {
+        return SlideTransition(
+          position: Tween(begin: Offset(0, -1), end: Offset(0, 0)).animate(anim1),
+          child: child,
+        );
+      },
+      pageBuilder: (_, _1, _2) => AlertDialog(
         backgroundColor: BaseColor.defaultBackgroundColor,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(

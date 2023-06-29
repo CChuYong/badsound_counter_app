@@ -98,71 +98,47 @@ class SocialScreenAction
 
   Future<void> addFriend() async {
     final textController = TextEditingController();
-    defaultDialog();
-    return;
-    Get.defaultDialog(
-      title: '',
-      content: Padding(
-          padding: EdgeInsets.only(left: 10.sp, right: 10.sp),
-          child: Column(
-            children: [
-              const Text('친구 추가하기'),
-              SizedBox(height: 10.sp),
-              TextField(
-                  controller: textController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: '친구 닉네임태그',
-                  )),
-              SizedBox(height: 4.sp),
-              MiniInfoMessage('닉네임#태그 형식이에요!', size: 12.sp),
-            ],
-          )),
-      middleText: 'gelllel',
-      backgroundColor: Colors.white,
-      titleStyle: const TextStyle(fontSize: 0),
-      middleTextStyle: const TextStyle(color: BaseColor.warmGray800),
-      confirmTextColor: Colors.black,
-      cancelTextColor: Colors.black,
-      onConfirm: () {},
-      onCancel: () {},
-      contentPadding: EdgeInsets.only(bottom: 15.sp),
-      confirm: TextButton(
-          style: TextButton.styleFrom(
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            backgroundColor: BaseColor.warmGray300,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(3.sp)),
-          ),
-          child: const Text(
-            '취소하기',
-            style: TextStyle(color: BaseColor.warmGray400),
-          ),
-          onPressed: () {
+    defaultDialog(
+      buttonText: '친구 추가하기',
+        content: Padding(
+        padding: EdgeInsets.only(left: 10.sp, right: 10.sp),
+        child: Column(
+          children: [
+            Text('친구 추가하기',
+                style: TextStyle(
+                  color: BaseColor.warmGray600,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                  height: 1.2,
+                )),
+            SizedBox(height: 10.sp),
+            TextField(
+                controller: textController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: '닉네임#태그',
+                ),
+                style: TextStyle(
+                  color: BaseColor.warmGray600,
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w700,
+                  height: 1.2,
+                )),
+            SizedBox(height: 4.sp),
+          ],
+        )),
+        onPerform: () async {
+          try {
             Get.back();
-          }),
-      cancel: TextButton(
-          style: TextButton.styleFrom(
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            backgroundColor: BaseColor.warmGray200,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(3.sp)),
-          ),
-          child: const Text(
-            '추가하기',
-            style: TextStyle(color: BaseColor.warmGray500),
-          ),
-          onPressed: () async {
-            try {
-              await openAPI
-                  .createFriendRequest(FriendRequest(textController.text));
-            } finally {
-              Get.back();
-              await updateFriends();
-              await updateRequests();
-            }
-          }),
+            await openAPI
+                .createFriendRequest(FriendRequest(textController.text));
+          } finally {
+            await updateFriends();
+            await updateRequests();
+          }
+        }
     );
+    return;
   }
 
   onTapFriend(User user) {

@@ -75,13 +75,18 @@ class ProfileScreenAction
 
   void updateNickname() {
     final textController = TextEditingController();
-    Get.defaultDialog(
-      title: '',
+    defaultDialog(
+      buttonText: "변경하기",
       content: Padding(
           padding: EdgeInsets.only(left: 10.sp, right: 10.sp),
           child: Column(
             children: [
-              const Text('닉네임 변경하기'),
+              Text('닉네임 변경하기', style: TextStyle(
+                color: BaseColor.warmGray600,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w700,
+                height: 1.2,
+              )),
               SizedBox(height: 10.sp),
               TextField(
                   controller: textController,
@@ -91,49 +96,15 @@ class ProfileScreenAction
                   ))
             ],
           )),
-      middleText: 'gelllel',
-      backgroundColor: Colors.white,
-      titleStyle: const TextStyle(fontSize: 0),
-      middleTextStyle: const TextStyle(color: BaseColor.warmGray800),
-      confirmTextColor: Colors.black,
-      cancelTextColor: Colors.black,
-      onConfirm: () {},
-      onCancel: () {},
-      contentPadding: EdgeInsets.only(bottom: 15.sp),
-      confirm: TextButton(
-          style: TextButton.styleFrom(
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            backgroundColor: BaseColor.warmGray300,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(3.sp)),
-          ),
-          child: const Text(
-            '취소하기',
-            style: TextStyle(color: BaseColor.warmGray400),
-          ),
-          onPressed: () {
-            Get.back();
-          }),
-      cancel: TextButton(
-          style: TextButton.styleFrom(
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            backgroundColor: BaseColor.warmGray200,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(3.sp)),
-          ),
-          child: const Text(
-            '변경하기',
-            style: TextStyle(color: BaseColor.warmGray500),
-          ),
-          onPressed: () {
-            openAPI
-                .updateNickname(UserNicknameRequest(textController.text))
-                .then((value) {
-              onReady();
-              Get.back();
-              infoSnackBar(message: '닉네임을 성공적으로 변경했어요!');
-            });
-          }),
+      onPerform: () {
+        openAPI
+            .updateNickname(UserNicknameRequest(textController.text))
+            .then((value) {
+          onReady();
+          Get.back();
+          infoSnackBar(message: '닉네임을 성공적으로 변경했어요!');
+        });
+      }
     );
   }
 

@@ -89,13 +89,18 @@ class ChatScreenAction
     final nameController = TextEditingController();
     final descController = TextEditingController();
     final priceController = TextEditingController();
-    Get.defaultDialog(
-      title: '',
+    defaultDialog(
+      buttonText: "추가하기",
       content: Padding(
           padding: EdgeInsets.only(left: 10.sp, right: 10.sp),
           child: Column(
             children: [
-              const Text('나쁜말 추가하기'),
+              Text('나쁜말 추가하기', style: TextStyle(
+                color: BaseColor.warmGray600,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w700,
+                height: 1.2,
+              )),
               SizedBox(height: 10.sp),
               TextField(
                   controller: nameController,
@@ -119,60 +124,26 @@ class ChatScreenAction
                   ))
             ],
           )),
-      middleText: 'gelllel',
-      backgroundColor: BaseColor.warmGray200,
-      titleStyle: const TextStyle(fontSize: 0),
-      middleTextStyle: const TextStyle(color: BaseColor.warmGray800),
-      confirmTextColor: Colors.black,
-      cancelTextColor: Colors.black,
-      onConfirm: () {},
-      onCancel: () {},
-      contentPadding: EdgeInsets.only(bottom: 15.sp),
-      confirm: TextButton(
-          style: TextButton.styleFrom(
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            backgroundColor: BaseColor.warmGray300,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(3.sp)),
-          ),
-          child: const Text(
-            '취소하기',
-            style: TextStyle(color: BaseColor.warmGray400),
-          ),
-          onPressed: () {
-            Get.back();
-          }),
-      cancel: TextButton(
-          style: TextButton.styleFrom(
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            backgroundColor: BaseColor.warmGray200,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(3.sp)),
-          ),
-          child: const Text(
-            '추가하기',
-            style: TextStyle(color: BaseColor.warmGray500),
-          ),
-          onPressed: () async {
-            final name = nameController.text;
-            final desc = descController.text;
-            final price = int.tryParse(priceController.text) ?? 0;
-            if (name.length <= 1) {
-              Get.snackbar('오류', '나쁜말 단어는 2자 이상이어야해요.');
-              return;
-            }
-            if (price <= 0) {
-              Get.snackbar('오류', '나쁜말 가격을 입력해주세요.');
-              return;
-            }
-            await openAPI.createRoomViolent(
-                roomResponse.roomId,
-                ViolentRequest(
-                    name: name, description: desc, violentPrice: price));
-            await reloadViolents();
-            Get.back();
-            infoSnackBar(message: '나쁜말을 성공적으로 추가했어요!');
-          }),
+      onPerform: () async {
+        final name = nameController.text;
+        final desc = descController.text;
+        final price = int.tryParse(priceController.text) ?? 0;
+        if (name.length <= 1) {
+          Get.snackbar('오류', '나쁜말 단어는 2자 이상이어야해요.');
+          return;
+        }
+        if (price <= 0) {
+          Get.snackbar('오류', '나쁜말 가격을 입력해주세요.');
+          return;
+        }
+        await openAPI.createRoomViolent(
+            roomResponse.roomId,
+            ViolentRequest(
+                name: name, description: desc, violentPrice: price));
+        await reloadViolents();
+        Get.back();
+        infoSnackBar(message: '나쁜말을 성공적으로 추가했어요!');
+      }
     );
   }
 

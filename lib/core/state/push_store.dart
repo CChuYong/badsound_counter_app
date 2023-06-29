@@ -10,12 +10,12 @@ class PushStore {
   Function? chatMessageConsumer;
 
   //Related to FireBase Push Services
-  PushStore() {
-    FirebaseMessaging.instance.getToken().then((value) {
-      token = value;
-      print("Firebase token: $token");
-    });
-  }
+  // PushStore() {
+  //   FirebaseMessaging.instance.getToken().then((value) {
+  //     token = value;
+  //     print("Firebase token: $token");
+  //   });
+  // }
 
   bool isPushAuthorized() => token != null;
 
@@ -50,6 +50,8 @@ class PushStore {
       badge: true,
       sound: true,
     );
+
+    token = await FirebaseMessaging.instance.getToken();
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('Got a message whilst in the foreground!');

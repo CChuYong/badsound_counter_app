@@ -46,16 +46,32 @@ class UserRepository {
       )
     ''');
 
+    database.execute('''
+      CREATE TABLE IF NOT EXISTS ${tableName}_friend (
+        userId TEXT PRIMARY KEY,
+        email TEXT NOT NULL,
+        nickname TEXT NOT NULL,
+        createdAtTs LONG NOT NULL,
+        profileImageUrl TEXT NOT NULL,
+        taggedNickname TEXT NOT NULL
+      )
+    ''');
+
     final myFriends = await _getFriends();
     friendsCache.addAll(myFriends);
   }
 
   List<User> getFriends() => friendsCache.toList();
 
-  bool isFriend(User user) => friendsCache.contains(user);
+  bool isFriend(User user) {
+    friendsCache.forEach((element) {
+      print(element.nickname);
+    });
+    return friendsCache.contains(user);
+  }
 
   Future<List<User>> _getFriends() async {
-    final result = await database.rawQuery('SELECT * FROM $tableName', []);
+    final result = await database.rawQuery('SELECT * FROM ${tableName}_friend', []);
     return result.map((json) {
       return User(
         userId: json['userId'] as String,
@@ -74,7 +90,7 @@ class UserRepository {
     await truncate();
     friends.forEach((friend) async {
       await database.rawInsert('''
-        INSERT INTO $tableName (
+        INSERT INTO ${tableName}_friend (
           userId,
           email,
           nickname,

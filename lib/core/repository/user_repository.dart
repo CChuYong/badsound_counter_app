@@ -26,6 +26,12 @@ class UserRepository {
     ''');
   }
 
+  Future<void> truncateFriend() async {
+    await database.execute('''
+      DELETE FROM ${tableName}_friend
+    ''');
+  }
+
   Future<void> open() async {
     final dbPath = await getDatabasesPath();
     String path = join(dbPath, 'room_data.db');
@@ -87,7 +93,7 @@ class UserRepository {
   Future<void> saveFriends(List<User> friends) async {
     friendsCache.clear();
     friendsCache.addAll(friends);
-    await truncate();
+    await truncateFriend();
     friends.forEach((friend) async {
       await database.rawInsert('''
         INSERT INTO ${tableName}_friend (

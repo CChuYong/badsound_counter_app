@@ -14,6 +14,7 @@ import 'package:badsound_counter_app/core/repository/user_repository.dart';
 import 'package:badsound_counter_app/core/state/push_store.dart';
 import 'package:badsound_counter_app/core/util/extension.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
+import 'package:badsound_counter_app/view/designsystem/component/gray_rounded_textbox.dart';
 import 'package:badsound_counter_app/view/feature/chat_screen/chat_screen.dart';
 import 'package:badsound_counter_app/view/feature/chat_screen/chat_speaker_selector_screen.dart';
 import 'package:flutter/material.dart';
@@ -102,26 +103,20 @@ class ChatScreenAction
                 height: 1.2,
               )),
               SizedBox(height: 10.sp),
-              TextField(
-                  controller: nameController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: '나쁜말 단어',
-                  )),
+              GrayRoundedTextBox(
+                  '나쁜말 단어',
+                  controller: nameController
+              ),
               SizedBox(height: 10.sp),
-              TextField(
-                  controller: descController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: '나쁜말 설명 (선택)',
-                  )),
+              GrayRoundedTextBox(
+                  '나쁜말 설명 (선택)',
+                  controller: descController
+              ),
               SizedBox(height: 10.sp),
-              TextField(
-                  controller: priceController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: '나쁜말 가격',
-                  ))
+              GrayRoundedTextBox(
+                  '나쁜말 가격',
+                  controller: priceController
+              )
             ],
           )),
       onPerform: () async {

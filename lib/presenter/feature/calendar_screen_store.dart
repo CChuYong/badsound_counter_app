@@ -7,6 +7,7 @@ import 'package:badsound_counter_app/core/service/user_service.dart';
 import 'package:badsound_counter_app/core/util/extension.dart';
 import 'package:badsound_counter_app/dependencies.config.dart';
 import 'package:badsound_counter_app/presenter/feature/profile_screen/profile_screen_state.dart';
+import 'package:badsound_counter_app/view/designsystem/component/gray_rounded_button.dart';
 import 'package:badsound_counter_app/view/designsystem/component/mini_info_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,6 +15,7 @@ import 'package:get/get.dart';
 import 'package:quiver/collection.dart';
 
 import '../../core/framework/state_store.dart';
+import '../../view/designsystem/component/gray_rounded_textbox.dart';
 import '../../view/designsystem/theme/base_color.dart';
 import '../../view/feature/navigator_screen/social_screen/social_sceren.dart';
 
@@ -112,18 +114,7 @@ class SocialScreenAction
                   height: 1.2,
                 )),
             SizedBox(height: 10.sp),
-            TextField(
-                controller: textController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: '닉네임#태그',
-                ),
-                style: TextStyle(
-                  color: BaseColor.warmGray600,
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w700,
-                  height: 1.2,
-                )),
+            GrayRoundedTextBox('닉네임#태그', controller: textController),
             SizedBox(height: 4.sp),
           ],
         )),

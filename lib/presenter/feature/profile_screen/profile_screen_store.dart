@@ -21,6 +21,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
 
 import '../../../core/api/model/user_nickname_request.dart';
+import '../../../view/designsystem/component/gray_rounded_textbox.dart';
 import '../../../view/designsystem/theme/base_color.dart';
 
 class ProfileScreenAction
@@ -88,12 +89,10 @@ class ProfileScreenAction
                 height: 1.2,
               )),
               SizedBox(height: 10.sp),
-              TextField(
-                  controller: textController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: '새로운 닉네임',
-                  ))
+              GrayRoundedTextBox(
+                  '새로운 닉네임',
+                controller: textController,
+              )
             ],
           )),
       onPerform: () {

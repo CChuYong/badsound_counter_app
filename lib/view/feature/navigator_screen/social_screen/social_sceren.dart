@@ -53,27 +53,14 @@ class SocialScreen
                       .map((e) => buildFriend(action, e))
                       .toList())),
               SliverToBoxAdapter(child: SizedBox(height: 15.sp)),
-            ]),
-          ),
-        ),
-        SizedBox(height: 10.sp),
-        Text(
-          '친구 요청 (${state.friendRequests.length}명)',
-          style: TextStyle(
-            color: BaseColor.warmGray700,
-            fontSize: 15.sp,
-            fontWeight: FontWeight.w800,
-          ),
-        ),
-        SizedBox(
-          height: 5.sp,
-        ),
-        Expanded(
-          flex: 1,
-          child: RefreshIndicator(
-            triggerMode: RefreshIndicatorTriggerMode.onEdge,
-            onRefresh: action.initState,
-            child: CustomScrollView(reverse: false, slivers: [
+              SliverToBoxAdapter(child: Text(
+                '친구 요청 (${state.friendRequests.length}명)',
+                style: TextStyle(
+                  color: BaseColor.warmGray700,
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w800,
+                ),
+              )),
               SliverList(
                   delegate: SliverChildListDelegate(state.friendRequests
                       .map((e) => buildFriendRequest(action, e))
@@ -82,10 +69,11 @@ class SocialScreen
                   delegate: SliverChildListDelegate(state.sentFriendRequests
                       .map((e) => buildSentFriendRequest(action, e))
                       .toList())),
-              SliverToBoxAdapter(child: SizedBox(height: 15.sp)),
+              SliverToBoxAdapter(child: SizedBox(height: 15.sp))
             ]),
           ),
-        )
+        ),
+        SizedBox(height: 10.sp),
       ],
     ));
   }

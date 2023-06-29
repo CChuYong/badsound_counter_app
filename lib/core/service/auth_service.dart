@@ -32,9 +32,6 @@ class AuthService {
       print("Push not authorized!");
     }
 
-    //Phase: Clear all repositories
-    await cleanupData();
-
     await initializePostAuth();
 
     //Phase 2: Navigate Page

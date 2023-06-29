@@ -17,11 +17,11 @@ class AuthProvider {
     log('Authenticate succeed!');
     authToken = token;
     StateStore.saveState(AuthProvider, token.toJson());
+    print("VALUE : ${StateStore.loadState(AuthProvider)?.let(AuthToken.fromJson)}");
   }
 
   void clearAuthentication() {
     log('Authenticate cleared!');
     authToken = null;
-    StateStore.clear();
   }
 }
